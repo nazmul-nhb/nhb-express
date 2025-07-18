@@ -6,15 +6,15 @@ Bootstrapped with [**nhb-express**](https://www.npmjs.com/package/nhb-express)
 
 ## 📦 Features
 
-✅ **TypeScript** with `ts-node` and `nodemon` for development and pre-configured `tsconfig.json`
-✅ **Express.js** pre‑configured with custom middlewares
-✅ **Zod** for schema validation
-✅ **Mongoose** for MongoDB integration
-✅ **Chalk** for colorful logging
-✅ **[nhb-scripts](https://www.npmjs.com/package/nhb-scripts)** for easy build, commit, module scaffolding, formatting, linting, and more
-✅ **Scaffolding via CLI** – choose package manager, DB, etc.
-✅ Built‑in **CI/CD workflow** for automatic deployment to Vercel
-✅ Pre‑set configs for ESLint, Prettier, and `nhb-scripts`
+- ✅ **TypeScript** with `ts-node` and `nodemon` for development and pre-configured `tsconfig.json`
+- ✅ **Express.js** pre‑configured with custom middlewares
+- ✅ **Zod** for schema validation
+- ✅ **Mongoose** for MongoDB integration
+- ✅ **Chalk** for colorful logging
+- ✅ **[nhb-scripts](https://www.npmjs.com/package/nhb-scripts)** for easy build, commit, module scaffolding, formatting, linting, and more
+- ✅ **Scaffolding via CLI** – choose package manager, DB, etc.
+- ✅ Built‑in **CI/CD workflow** for automatic deployment to Vercel
+- ✅ Pre‑set configs for ESLint, Prettier, and `nhb-scripts`
 
 ---
 
@@ -71,16 +71,16 @@ pnpm dev     # or npm run dev / yarn dev
 
 ## 🛠️ Scripts
 
-* `pnpm dev` – Start in dev mode with hot reload
-* `pnpm start` – Run the built server
-* `pnpm deploy` – Build the project and deploy to Vercel (`nhb-build && vercel --prod`)
-* `pnpm build` – Build the project for production (`nhb-build`)
-* `pnpm format` – Format the codebase (`nhb-format`)
-* `pnpm lint` – Lint the code (`nhb-lint`)
-* `pnpm fix` – Auto‑fix lint issues (`nhb-fix`)
-* `pnpm commit` – Guided commit workflow (`nhb-commit`)
-* `pnpm count` – Count exports (`nhb-count`)
-* `pnpm module` – Scaffold new modules (`nhb-module`)
+- `pnpm dev` – Start in dev mode with hot reload
+- `pnpm start` – Run the built server
+- `pnpm deploy` – Build the project and deploy to Vercel (`nhb-build && vercel --prod`)
+- `pnpm build` – Build the project for production (`nhb-build`)
+- `pnpm format` – Format the codebase (`nhb-format`)
+- `pnpm lint` – Lint the code (`nhb-lint`)
+- `pnpm fix` – Auto‑fix lint issues (`nhb-fix`)
+- `pnpm commit` – Guided commit workflow (`nhb-commit`)
+- `pnpm count` – Count exports (`nhb-count`)
+- `pnpm module` – Scaffold new modules (`nhb-module`)
 
 ---
 

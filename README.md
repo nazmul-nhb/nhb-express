@@ -6,15 +6,15 @@ Quickly bootstrap a production‑ready **Express + TypeScript + Zod** server wit
 
 ## ✨ Features
 
-✅ **TypeScript** with `ts-node` and `nodemon` for development and pre-configured `tsconfig.json`
-✅ **Express.js** pre‑configured with custom middlewares
-✅ **Zod** for schema validation
-✅ **Mongoose** for MongoDB integration (Postgres with ORMs coming soon...)
-✅ **Chalk** for colorful logging
-✅ **[nhb-scripts](https://www.npmjs.com/package/nhb-scripts)** for easy build, commit, module scaffolding, formatting, linting, and more
-✅ **Scaffolding via CLI** – choose package manager, DB, etc.
-✅ Built‑in **CI/CD workflow** for automatic deployment to Vercel
-✅ Easily **extendable** _(Postgres/Prisma/Drizzle planned!)_
+- ✅ **TypeScript** with `ts-node` and `nodemon` for development and pre-configured `tsconfig.json`
+- ✅ **Express.js** pre‑configured with custom middlewares
+- ✅ **Zod** for schema validation
+- ✅ **Mongoose** for MongoDB integration (Postgres with ORMs coming soon...)
+- ✅ **Chalk** for colorful logging
+- ✅ **[nhb-scripts](https://www.npmjs.com/package/nhb-scripts)** for easy build, commit, module scaffolding, formatting, linting, and more
+- ✅ **Scaffolding via CLI** – choose package manager, DB, etc.
+- ✅ Built‑in **CI/CD workflow** for automatic deployment to Vercel
+- ✅ Easily **extendable** _(Postgres/Prisma/Drizzle planned!)_
 
 ---
 
@@ -35,9 +35,9 @@ yarn dlx nhb-express@latest
 
 Follow the interactive prompts:
 
-* Choose a **project name**
-* Select a **database** (MongoDB default, more coming soon)
-* Pick your **package manager**
+- Choose a **project name**
+- Select a **database** (MongoDB default, more coming soon)
+- Pick your **package manager**
 
 Your new server will be scaffolded in the chosen folder with all dependencies installed.
 
@@ -103,9 +103,9 @@ A ready‑to‑use **GitHub Actions workflow** is included in:
 
 ✅ **What it does:**
 
-* Runs on push to your main branch
-* Builds your project
-* Deploys automatically to **Vercel** (configured via `vercel.json`)
+- Runs on push to your main branch
+- Builds your project
+- Deploys automatically to **Vercel** (configured via `vercel.json`)
 
 ✅ **How to use:**
 
@@ -123,12 +123,12 @@ This project comes integrated with **[nhb-scripts](https://www.npmjs.com/package
 
 ✨ **What you get:**
 
-* `pnpm run build` → builds your project
-* `pnpm run commit` → guided commit with semantic messages
-* `pnpm run module` → scaffolds new modules
-* `pnpm run fix` → auto‑fix lint issues
-* `pnpm run format` → formats with Prettier
-* and more… configurable via `nhb.scripts.config.mjs`
+- `pnpm run build` → builds your project
+- `pnpm run commit` → guided commit with semantic messages
+- `pnpm run module` → scaffolds new modules
+- `pnpm run fix` → auto‑fix lint issues
+- `pnpm run format` → formats with Prettier
+- and more… configurable via `nhb.scripts.config.mjs`
 
 You can explore and extend `nhb-scripts` in your project as needed.
 
@@ -138,7 +138,7 @@ You can explore and extend `nhb-scripts` in your project as needed.
 
 Future versions of `nhb-express` will allow:
 
-* Choosing Postgres (Prisma, Drizzle, etc.)
+- Choosing Postgres (Prisma, Drizzle, etc.)
 
 ---
 
