@@ -28,7 +28,7 @@ app.use(requestLogger);
 
 // * Root/Test Route
 app.get(['/', '/api'], (_req, res) => {
-	sendResponse(res, 'N/A', 'OK', null, 'Hourly Server is Running! 🏃');
+	sendResponse(res, 'N/A', 'OK', null, 'NHB Server is Running! 🏃');
 });
 
 // * Application Routes

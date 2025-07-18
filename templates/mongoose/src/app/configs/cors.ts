@@ -4,9 +4,7 @@ export const corsOptions: CorsOptions = {
 	origin: (origin, callback) => {
 		const allowedOrigins = [
 			/^http:\/\/localhost:\d+$/,
-			/^http:\/\/192\.168\.224\.74:\d+$/,
-			/^http:\/\/192\.168\.0\.6:\d+$/,
-			'https://nexabyte-hourly.web.app',
+			/^http:\/\/192\.168\.0\.1:\d+$/,
 		];
 
 		if (
