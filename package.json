@@ -1,6 +1,6 @@
 {
   "name": "nhb-express",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Create Express+TypeScript Server Boilerplate",
   "main": "bin/index.mjs",
   "type": "module",
@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.0.10",
-    "nhb-scripts": "^1.8.0",
+    "nhb-scripts": "^1.8.1",
     "prettier": "^3.6.2"
   },
   "engines": {
