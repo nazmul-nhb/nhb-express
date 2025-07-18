@@ -111,7 +111,7 @@ A ready‑to‑use **GitHub Actions workflow** is included in:
 
 1. Push your project to a GitHub repository.
 2. Add your Vercel tokens/secrets as GitHub repository secrets.
-3. Every time you push to `main`, GitHub Actions will trigger and deploy your server to Vercel.
+3. Every time you push to `main` and version is updated, GitHub Actions will trigger and deploy your server to Vercel.
 
 You can customize the workflow to fit your own CI/CD needs (e.g., change branches, add tests, deploy elsewhere).
 
