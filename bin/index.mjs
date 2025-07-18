@@ -78,6 +78,9 @@ const templateDir = path.resolve(__dirname, '../templates', dbChoice.toString())
 
 copyDir(templateDir, targetDir);
 
+fs.renameSync(path.join(targetDir, 'gitignore'), path.join(targetDir, '.gitignore'));
+fs.renameSync(path.join(targetDir, 'env'), path.join(targetDir, '.env'));
+
 /** @type {PackageJson} */
 const pkgJson = {
 	name: projectName.toString(),
