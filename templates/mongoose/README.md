@@ -1,85 +1,89 @@
-# 🚀 Express TypeScript Server Scaffold with `nhb-express`
+# 🚀 Express TypeScript Mongoose Server
 
-Quickly bootstrap a production‑ready **Express + TypeScript + Zod** server with a single command.
+Bootstrapped with [**nhb-express**](https://www.npmjs.com/package/nhb-express)
 
 ---
 
-## ✨ Features
+## 📦 Features
 
-✅ **TypeScript** with `ts-node` and `nodemon` for development
-✅ **Express 5** preconfigured
+✅ **TypeScript** with `ts-node` and `nodemon` for development and pre-configured `tsconfig.json`
+✅ **Express.js** pre‑configured with custom middlewares
 ✅ **Zod** for schema validation
-✅ **Mongoose** for MongoDB integration (Postgres with ORMs coming soon...)
+✅ **Mongoose** for MongoDB integration
 ✅ **Chalk** for colorful logging
-✅ **nhb-scripts** for easy commit, module scaffolding, format, linting and more.
+✅ **[nhb-scripts](https://www.npmjs.com/package/nhb-scripts)** for easy build, commit, module scaffolding, formatting, linting, and more
 ✅ **Scaffolding via CLI** – choose package manager, DB, etc.
-✅ Easily extendable (Postgres/Prisma/Drizzle planned!)
+✅ Built‑in **CI/CD workflow** for automatic deployment to Vercel
+✅ Pre‑set configs for ESLint, Prettier, and `nhb-scripts`
 
 ---
 
-## 📦 Usage
+## 🚀 Development
 
-You don’t need to install anything globally. Run directly with your favorite package manager:
+Install dependencies (already done by `nhb-express` scaffold)
+
+Run in development mode:
 
 ```bash
-# Using npx
-npx nhb-express@latest
-
-# Using pnpm
-pnpm dlx nhb-express@latest
-
-# Using yarn
-yarn dlx nhb-express@latest
-```
-
-Follow the interactive prompts:
-
-* Choose a **project name**
-* Select a **database** (MongoDB default, more coming soon)
-* Pick your **package manager**
-
-Your new server will be scaffolded in the chosen folder with all dependencies installed.
-
----
-
-## 🚀 Quick Start
-
-After running the CLI:
-
-```bash
-cd <your-project-name>
-pnpm run dev     # or npm run dev / yarn dev / pnpm dev
+pnpm dev     # or npm run dev / yarn dev
+# Runs on port: 4242
 ```
 
 ---
 
-<!-- ## 📁 Project Structure
+## 📁 Structure
 
-```
+```text
 <your-project-name>/
+ |- .github/
+ │   └─ workflows/
+ │       └─ publish.yml     # GitHub Actions workflow for CI/CD (vercel deployment) 
  ├─ src/
- │   ├─ server.ts
- │   ├─ routes/
- │   └─ schemas/
- ├─ scripts/
- │   ├─ build.mjs
- │   ├─ lint.mjs
- │   └─ ...
+ │   |─ app/
+ │   |   ├─ classes/        # Utility classes e.g. `QueryBuilder`, `ErrorWihStatus`
+ │   |   ├─ configs/        # App configurations
+ │   |   ├─ constants/      # Constant values
+ │   |   ├─ errors/         # Custom error processors/handlers
+ │   |   ├─ middlewares/    # Custom Express middlewares
+ │   |   ├─ modules/        # Feature modules (controllers, services, etc.)
+ │   |   ├─ routes/         # Route definitions
+ │   |   ├─ types/          # Types for the App
+ │   |   └─ utilities/      # Helper functions
+ │   |
+ │   ├─ app.ts              # Express app setup
+ │   ├─ index.d.ts          # Global type declarations
+ │   └─ server.ts           # Server bootstrap
+ │
+ ├─ .env                    # Environment variables
+ ├─ .gitignore              # Ignore files/folders from being pushed/committed
+ ├─ .prettierignore         # Ignore files/folders from being formatted with prettier
+ ├─ .prettierrc.json        # Prettier config
+ ├─ eslint.config.mjs       # ESLint config (flat config, ready for TS)
+ ├─ nhb.scripts.config.mjs  # Config for nhb-scripts
+ ├─ nodemon.json            # Nodemon settings
  ├─ package.json
- ├─ tsconfig.json
- └─ ...
+ ├─ README.md
+ ├─ tsconfig.json           # Ready to use tsconfig
+ └─ vercel.json             # Deployment config for Vercel
 ```
-
---- -->
-
-## 🔧 Extending
-
-Future versions of `nhb-express` will allow:
-
-* Choosing Postgres (Prisma, Drizzle, etc.)
 
 ---
 
-## ✨ Author
+## 🛠️ Scripts
+
+* `pnpm dev` – Start in dev mode with hot reload
+* `pnpm start` – Run the built server
+* `pnpm deploy` – Build the project and deploy to Vercel (`nhb-build && vercel --prod`)
+* `pnpm build` – Build the project for production (`nhb-build`)
+* `pnpm format` – Format the codebase (`nhb-format`)
+* `pnpm lint` – Lint the code (`nhb-lint`)
+* `pnpm fix` – Auto‑fix lint issues (`nhb-fix`)
+* `pnpm commit` – Guided commit workflow (`nhb-commit`)
+* `pnpm count` – Count exports (`nhb-count`)
+* `pnpm module` – Scaffold new modules (`nhb-module`)
+
+---
 
 Made with ❤️ by [Nazmul Hassan](https://github.com/nazmul-nhb)
+
+**Powered by `nhb-express`** 🚀

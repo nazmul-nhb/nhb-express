@@ -1,7 +1,7 @@
 {
   "name": "nhb-express",
-  "version": "1.0.0",
-  "description": "Create Express+TypeScript Server Boilerplate",
+  "version": "1.1.0",
+  "description": "Express TypeScript Server Scaffold",
   "main": "bin/index.mjs",
   "type": "module",
   "bin": {
@@ -34,6 +34,7 @@
     "typescript",
     "cli",
     "node",
+    "zod",
     "nodejs",
     "boilerplate",
     "mongoose"

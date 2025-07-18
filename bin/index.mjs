@@ -38,7 +38,8 @@ const dbChoice = await select({
 	message: 'Select a database:',
 	options: [
 		{ value: 'mongoose', label: 'MongoDB + Mongoose', hint: 'default' },
-		// { value: 'postgres', label: 'PostgreSQL (future support)' },
+		{ value: 'prisma', label: 'PostgreSQL + Prisma (Coming Soon...)' },
+		{ value: 'drizzle', label: 'PostgreSQL + Drizzle (Coming Soon...)' },
 	],
 	initialValue: 'mongoose',
 });
