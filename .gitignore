@@ -1,0 +1,8 @@
+node_modules
+__*.*
+coverage
+TODO.md
+dist
+src
+
+.estimator
