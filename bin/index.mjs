@@ -107,6 +107,7 @@ fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkgJson, n
 
 const deps = [
 	'bcrypt',
+	'cloudinary',
 	'cookie-parser',
 	'cors',
 	'dotenv',
@@ -125,6 +126,7 @@ const devDeps = [
 	'@types/cors',
 	'@types/express',
 	'@types/jsonwebtoken',
+	'@types/multer',
 	'@types/node',
 	'@typescript-eslint/eslint-plugin',
 	'@typescript-eslint/parser',
