@@ -5,11 +5,11 @@ import { defineScriptConfig } from 'nhb-scripts';
 export default defineScriptConfig({
     format: {
         args: ['--write'],
-        files: ['bin', 'templates'],
+        files: ['bin',],
         ignorePath: '.prettierignore',
     },
     commit: {
-        runFormatter: false,
+        runFormatter: true,
     },
     count: {
         defaultPath: 'bin',
