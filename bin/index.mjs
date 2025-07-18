@@ -24,7 +24,7 @@ const runCancel = (result) => {
 // ----------------------
 // Entry
 // ----------------------
-intro(chalk.cyan('🚀 Create nhb-express app'));
+intro(chalk.cyan('🚀 Create Express + TypeScript App with "nhb-express"'));
 
 const projectName = await text({
   message: 'Project name:',
@@ -38,7 +38,7 @@ const dbChoice = await select({
   message: 'Select a database:',
   options: [
     { value: 'mongoose', label: 'MongoDB + Mongoose', hint: 'default' },
-    { value: 'postgres', label: 'PostgreSQL (future support)' },
+    // { value: 'postgres', label: 'PostgreSQL (future support)' },
   ],
   initialValue: 'mongoose',
 })
