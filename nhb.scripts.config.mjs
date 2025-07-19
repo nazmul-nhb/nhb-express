@@ -13,6 +13,6 @@ export default defineScriptConfig({
     },
     count: {
         defaultPath: 'bin',
-        excludePaths: ['node_modules', 'dist', 'build']
+        excludePaths: ['node_modules', '.github']
     },
 });
