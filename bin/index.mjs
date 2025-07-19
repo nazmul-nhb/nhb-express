@@ -4,61 +4,133 @@
 
 /** @import {PackageJson} from 'type-fest'; */
 
-import { confirm, intro, isCancel, outro, select, spinner, text } from '@clack/prompts';
+import {
+	confirm,
+	intro,
+	isCancel,
+	note,
+	outro,
+	select,
+	spinner,
+	text,
+} from '@clack/prompts';
 import chalk from 'chalk';
 import { execa } from 'execa';
+import { capitalizeString } from 'nhb-toolbox';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-/** @param {string | symbol } result */
-const runCancel = (result) => {
+/**
+ * * Normalize clack result to string
+ * @param {string | symbol} result
+ * @returns {string}
+ */
+function normalizeResult(result) {
 	if (isCancel(result)) {
 		console.log(chalk.gray('⛔ Process cancelled by user!'));
 		process.exit(0);
 	}
-};
+	return typeof result === 'string' ? result : '';
+}
 
 // ----------------------
 // Entry
 // ----------------------
 intro(chalk.cyan('🚀 Create Express + TypeScript App with "nhb-express"'));
 
-const projectName = await text({
-	message: 'Project name:',
-	initialValue: 'my-server',
-	validate: (v) => (v.trim() ? undefined : 'Project name is required!'),
-});
+const projectName = normalizeResult(
+	await text({
+		message: 'Project name:',
+		initialValue: 'my-server',
+		validate: (v) => (v.trim() ? undefined : 'Project name is required!'),
+	}),
+);
 
-runCancel(projectName);
+const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
+	normalizeResult(
+		await select({
+			message: 'Select a database:',
+			options: [
+				{ value: 'mongoose', label: 'MongoDB + Mongoose', hint: 'default' },
+				{ value: 'prisma', label: 'PostgreSQL + Prisma (Coming Soon...)' },
+				{ value: 'drizzle', label: 'PostgreSQL + Drizzle (Coming Soon...)' },
+			],
+			initialValue: 'mongoose',
+		}),
+	)
+);
 
-const dbChoice = await select({
-	message: 'Select a database:',
-	options: [
-		{ value: 'mongoose', label: 'MongoDB + Mongoose', hint: 'default' },
-		{ value: 'prisma', label: 'PostgreSQL + Prisma (Coming Soon...)' },
-		{ value: 'drizzle', label: 'PostgreSQL + Drizzle (Coming Soon...)' },
+const deps = /* @__PURE__ */ Object.freeze({
+	common: [
+		'bcrypt',
+		'cloudinary',
+		'cookie-parser',
+		'cors',
+		'dotenv',
+		'express',
+		'jsonwebtoken',
+		'multer',
+		'nhb-toolbox',
+		'zod',
+		'chalk@4.1.2',
 	],
-	initialValue: 'mongoose',
+	mongoose: ['mongoose'],
+	prisma: [],
+	drizzle: [],
 });
 
-runCancel(dbChoice);
-
-const pkgManager = await select({
-	message: 'Choose a package manager:',
-	options: [
-		{ value: 'pnpm', label: 'pnpm' },
-		{ value: 'npm', label: 'npm' },
-		{ value: 'yarn', label: 'yarn' },
+const devDeps = /* @__PURE__ */ Object.freeze({
+	common: [
+		'@eslint/js',
+		'@types/bcrypt',
+		'@types/cookie-parser',
+		'@types/cors',
+		'@types/express',
+		'@types/jsonwebtoken',
+		'@types/multer',
+		'@types/node',
+		'@typescript-eslint/eslint-plugin',
+		'@typescript-eslint/parser',
+		'eslint',
+		'eslint-config-prettier',
+		'eslint-plugin-prettier',
+		'globals',
+		'nhb-scripts',
+		'nodemon',
+		'prettier',
+		'ts-node',
+		'typescript',
+		'typescript-eslint',
 	],
-	initialValue: 'pnpm',
+	mongoose: ['vercel'],
+	prisma: [],
+	drizzle: [],
 });
 
-runCancel(pkgManager);
+const pkgManager = normalizeResult(
+	await select({
+		message: 'Choose a package manager:',
+		options: [
+			{ value: 'pnpm', label: 'pnpm' },
+			{ value: 'npm', label: 'npm' },
+			{ value: 'yarn', label: 'yarn' },
+		],
+		initialValue: 'pnpm',
+	}),
+);
 
 const targetDir = path.resolve(process.cwd(), projectName.toString());
+
+/**
+ * * Rename a file to a dotfile
+ * @param {string} fileName
+ */
+function renameDotFile(fileName) {
+	fs.renameSync(path.join(targetDir, fileName), path.join(targetDir, `.${fileName}`));
+}
 
 // if exists, confirm overwrite
 if (fs.existsSync(targetDir)) {
@@ -66,7 +138,7 @@ if (fs.existsSync(targetDir)) {
 		message: `${projectName.toString()} already exists. Overwrite?`,
 	});
 	if (!overwrite) {
-		outro(chalk.yellow('🛑 Cancelled!'));
+		outro(chalk.yellow('🛑 Cancelled by user!'));
 		process.exit(0);
 	}
 	fs.rmSync(targetDir, { recursive: true, force: true });
@@ -78,14 +150,14 @@ const templateDir = path.resolve(__dirname, '../templates', dbChoice.toString())
 
 copyDir(templateDir, targetDir);
 
-fs.renameSync(path.join(targetDir, 'gitignore'), path.join(targetDir, '.gitignore'));
-fs.renameSync(path.join(targetDir, 'env'), path.join(targetDir, '.env'));
+renameDotFile('env');
+renameDotFile('gitignore');
 
 /** @type {PackageJson} */
 const pkgJson = {
 	name: projectName.toString(),
 	version: '0.0.1',
-	description: 'Express TypeScript Mongoose Server',
+	description: `Express TypeScript ${capitalizeString(dbChoice.toString())} Server`,
 	scripts: {
 		dev: 'nodemon',
 		start: 'node dist/server.js',
@@ -108,60 +180,32 @@ const pkgJson = {
 
 fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkgJson, null, 2));
 
-const deps = [
-	'bcrypt',
-	'cloudinary',
-	'cookie-parser',
-	'cors',
-	'dotenv',
-	'express',
-	'jsonwebtoken',
-	'mongoose',
-	'multer',
-	'nhb-toolbox',
-	'zod',
-	'chalk@4.1.2',
-];
-const devDeps = [
-	'@eslint/js',
-	'@types/bcrypt',
-	'@types/cookie-parser',
-	'@types/cors',
-	'@types/express',
-	'@types/jsonwebtoken',
-	'@types/multer',
-	'@types/node',
-	'@typescript-eslint/eslint-plugin',
-	'@typescript-eslint/parser',
-	'eslint',
-	'eslint-config-prettier',
-	'eslint-plugin-prettier',
-	'globals',
-	'nhb-scripts',
-	'nodemon',
-	'prettier',
-	'ts-node',
-	'typescript',
-	'typescript-eslint',
-	'vercel',
-];
-
 const s = spinner();
+
 s.start('Installing dependencies...');
-await installDeps(pkgManager.toString(), targetDir, deps, devDeps);
+
+await installDeps(
+	pkgManager.toString(),
+	targetDir,
+	[...deps.common, ...deps[dbChoice]],
+	[...devDeps.common, ...devDeps[dbChoice]],
+);
+
 s.stop(chalk.green('✓ Dependencies installed'));
 
 outro(chalk.green('🎉 Project created successfully!'));
-console.log(`\nNext steps:`);
-console.log(chalk.cyan(`  cd ${projectName.toString()}`));
-console.log(chalk.cyan(`  ${pkgManager.toString()} run dev`));
+
+note(
+	chalk.cyan(`  cd ${projectName.toString()}\n  ${pkgManager.toString()} run dev`),
+	chalk.yellowBright('Next Steps'),
+);
 
 // ----------------------
 // Helpers
 // ----------------------
 
 /**
- * Recursively copy a directory
+ * * Recursively copy a directory
  * @param {string} src
  * @param {string} dest
  */
@@ -179,7 +223,7 @@ function copyDir(src, dest) {
 }
 
 /**
- * Install dependencies with the chosen package manager
+ * * Install dependencies with the chosen package manager
  * @param {string} manager
  * @param {string} cwd
  * @param {string[]} deps
