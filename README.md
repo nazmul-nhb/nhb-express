@@ -61,10 +61,10 @@ pnpm dev     # or npm run dev / yarn dev
 
 ```text
 <your-project-name>/
- |- .github/
+ ├─ .github/
  │   └─ workflows/
  │       └─ publish.yml     # GitHub Actions workflow for CI/CD (vercel deployment) 
- |- .vscode/
+ ├─ .vscode/
  │   └─ settings.json       # VS Code Settings for better formatting
  ├─ src/
  │   |─ app/
