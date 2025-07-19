@@ -23,46 +23,6 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-/**
- * * Normalize clack result to string
- * @param {string | symbol} result
- * @returns {string}
- */
-function normalizeResult(result) {
-	if (isCancel(result)) {
-		console.log(chalk.gray('⛔ Process cancelled by user!'));
-		process.exit(0);
-	}
-	return typeof result === 'string' ? result : '';
-}
-
-// ----------------------
-// Entry
-// ----------------------
-intro(chalk.cyan('🚀 Create Express + TypeScript App with "nhb-express"'));
-
-const projectName = normalizeResult(
-	await text({
-		message: 'Project name:',
-		initialValue: 'my-server',
-		validate: (v) => (v.trim() ? undefined : 'Project name is required!'),
-	}),
-);
-
-const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
-	normalizeResult(
-		await select({
-			message: 'Select a database:',
-			options: [
-				{ value: 'mongoose', label: 'MongoDB + Mongoose', hint: 'default' },
-				{ value: 'prisma', label: 'PostgreSQL + Prisma (Coming Soon...)' },
-				{ value: 'drizzle', label: 'PostgreSQL + Drizzle (Coming Soon...)' },
-			],
-			initialValue: 'mongoose',
-		}),
-	)
-);
-
 const deps = /* @__PURE__ */ Object.freeze({
 	common: [
 		'bcrypt',
@@ -110,9 +70,49 @@ const devDeps = /* @__PURE__ */ Object.freeze({
 	drizzle: [],
 });
 
+/**
+ * * Normalize clack result to string
+ * @param {string | symbol} result
+ * @returns {string}
+ */
+function normalizeResult(result) {
+	if (isCancel(result)) {
+		console.log(chalk.gray('⛔ Process cancelled by user!'));
+		process.exit(0);
+	}
+	return typeof result === 'string' ? result : '';
+}
+
+// ----------------------
+// Entry
+// ----------------------
+intro(chalk.cyan('🚀 Create Express + TypeScript App with "nhb-express"'));
+
+const projectName = normalizeResult(
+	await text({
+		message: '📂 Project name:',
+		initialValue: 'my-server',
+		validate: (v) => (v.trim() ? undefined : 'Project name is required!'),
+	}),
+);
+
+const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
+	normalizeResult(
+		await select({
+			message: '🛢 Select a database:',
+			options: [
+				{ value: 'mongoose', label: 'MongoDB + Mongoose', hint: 'default' },
+				{ value: 'prisma', label: 'PostgreSQL + Prisma (Coming Soon...)' },
+				{ value: 'drizzle', label: 'PostgreSQL + Drizzle (Coming Soon...)' },
+			],
+			initialValue: 'mongoose',
+		}),
+	)
+);
+
 const pkgManager = normalizeResult(
 	await select({
-		message: 'Choose a package manager:',
+		message: '📦 Choose a package manager:',
 		options: [
 			{ value: 'pnpm', label: 'pnpm' },
 			{ value: 'npm', label: 'npm' },
@@ -122,7 +122,7 @@ const pkgManager = normalizeResult(
 	}),
 );
 
-const targetDir = path.resolve(process.cwd(), projectName.toString());
+const targetDir = path.resolve(process.cwd(), projectName);
 
 /**
  * * Rename a file to a dotfile
@@ -135,7 +135,7 @@ function renameDotFile(fileName) {
 // if exists, confirm overwrite
 if (fs.existsSync(targetDir)) {
 	const overwrite = await confirm({
-		message: `${projectName.toString()} already exists. Overwrite?`,
+		message: `⛔ ${projectName} already exists. Overwrite?`,
 	});
 	if (!overwrite) {
 		outro(chalk.yellow('🛑 Cancelled by user!'));
@@ -146,7 +146,7 @@ if (fs.existsSync(targetDir)) {
 
 fs.mkdirSync(targetDir);
 
-const templateDir = path.resolve(__dirname, '../templates', dbChoice.toString());
+const templateDir = path.resolve(__dirname, '../templates', dbChoice);
 
 copyDir(templateDir, targetDir);
 
@@ -155,9 +155,9 @@ renameDotFile('gitignore');
 
 /** @type {PackageJson} */
 const pkgJson = {
-	name: projectName.toString(),
+	name: projectName,
 	version: '0.0.1',
-	description: `Express TypeScript ${capitalizeString(dbChoice.toString())} Server`,
+	description: `Express TypeScript ${capitalizeString(dbChoice)} Server`,
 	scripts: {
 		dev: 'nodemon',
 		start: 'node dist/server.js',
@@ -185,7 +185,7 @@ const s = spinner();
 s.start('Installing dependencies...');
 
 await installDeps(
-	pkgManager.toString(),
+	pkgManager,
 	targetDir,
 	[...deps.common, ...deps[dbChoice]],
 	[...devDeps.common, ...devDeps[dbChoice]],
@@ -196,8 +196,8 @@ s.stop(chalk.green('✓ Dependencies installed'));
 outro(chalk.green('🎉 Project created successfully!'));
 
 note(
-	chalk.cyan(`  cd ${projectName.toString()}\n  ${pkgManager.toString()} run dev`),
-	chalk.yellowBright('Next Steps'),
+	chalk.cyan(`cd ${projectName}\n${pkgManager} run dev`),
+	chalk.yellowBright('⏭️ Next Steps'),
 );
 
 // ----------------------
