@@ -2,6 +2,8 @@
 
 Quickly bootstrap a production‑ready **Express + TypeScript + Zod** server with a single command.
 
+> Currently limited to only `MongoDB` and `Mongoose`, `PostgreSQL` (`Prisma` and `Drizzle`) coming soon...
+
 ---
 
 ## ✨ Features
@@ -9,12 +11,12 @@ Quickly bootstrap a production‑ready **Express + TypeScript + Zod** server wit
 - ✅ **TypeScript** with `ts-node` and `nodemon` for development and pre-configured `tsconfig.json`
 - ✅ **Express.js** pre‑configured with custom middlewares
 - ✅ **Zod** for schema validation
-- ✅ **Mongoose** for MongoDB integration (Postgres with ORMs coming soon...)
+- ✅ **Mongoose** for MongoDB integration (PostgreSQL with ORMs coming soon...)
 - ✅ **Chalk** for colorful logging
 - ✅ **[nhb-scripts](https://www.npmjs.com/package/nhb-scripts)** for easy build, commit, module scaffolding, formatting, linting, and more
 - ✅ **Scaffolding via CLI** – choose package manager, DB, etc.
-- ✅ Built‑in **CI/CD workflow** for automatic deployment to Vercel
-- ✅ Easily **extendable** _(Postgres/Prisma/Drizzle planned!)_
+- ✅ Built‑in [**CI/CD workflow**](#️-cicd-workflow) for automatic deployment to Vercel
+- ✅ Easily **extendable** _(PostgreSQL+Prisma/Drizzle planned!)_
 
 ---
 
@@ -36,7 +38,7 @@ yarn dlx nhb-express@latest
 Follow the interactive prompts:
 
 - Choose a **project name**
-- Select a **database** (MongoDB default, more coming soon)
+- Select a **database** (`MongoDB` default, more coming soon)
 - Pick your **package manager**
 
 Your new server will be scaffolded in the chosen folder with all dependencies installed.
@@ -55,13 +57,15 @@ pnpm dev     # or npm run dev / yarn dev
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Structure: Mongoose
 
 ```text
 <your-project-name>/
  |- .github/
  │   └─ workflows/
  │       └─ publish.yml     # GitHub Actions workflow for CI/CD (vercel deployment) 
+ |- .vscode/
+ │   └─ settings.json       # VS Code Settings for better formatting
  ├─ src/
  │   |─ app/
  │   |   ├─ classes/        # Utility classes e.g. `QueryBuilder`, `ErrorWihStatus`
@@ -110,8 +114,12 @@ A ready‑to‑use **GitHub Actions workflow** is included in:
 ✅ **How to use:**
 
 1. Push your project to a GitHub repository.
-2. Add your Vercel tokens/secrets as GitHub repository secrets.
-3. Every time you push to `main` and version is updated, GitHub Actions will trigger and deploy your server to Vercel.
+2. Add your Vercel tokens/secrets as GitHub repository secrets:
+    Go to `Settings >> Secrets and variables >> Actions >> Repository secrets` and add these variables:
+    - `VERCEL_ORG_ID`
+    - `VERCEL_PROJECT_ID`
+    - `VERCEL_TOKEN`
+3. Every time you push to `main` and _version is updated_, GitHub Actions will trigger and deploy your server to Vercel.
 
 You can customize the workflow to fit your own CI/CD needs (e.g., change branches, add tests, deploy elsewhere).
 
@@ -128,7 +136,7 @@ This project comes integrated with **[nhb-scripts](https://www.npmjs.com/package
 - `pnpm run module` → scaffolds new modules
 - `pnpm run fix` → auto‑fix lint issues
 - `pnpm run format` → formats with Prettier
-- and more… configurable via `nhb.scripts.config.mjs`
+- and _more…_ configurable via `nhb.scripts.config.mjs`
 
 You can explore and extend `nhb-scripts` in your project as needed.
 
@@ -138,7 +146,7 @@ You can explore and extend `nhb-scripts` in your project as needed.
 
 Future versions of `nhb-express` will allow:
 
-- Choosing Postgres (Prisma, Drizzle, etc.)
+- Choosing PostgreSQL (Prisma, Drizzle, etc.)
 
 ---
 

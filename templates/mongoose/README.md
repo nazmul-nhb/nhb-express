@@ -11,9 +11,9 @@ Bootstrapped with [**nhb-express**](https://www.npmjs.com/package/nhb-express)
 - ✅ **Zod** for schema validation
 - ✅ **Mongoose** for MongoDB integration
 - ✅ **Chalk** for colorful logging
-- ✅ **[nhb-scripts](https://www.npmjs.com/package/nhb-scripts)** for easy build, commit, module scaffolding, formatting, linting, and more
+- ✅ **[nhb-scripts](https://www.npmjs.com/package/nhb-scripts)** for easy build, commit, module scaffolding, formatting, linting, and more. [see below](#️-scripts)
 - ✅ **Scaffolding via CLI** – choose package manager, DB, etc.
-- ✅ Built‑in **CI/CD workflow** for automatic deployment to Vercel
+- ✅ Built‑in [**CI/CD workflow**](#️-cicd-workflow) for automatic deployment to Vercel
 - ✅ Pre‑set configs for ESLint, Prettier, and `nhb-scripts`
 
 ---
@@ -38,6 +38,8 @@ pnpm dev     # or npm run dev / yarn dev
  |- .github/
  │   └─ workflows/
  │       └─ publish.yml     # GitHub Actions workflow for CI/CD (vercel deployment) 
+ |- .vscode/
+ │   └─ settings.json       # VS Code Settings for better formatting
  ├─ src/
  │   |─ app/
  │   |   ├─ classes/        # Utility classes e.g. `QueryBuilder`, `ErrorWihStatus`
@@ -81,6 +83,34 @@ pnpm dev     # or npm run dev / yarn dev
 - `pnpm commit` – Guided commit workflow (`nhb-commit`)
 - `pnpm count` – Count exports (`nhb-count`)
 - `pnpm module` – Scaffold new modules (`nhb-module`)
+
+---
+
+## ⚙️ CI/CD Workflow
+
+A ready‑to‑use **GitHub Actions workflow** is included in:
+
+```text
+.github/workflows/publish.yml
+```
+
+✅ **What it does:**
+
+- Runs on push to your main branch
+- Builds your project
+- Deploys automatically to **Vercel** (configured via `vercel.json`)
+
+✅ **How to use:**
+
+1. Push your project to a GitHub repository.
+2. Add your Vercel tokens/secrets as GitHub repository secrets:
+    Go to `Settings >> Secrets and variables >> Actions >> Repository secrets` and add these variables:
+    - `VERCEL_ORG_ID`
+    - `VERCEL_PROJECT_ID`
+    - `VERCEL_TOKEN`
+3. Every time you push to `main` and _version is updated_, GitHub Actions will trigger and deploy your server to Vercel.
+
+You can customize the workflow to fit your own CI/CD needs (e.g., change branches, add tests, deploy elsewhere).
 
 ---
 
