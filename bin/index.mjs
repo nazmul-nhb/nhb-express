@@ -99,7 +99,7 @@ const projectName = normalizeResult(
 const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
 	normalizeResult(
 		await select({
-			message: '🛢 Select a database:',
+			message: '🛢️ Select a database:',
 			options: [
 				{ value: 'mongoose', label: 'MongoDB + Mongoose', hint: 'default' },
 				{ value: 'prisma', label: 'PostgreSQL + Prisma (Coming Soon...)' },
