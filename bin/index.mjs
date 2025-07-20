@@ -180,9 +180,7 @@ const pkgJson = {
 
 fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkgJson, null, 2));
 
-const s = spinner();
-
-s.start(chalk.cyanBright('🔄️ Installing dependencies'));
+note(chalk.cyanBright('🔄️ Installing dependencies...'), chalk.gray('Progress:'));
 
 await installDeps(
 	pkgManager,
@@ -191,7 +189,7 @@ await installDeps(
 	[...devDeps.common, ...devDeps[dbChoice]],
 );
 
-s.stop(chalk.green('✅ Dependencies installed!'));
+note(chalk.green('✅ Dependencies installed!'));
 
 note(
 	chalk.cyan(`cd ${projectName}\n${pkgManager} run dev`),
