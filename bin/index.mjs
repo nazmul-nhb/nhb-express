@@ -165,7 +165,7 @@ renameDotFile('gitignore');
 /** @type {PackageJson} */
 const pkgJson = {
 	name: projectName,
-	version: '0.0.1',
+	version: '0.1.0',
 	description: `Express TypeScript ${capitalizeString(dbChoice)} Server`,
 	scripts: {
 		dev: 'nodemon',
@@ -249,15 +249,10 @@ async function installDeps(manager, cwd, deps, devDeps) {
 		await execa('pnpm', ['add', ...deps], { cwd, stdout: 'inherit' });
 		await execa('pnpm', ['add', '-D', ...devDeps], { cwd, stdout: 'inherit' });
 	} else if (manager === 'npm') {
-		await execa('npm', ['install', '--progress', ...deps], {
-			cwd,
-			stdout: 'inherit',
-			stderr: 'inherit',
-		});
+		await execa('npm', ['install', '--progress', ...deps], { cwd, stdout: 'inherit' });
 		await execa('npm', ['install', '--progress', '-D', ...devDeps], {
 			cwd,
 			stdout: 'inherit',
-			stderr: 'inherit',
 		});
 	} else if (manager === 'yarn') {
 		await execa('yarn', ['add', ...deps], { cwd, stdout: 'inherit' });
