@@ -18,7 +18,7 @@ import chalk from 'chalk';
 import { execa } from 'execa';
 import { capitalizeString } from 'nhb-toolbox';
 import fs from 'node:fs';
-import { rm } from 'node:fs/promises';
+import { rm as rmAsync } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -85,7 +85,7 @@ function normalizeResult(result) {
 }
 
 // ----------------------
-// Entry
+// ! Entry
 // ----------------------
 intro(chalk.cyan('🚀 Create Express + TypeScript App with "nhb-express"'));
 
@@ -133,7 +133,7 @@ function renameDotFile(fileName) {
 	fs.renameSync(path.join(targetDir, fileName), path.join(targetDir, `.${fileName}`));
 }
 
-// if exists, confirm overwrite
+// ! if exists, confirm overwrite
 if (fs.existsSync(targetDir)) {
 	const overwrite = await confirm({
 		message: chalk.redBright(`⛔ ${projectName} already exists. Overwrite?`),
@@ -165,7 +165,7 @@ renameDotFile('gitignore');
 /** @type {PackageJson} */
 const pkgJson = {
 	name: projectName,
-	version: '0.0.1',
+	version: '0.1.0',
 	description: `Express TypeScript ${capitalizeString(dbChoice)} Server`,
 	scripts: {
 		dev: 'nodemon',
@@ -184,7 +184,7 @@ const pkgJson = {
 		email: 'nazmulnhb@gmail.com',
 	},
 	license: 'ISC',
-	keywords: ['server', 'express', 'typescript'],
+	keywords: [projectName, 'server', 'express', 'typescript', dbChoice],
 };
 
 fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkgJson, null, 2));
@@ -208,7 +208,7 @@ note(
 outro(chalk.green('🎉 Project created successfully!'));
 
 // ----------------------
-// Helpers
+// ! Helpers
 // ----------------------
 
 /**
@@ -266,13 +266,13 @@ async function installDeps(manager, cwd, deps, devDeps) {
  */
 async function removeExistingDir(targetDir) {
 	const s = spinner();
-	s.start(chalk.yellowBright('🗑️  Removing existing directory'));
+	s.start(chalk.yellowBright('⛔  Removing existing directory'));
 
 	try {
-		await rm(targetDir, { recursive: true, force: true });
+		await rmAsync(targetDir, { recursive: true, force: true });
 		s.stop(chalk.green('✅ Existing directory removed!'));
 	} catch (err) {
-		s.stop(chalk.redBright('❌ Failed to remove directory', err));
+		s.stop(chalk.redBright('❌ Failed to remove directory!', err));
 		process.exit(0);
 	}
 }
