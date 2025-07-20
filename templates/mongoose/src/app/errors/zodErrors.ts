@@ -9,24 +9,9 @@ export const handleZodErrors = (error: ZodError, stack?: string): IErrorResponse
 		let message = zodIssue.message;
 
 		switch (zodIssue.code) {
-			// case 'invalid_type':
-			// 	message = `Expected ${zodIssue.expected} for “${path}” but received “${zodIssue.input}”!`;
-			// 	break;
 			case 'invalid_value':
 				message = `Invalid value for “${path}”. Expected one of: “${joinArrayElements(zodIssue.values)}”!`;
 				break;
-			// case ZodIssueCode.too_small:
-			// 	message =
-			// 		zodIssue.type === 'string' ?
-			// 			`Value for “${path}” must contain at least ${zodIssue.minimum} character(s)`
-			// 		:	`Value for “${path}” is too small. Minimum: ${zodIssue.minimum}!`;
-			// 	break;
-			// case ZodIssueCode.too_big:
-			// 	message = `Value for “${path}” is too large. Maximum: ${zodIssue.maximum}!`;
-			// 	break;
-			// case ZodIssueCode.invalid_string:
-			// 	message = `Invalid string format for “${path}”. Expected ${zodIssue.validation}!`;
-			// 	break;
 		}
 
 		return { path, message };

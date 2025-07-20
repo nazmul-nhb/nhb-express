@@ -86,7 +86,7 @@ function normalizeResult(result) {
 	if (isCancel(result)) {
 		showCancelMessage();
 	}
-	return typeof result === 'string' ? result : '';
+	return typeof result === 'string' ? result?.trim() : '';
 }
 
 // ----------------------
@@ -201,7 +201,7 @@ await installDeps(
 	[...devDeps.common, ...devDeps[dbChoice]],
 );
 
-mimicClack(chalk.green('✅ Dependencies installed!'));
+mimicClack(chalk.green('✅ Dependencies installed!'), false);
 
 note(
 	chalk.cyan(`cd ${projectName}\n${pkgManager} run dev`),
@@ -215,11 +215,17 @@ outro(chalk.green('🎉 Project created successfully!'));
 // ----------------------
 
 /**
- * Mimic clack left vertical line before a message
- * @param {string} message
+ * * Mimic clack left vertical line before a message
+ * @param {string} message message to print
+ * @param {boolean} [suffix=true] If true, adds a pipe in new line
  */
-function mimicClack(message) {
-	console.log(chalk.gray('│\n') + chalk.green('◇  ') + message + chalk.gray('\n│'));
+export function mimicClack(message, suffix = true) {
+	console.log(
+		chalk.gray('│\n') +
+			chalk.green('◇  ') +
+			message +
+			(suffix ? chalk.gray('\n│') : ''),
+	);
 }
 
 /**
