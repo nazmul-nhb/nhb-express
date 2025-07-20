@@ -181,6 +181,7 @@ const pkgJson = {
 		commit: 'nhb-commit',
 		count: 'nhb-count',
 		module: 'nhb-module',
+		secret: 'node secret.mjs',
 	},
 	author: {
 		name: 'Nazmul Hassan',
