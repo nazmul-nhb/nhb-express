@@ -1,8 +1,8 @@
 import type { Types } from 'mongoose';
 import type { Branded } from 'nhb-toolbox/types';
-import type { STATUS_CODES, USER_ROLES } from '../constants';
+import type { COLLECTIONS, STATUS_CODES, USER_ROLES } from '../constants';
 
-export type TCollection = 'N/A' | 'User';
+export type TCollection = (typeof COLLECTIONS)[number];
 
 export type TMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'OPTIONS' | 'OK';
 
