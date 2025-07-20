@@ -36,8 +36,8 @@ const userSchema = new Schema<IUserDoc>(
 		},
 		role: {
 			type: String,
-			enum: Object.values(USER_ROLES),
-			default: USER_ROLES.USER,
+			enum: USER_ROLES,
+			default: 'user',
 		},
 		is_active: {
 			type: Boolean,

@@ -19,11 +19,7 @@ export const STATUS_CODES = {
 } as const;
 
 /** User Roles */
-export const USER_ROLES = {
-	SUPER_ADMIN: 'super_admin',
-	ADMIN: 'admin',
-	USER: 'user',
-} as const;
+export const USER_ROLES = ['super_admin', 'admin', 'user'] as const;
 
 /** Collection Names */
 export const COLLECTIONS = ['N/A', 'User'] as const;

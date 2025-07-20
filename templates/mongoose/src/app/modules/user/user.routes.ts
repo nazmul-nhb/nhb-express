@@ -5,6 +5,6 @@ import { userControllers } from './user.controllers';
 
 const router = Router();
 
-router.get('/', authorizeUser(...Object.values(USER_ROLES)), userControllers.getAllUsers);
+router.get('/', authorizeUser(...USER_ROLES), userControllers.getAllUsers);
 
 export const userRoutes = router;

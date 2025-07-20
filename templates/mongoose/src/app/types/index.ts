@@ -10,7 +10,7 @@ export type TResponseDetails = { message: string; statusCode: number };
 
 export type TStatusCode = (typeof STATUS_CODES)[keyof typeof STATUS_CODES];
 
-export type TUserRole = (typeof USER_ROLES)[keyof typeof USER_ROLES];
+export type TUserRole = (typeof USER_ROLES)[number];
 
 export type TEmail = Branded<string, 'email'>;
 
