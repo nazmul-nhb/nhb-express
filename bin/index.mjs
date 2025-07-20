@@ -90,7 +90,7 @@ const projectName = normalizeResult(
 const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
 	normalizeResult(
 		await select({
-			message: chalk.yellowBright('🛢️ Select a database:'),
+			message: chalk.cyanBright('🛢️ Select a database:'),
 			options: [
 				{ value: 'mongoose', label: 'MongoDB + Mongoose', hint: 'default' },
 				{ value: 'prisma', label: 'PostgreSQL + Prisma (Coming Soon...)' },
@@ -126,7 +126,7 @@ function renameDotFile(fileName) {
 // if exists, confirm overwrite
 if (fs.existsSync(targetDir)) {
 	const overwrite = await confirm({
-		message: chalk.red(`⛔ ${projectName} already exists. Overwrite?`),
+		message: chalk.redBright(`⛔ ${projectName} already exists. Overwrite?`),
 	});
 	if (!overwrite) {
 		outro(chalk.yellow('🛑 Cancelled by user!'));
@@ -198,7 +198,7 @@ outro(chalk.green('🎉 Project created successfully!'));
  * @param {string} message
  */
 function mimicClack(message) {
-	console.log(chalk.gray('|\n|  ') + message + chalk.gray('\n|'));
+	console.log(chalk.gray('│\n◇  ') + message + chalk.gray('\n│'));
 }
 
 /**
