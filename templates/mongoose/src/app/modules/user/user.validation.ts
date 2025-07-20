@@ -1,20 +1,27 @@
 import { z } from 'zod';
+import { authValidations } from '../auth/auth.validation';
 
 /** Validation Schema for Creating new User */
-const creationSchema = z
-	.object({
+const creationSchema = authValidations.loginSchema
+	.extend({
 		first_name: z.string({ error: 'First name is required!' }).trim(),
 		last_name: z.string({ error: 'Last name is required!' }).trim(),
-		email: z.email({ error: 'Please provide a valid email address!' }),
-		password: z
-			.string()
+		confirm_password: z
+			.string({ error: 'Password is required!' })
 			.trim()
-			.min(6, { message: 'Password must be at least 6 characters long!' })
-			.max(20, {
-				message: 'Password cannot be more than 20 characters!',
+			.min(6, {
+				message: 'Password must be at least 6 characters long!',
+			})
+			.max(56, {
+				message: 'Password cannot be more than 56 characters!',
 			}),
 	})
-	.strict();
+	.refine((schema) => schema.password === schema.confirm_password, {
+		path: ['confirm_password'],
+		message: 'Passwords do not match!',
+	})
+	.strict()
+	.transform(({ confirm_password: _, ...rest }) => rest);
 
 /** User Validation Schema */
 export const userValidations = { creationSchema };
