@@ -171,7 +171,7 @@ const pkgJson = {
 
 fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkgJson, null, 2));
 
-mimicClack(chalk.cyanBright('🔄️ Installing dependencies...\n'));
+mimicClack(chalk.cyanBright('🔄️ Installing dependencies...'));
 
 await installDeps(
 	pkgManager,
@@ -198,7 +198,7 @@ outro(chalk.green('🎉 Project created successfully!'));
  * @param {string} message
  */
 function mimicClack(message) {
-	console.log(chalk.gray('|  \n|  ') + message);
+	console.log(chalk.gray('|\n|  ') + message + chalk.gray('\n|'));
 }
 
 /**
