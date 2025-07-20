@@ -171,7 +171,7 @@ const pkgJson = {
 
 fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkgJson, null, 2));
 
-console.log(chalk.cyanBright('🔄️ Installing dependencies...'));
+mimicClack(chalk.cyanBright('🔄️ Installing dependencies...\n'));
 
 await installDeps(
 	pkgManager,
@@ -180,7 +180,7 @@ await installDeps(
 	[...devDeps.common, ...devDeps[dbChoice]],
 );
 
-console.log(chalk.green('✅ Dependencies installed!'));
+mimicClack(chalk.green('✅ Dependencies installed!'));
 
 note(
 	chalk.cyan(`cd ${projectName}\n${pkgManager} run dev`),
@@ -192,6 +192,14 @@ outro(chalk.green('🎉 Project created successfully!'));
 // ----------------------
 // Helpers
 // ----------------------
+
+/**
+ * Mimic clack left vertical line before a message
+ * @param {string} message
+ */
+function mimicClack(message) {
+	console.log(chalk.gray('|  \n|  ') + message);
+}
 
 /**
  * * Recursively copy a directory
