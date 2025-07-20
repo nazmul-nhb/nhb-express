@@ -1,19 +1,9 @@
-import { ErrorWithStatus } from '../../classes/ErrorWithStatus';
 import configs from '../../configs';
-import { STATUS_CODES } from '../../constants';
 import type { DecodedUser } from '../../types/interfaces';
-import {
-	comparePassword,
-	generateToken,
-	verifyToken,
-} from '../../utilities/authUtilities';
+import { generateToken, verifyToken } from '../../utilities/authUtilities';
 import { User } from '../user/user.model';
-import type {
-	ILoginCredentials,
-	IPlainUser,
-	ITokens,
-	IUser,
-} from '../user/user.types';
+import type { ILoginCredentials, IPlainUser, ITokens, IUser } from '../user/user.types';
+import { processLogin } from './auth.utils';
 
 /**
  * Create a new user in MongoDB `user` collection.
@@ -35,50 +25,18 @@ const registerUserInDB = async (payload: IUser) => {
  * @param payload Login credentials (`email` and `password`).
  * @returns Token as object.
  */
+/**
+ * * Login user.
+ * @param payload Login credentials (`email` and `password`).
+ * @returns Token as object.
+ */
 const loginUser = async (payload: ILoginCredentials): Promise<ITokens> => {
 	// * Validate and extract user from DB.
 	const user = await User.validateUser(payload.email);
 
-	// * Check if password matches with the saved password in DB.
-	const passwordMatched = await comparePassword(
-		payload?.password,
-		user?.password,
-	);
+	const result = await processLogin(payload?.password, user);
 
-	if (!passwordMatched) {
-		throw new ErrorWithStatus(
-			'Authorization Error',
-			`Invalid credentials!`,
-			STATUS_CODES.UNAUTHORIZED,
-			'auth',
-		);
-	}
-
-	// * Create tokens and send to the client.
-	const jwtPayload = {
-		email: user.email,
-		role: user.role,
-	};
-
-	const accessToken = generateToken(
-		jwtPayload,
-		configs.accessSecret,
-		configs.accessExpireTime,
-	);
-
-	const refreshToken = generateToken(
-		jwtPayload,
-		configs.refreshSecret,
-		configs.refreshExpireTime,
-	);
-
-	const { password: _, __v, ...userInfo } = user.toObject<IPlainUser>();
-
-	return {
-		access_token: accessToken,
-		refresh_token: refreshToken,
-		user: userInfo,
-	};
+	return result;
 };
 
 /**

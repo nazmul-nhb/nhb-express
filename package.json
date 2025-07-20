@@ -1,6 +1,6 @@
 {
   "name": "nhb-express",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "Express TypeScript Server Scaffold",
   "main": "bin/index.mjs",
   "type": "module",
@@ -48,7 +48,7 @@
     "@clack/prompts": "^0.11.0",
     "chalk": "5.4.1",
     "execa": "^9.5.2",
-    "nhb-toolbox": "^4.12.67",
+    "nhb-toolbox": "^4.12.81",
     "type-fest": "^4.41.0"
   },
   "devDependencies": {

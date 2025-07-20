@@ -26,7 +26,7 @@ export interface IPlainUser extends IUser {
 	updated_at: string;
 }
 
-export interface IUserDoc extends IUser, Document {
+export interface IUserDoc extends IPlainUser, Document {
 	_id: Types.ObjectId;
 }
 

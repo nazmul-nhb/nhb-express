@@ -13,7 +13,7 @@ export const handleZodErrors = (error: ZodError, stack?: string): IErrorResponse
 			// 	message = `Expected ${zodIssue.expected} for “${path}” but received “${zodIssue.input}”!`;
 			// 	break;
 			case 'invalid_value':
-				message = `Invalid value for “${path}”. Expected one of: “${joinArrayElements(zodIssue.values)}” but received “${zodIssue.input}”!`;
+				message = `Invalid value for “${path}”. Expected one of: “${joinArrayElements(zodIssue.values)}”!`;
 				break;
 			// case ZodIssueCode.too_small:
 			// 	message =
