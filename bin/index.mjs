@@ -71,6 +71,12 @@ const devDeps = /* @__PURE__ */ Object.freeze({
 	drizzle: [],
 });
 
+/** Show cancel message with outro and graceful exit */
+function showCancelMessage() {
+	outro(chalk.redBright('🛑 Process cancelled by user!'));
+	process.exit(0);
+}
+
 /**
  * * Normalize clack result to string
  * @param {string | symbol} result
@@ -78,8 +84,7 @@ const devDeps = /* @__PURE__ */ Object.freeze({
  */
 function normalizeResult(result) {
 	if (isCancel(result)) {
-		console.log(chalk.gray('⛔ Process cancelled by user!'));
-		process.exit(0);
+		showCancelMessage();
 	}
 	return typeof result === 'string' ? result : '';
 }
@@ -141,13 +146,11 @@ if (fs.existsSync(targetDir)) {
 	});
 
 	if (isCancel(overwrite)) {
-		outro(chalk.redBright('🛑 Cancelled by user!'));
-		process.exit(0);
+		showCancelMessage();
 	}
 
 	if (!overwrite) {
-		outro(chalk.redBright('🛑 Cancelled by user!'));
-		process.exit(0);
+		showCancelMessage();
 	}
 
 	await removeExistingDir(targetDir);
