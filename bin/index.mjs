@@ -91,7 +91,7 @@ intro(chalk.cyan('🚀 Create Express + TypeScript App with "nhb-express"'));
 
 const projectName = normalizeResult(
 	await text({
-		message: '📂 Project name:',
+		message: chalk.yellowBright('📂 Project name:'),
 		initialValue: 'my-server',
 		validate: (v) => (v.trim() ? undefined : 'Project name is required!'),
 	}),
@@ -100,7 +100,7 @@ const projectName = normalizeResult(
 const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
 	normalizeResult(
 		await select({
-			message: '🛢️ Select a database:',
+			message: chalk.yellowBright('🛢️ Select a database:'),
 			options: [
 				{ value: 'mongoose', label: 'MongoDB + Mongoose', hint: 'default' },
 				{ value: 'prisma', label: 'PostgreSQL + Prisma (Coming Soon...)' },
@@ -113,7 +113,7 @@ const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
 
 const pkgManager = normalizeResult(
 	await select({
-		message: '📦 Choose a package manager:',
+		message: chalk.yellowBright('📦 Choose a package manager:'),
 		options: [
 			{ value: 'pnpm', label: 'pnpm' },
 			{ value: 'npm', label: 'npm' },
@@ -136,7 +136,7 @@ function renameDotFile(fileName) {
 // if exists, confirm overwrite
 if (fs.existsSync(targetDir)) {
 	const overwrite = await confirm({
-		message: `⛔ ${projectName} already exists. Overwrite?`,
+		message: chalk.red(`⛔ ${projectName} already exists. Overwrite?`),
 	});
 	if (!overwrite) {
 		outro(chalk.yellow('🛑 Cancelled by user!'));
@@ -181,9 +181,9 @@ const pkgJson = {
 
 fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkgJson, null, 2));
 
-const s = spinner();
+// const s = spinner();
 
-s.start('⬇️ Installing dependencies...');
+// s.start('⬇️ Installing dependencies...');
 
 await installDeps(
 	pkgManager,
@@ -192,7 +192,7 @@ await installDeps(
 	[...devDeps.common, ...devDeps[dbChoice]],
 );
 
-s.stop(chalk.green('✅ Dependencies installed!'));
+// s.stop(chalk.green('✅ Dependencies installed!'));
 
 outro(chalk.green('🎉 Project created successfully!'));
 
