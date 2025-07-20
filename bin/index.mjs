@@ -182,7 +182,7 @@ fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkgJson, n
 
 const s = spinner();
 
-s.start('🔄️ Installing dependencies...');
+s.start(chalk.cyanBright('🔄️ Installing dependencies'));
 
 await installDeps(
 	pkgManager,
@@ -193,12 +193,12 @@ await installDeps(
 
 s.stop(chalk.green('✅ Dependencies installed!'));
 
-outro(chalk.green('🎉 Project created successfully!'));
-
 note(
 	chalk.cyan(`cd ${projectName}\n${pkgManager} run dev`),
 	chalk.yellowBright('⏭️ Next Steps'),
 );
+
+outro(chalk.green('🎉 Project created successfully!'));
 
 // ----------------------
 // Helpers
@@ -249,17 +249,18 @@ async function installDeps(manager, cwd, deps, devDeps) {
 			const child = execa(cmd, args, { cwd });
 
 			child.stdout?.on('data', (data) => {
-				// data is a Buffer, convert to string and trim
+				/** @type {string[]} */
 				const lines = data.toString().split('\n').filter(Boolean);
 				for (const line of lines) {
-					process.stdout.write(chalk.gray('│ ') + line + '\n');
+					process.stdout.write(chalk.gray('\n│ ') + line);
 				}
 			});
 
 			child.stderr?.on('data', (data) => {
+				/** @type {string[]} */
 				const lines = data.toString().split('\n').filter(Boolean);
 				for (const line of lines) {
-					process.stdout.write(chalk.red('│ ') + line + '\n');
+					process.stdout.write(chalk.red('\n│ ') + line);
 				}
 			});
 
