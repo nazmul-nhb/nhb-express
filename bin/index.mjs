@@ -4,16 +4,7 @@
 
 /** @import {PackageJson} from 'type-fest'; */
 
-import {
-	confirm,
-	intro,
-	isCancel,
-	note,
-	outro,
-	select,
-	spinner,
-	text,
-} from '@clack/prompts';
+import { confirm, intro, isCancel, note, outro, select, text } from '@clack/prompts';
 import chalk from 'chalk';
 import { execa } from 'execa';
 import { capitalizeString } from 'nhb-toolbox';
@@ -180,7 +171,7 @@ const pkgJson = {
 
 fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkgJson, null, 2));
 
-note(chalk.cyanBright('🔄️ Installing dependencies...'), chalk.gray('Progress:'));
+console.log(chalk.cyanBright('🔄️ Installing dependencies...'));
 
 await installDeps(
 	pkgManager,
@@ -189,7 +180,7 @@ await installDeps(
 	[...devDeps.common, ...devDeps[dbChoice]],
 );
 
-note(chalk.green('✅ Dependencies installed!'));
+console.log(chalk.green('✅ Dependencies installed!'));
 
 note(
 	chalk.cyan(`cd ${projectName}\n${pkgManager} run dev`),
@@ -222,54 +213,20 @@ function copyDir(src, dest) {
 
 /**
  * * Install dependencies with the chosen package manager
- * and print logs with clack-style left bar and indentation
  * @param {string} manager
  * @param {string} cwd
  * @param {string[]} deps
  * @param {string[]} devDeps
  */
 async function installDeps(manager, cwd, deps, devDeps) {
-	/**
-	 * Run a single command and stream output
-	 * @param {string} cmd
-	 * @param {string[]} args
-	 */
-	const runWithPrefix = (cmd, args) => {
-		return new Promise((resolve, reject) => {
-			const child = execa(cmd, args, { cwd });
-
-			// handle stdout
-			child.stdout?.on('data', (chunk) => {
-				const lines = chunk.toString().split('\n').filter(Boolean);
-				for (const line of lines) {
-					// left vertical bar and indent with two spaces
-					process.stdout.write(chalk.gray('│ ') + '  ' + line + '\n');
-				}
-			});
-
-			// handle stderr
-			child.stderr?.on('data', (chunk) => {
-				const lines = chunk.toString().split('\n').filter(Boolean);
-				for (const line of lines) {
-					process.stdout.write(chalk.red('│ ') + '  ' + line + '\n');
-				}
-			});
-
-			child.on('close', (code) => {
-				if (code === 0) resolve(undefined);
-				else reject(new Error(`${cmd} exited with code ${code}`));
-			});
-		});
-	};
-
 	if (manager === 'pnpm') {
-		await runWithPrefix('pnpm', ['add', ...deps]);
-		await runWithPrefix('pnpm', ['add', '-D', ...devDeps]);
+		await execa('pnpm', ['add', ...deps], { cwd, stdout: 'inherit' });
+		await execa('pnpm', ['add', '-D', ...devDeps], { cwd, stdout: 'inherit' });
 	} else if (manager === 'npm') {
-		await runWithPrefix('npm', ['install', ...deps]);
-		await runWithPrefix('npm', ['install', '-D', ...devDeps]);
+		await execa('npm', ['install', ...deps], { cwd, stdout: 'inherit' });
+		await execa('npm', ['install', '-D', ...devDeps], { cwd, stdout: 'inherit' });
 	} else if (manager === 'yarn') {
-		await runWithPrefix('yarn', ['add', ...deps]);
-		await runWithPrefix('yarn', ['add', '--dev', ...devDeps]);
+		await execa('yarn', ['add', ...deps], { cwd, stdout: 'inherit' });
+		await execa('yarn', ['add', '--dev', ...devDeps], { cwd, stdout: 'inherit' });
 	}
 }
