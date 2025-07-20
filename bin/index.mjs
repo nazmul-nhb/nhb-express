@@ -165,7 +165,7 @@ renameDotFile('gitignore');
 /** @type {PackageJson} */
 const pkgJson = {
 	name: projectName,
-	version: '0.1.0',
+	version: '0.0.1',
 	description: `Express TypeScript ${capitalizeString(dbChoice)} Server`,
 	scripts: {
 		dev: 'nodemon',
@@ -245,18 +245,18 @@ function copyDir(src, dest) {
  * @param {string[]} devDeps
  */
 async function installDeps(manager, cwd, deps, devDeps) {
+	/** @type {import('execa').Options} */
+	const options = { cwd, stdout: 'inherit', stderr: 'inherit' };
+
 	if (manager === 'pnpm') {
-		await execa('pnpm', ['add', ...deps], { cwd, stdout: 'inherit' });
-		await execa('pnpm', ['add', '-D', ...devDeps], { cwd, stdout: 'inherit' });
+		await execa('pnpm', ['add', ...deps], options);
+		await execa('pnpm', ['add', '-D', ...devDeps], options);
 	} else if (manager === 'npm') {
-		await execa('npm', ['install', '--progress', ...deps], { cwd, stdout: 'inherit' });
-		await execa('npm', ['install', '--progress', '-D', ...devDeps], {
-			cwd,
-			stdout: 'inherit',
-		});
+		await execa('npm', ['install', '--progress', ...deps], options);
+		await execa('npm', ['install', '--progress', '-D', ...devDeps], options);
 	} else if (manager === 'yarn') {
-		await execa('yarn', ['add', ...deps], { cwd, stdout: 'inherit' });
-		await execa('yarn', ['add', '--dev', ...devDeps], { cwd, stdout: 'inherit' });
+		await execa('yarn', ['add', ...deps], options);
+		await execa('yarn', ['add', '--dev', ...devDeps], options);
 	}
 }
 
