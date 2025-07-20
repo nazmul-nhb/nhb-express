@@ -91,6 +91,7 @@ pnpm dev     # or npm run dev / yarn dev
  ├─ nodemon.json            # Nodemon settings
  ├─ package.json
  ├─ README.md
+ ├─ secret.mjs              # Generate secrets for jwt (using crypto module, just run in cli: node secret.mjs)
  ├─ tsconfig.json           # Ready to use tsconfig
  └─ vercel.json             # Deployment config for Vercel
 ```
