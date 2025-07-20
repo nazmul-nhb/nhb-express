@@ -4,11 +4,21 @@
 
 /** @import {PackageJson} from 'type-fest'; */
 
-import { confirm, intro, isCancel, note, outro, select, text } from '@clack/prompts';
+import {
+	confirm,
+	intro,
+	isCancel,
+	note,
+	outro,
+	select,
+	spinner,
+	text,
+} from '@clack/prompts';
 import chalk from 'chalk';
 import { execa } from 'execa';
 import { capitalizeString } from 'nhb-toolbox';
 import fs from 'node:fs';
+import { rm } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -127,12 +137,20 @@ function renameDotFile(fileName) {
 if (fs.existsSync(targetDir)) {
 	const overwrite = await confirm({
 		message: chalk.redBright(`⛔ ${projectName} already exists. Overwrite?`),
+		initialValue: false,
 	});
-	if (!overwrite) {
-		outro(chalk.yellow('🛑 Cancelled by user!'));
+
+	if (isCancel(overwrite)) {
+		outro(chalk.redBright('🛑 Cancelled by user!'));
 		process.exit(0);
 	}
-	fs.rmSync(targetDir, { recursive: true, force: true });
+
+	if (!overwrite) {
+		outro(chalk.redBright('🛑 Cancelled by user!'));
+		process.exit(0);
+	}
+
+	await removeExistingDir(targetDir);
 }
 
 fs.mkdirSync(targetDir);
@@ -198,7 +216,7 @@ outro(chalk.green('🎉 Project created successfully!'));
  * @param {string} message
  */
 function mimicClack(message) {
-	console.log(chalk.gray('│\n◇  ') + message + chalk.gray('\n│'));
+	console.log(chalk.gray('│\n') + chalk.green('◇  ') + message + chalk.gray('\n│'));
 }
 
 /**
@@ -236,5 +254,22 @@ async function installDeps(manager, cwd, deps, devDeps) {
 	} else if (manager === 'yarn') {
 		await execa('yarn', ['add', ...deps], { cwd, stdout: 'inherit' });
 		await execa('yarn', ['add', '--dev', ...devDeps], { cwd, stdout: 'inherit' });
+	}
+}
+
+/**
+ * Remove an existing directory with spinner feedback
+ * @param {string} targetDir
+ */
+async function removeExistingDir(targetDir) {
+	const s = spinner();
+	s.start(chalk.yellowBright('🗑️  Removing existing directory'));
+
+	try {
+		await rm(targetDir, { recursive: true, force: true });
+		s.stop(chalk.green('✅ Existing directory removed!'));
+	} catch (err) {
+		s.stop(chalk.redBright('❌ Failed to remove directory', err));
+		process.exit(0);
 	}
 }
