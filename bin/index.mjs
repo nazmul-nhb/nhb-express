@@ -19,6 +19,7 @@ import { execa } from 'execa';
 import { capitalizeString } from 'nhb-toolbox';
 import fs from 'node:fs';
 import path from 'node:path';
+import { stdout } from 'node:process';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -182,7 +183,7 @@ fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkgJson, n
 
 const s = spinner();
 
-s.start('Installing dependencies...');
+s.start('⬇️ Installing dependencies...');
 
 await installDeps(
 	pkgManager,
@@ -191,7 +192,7 @@ await installDeps(
 	[...devDeps.common, ...devDeps[dbChoice]],
 );
 
-s.stop(chalk.green('✓ Dependencies installed'));
+s.stop(chalk.green('✅ Dependencies installed!'));
 
 outro(chalk.green('🎉 Project created successfully!'));
 
@@ -231,13 +232,13 @@ function copyDir(src, dest) {
  */
 async function installDeps(manager, cwd, deps, devDeps) {
 	if (manager === 'pnpm') {
-		await execa('pnpm', ['add', ...deps], { cwd });
-		await execa('pnpm', ['add', '-D', ...devDeps], { cwd });
+		await execa('pnpm', ['add', ...deps], { cwd, stdout: 'inherit' });
+		await execa('pnpm', ['add', '-D', ...devDeps], { cwd, stdout: 'inherit' });
 	} else if (manager === 'npm') {
-		await execa('npm', ['install', ...deps], { cwd });
-		await execa('npm', ['install', '-D', ...devDeps], { cwd });
+		await execa('npm', ['install', ...deps], { cwd, stdout: 'inherit' });
+		await execa('npm', ['install', '-D', ...devDeps], { cwd, stdout: 'inherit' });
 	} else if (manager === 'yarn') {
-		await execa('yarn', ['add', ...deps], { cwd });
-		await execa('yarn', ['add', '--dev', ...devDeps], { cwd });
+		await execa('yarn', ['add', ...deps], { cwd, stdout: 'inherit' });
+		await execa('yarn', ['add', '--dev', ...devDeps], { cwd, stdout: 'inherit' });
 	}
 }
