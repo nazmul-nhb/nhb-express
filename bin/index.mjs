@@ -141,13 +141,7 @@ if (fs.existsSync(targetDir)) {
 		outro(chalk.yellow('🛑 Cancelled by user!'));
 		process.exit(0);
 	}
-	const s = spinner();
-
-	s.start('🔄️ Overriding existing files...');
-
 	fs.rmSync(targetDir, { recursive: true, force: true });
-
-	s.stop(chalk.green('✅ Overriding existing files complete!'));
 }
 
 fs.mkdirSync(targetDir);
@@ -186,9 +180,9 @@ const pkgJson = {
 
 fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkgJson, null, 2));
 
-// const s = spinner();
+const s = spinner();
 
-// s.start('⬇️ Installing dependencies...');
+s.start('🔄️ Installing dependencies...');
 
 await installDeps(
 	pkgManager,
@@ -197,7 +191,7 @@ await installDeps(
 	[...devDeps.common, ...devDeps[dbChoice]],
 );
 
-// s.stop(chalk.green('✅ Dependencies installed!'));
+s.stop(chalk.green('✅ Dependencies installed!'));
 
 outro(chalk.green('🎉 Project created successfully!'));
 
@@ -229,33 +223,43 @@ function copyDir(src, dest) {
 }
 
 /**
- * * Install dependencies with the chosen package manager and print logs with clack-style left bar and indentation
+ * * Install dependencies with the chosen package manager and capture logs line-by-line
  * @param {string} manager
  * @param {string} cwd
  * @param {string[]} deps
  * @param {string[]} devDeps
  */
 async function installDeps(manager, cwd, deps, devDeps) {
-	/**
-	 * Run a single command and stream output
-	 * @param {string} cmd
-	 * @param {string[]} args
-	 */
-	const runWithPrefix = (cmd, args) => {
-		return new Promise((resolve, reject) => {
+	/** @type {Array<[string, string[]]>} */
+	const installCmds = [];
+
+	if (manager === 'pnpm') {
+		installCmds.push(['pnpm', ['add', ...deps]]);
+		installCmds.push(['pnpm', ['add', '-D', ...devDeps]]);
+	} else if (manager === 'npm') {
+		installCmds.push(['npm', ['install', ...deps]]);
+		installCmds.push(['npm', ['install', '-D', ...devDeps]]);
+	} else if (manager === 'yarn') {
+		installCmds.push(['yarn', ['add', ...deps]]);
+		installCmds.push(['yarn', ['add', '--dev', ...devDeps]]);
+	}
+
+	for (const [cmd, args] of installCmds) {
+		await new Promise((resolve, reject) => {
 			const child = execa(cmd, args, { cwd });
 
-			child.stdout?.on('data', (chunk) => {
-				const lines = chunk.toString().split('\n').filter(Boolean);
+			child.stdout?.on('data', (data) => {
+				// data is a Buffer, convert to string and trim
+				const lines = data.toString().split('\n').filter(Boolean);
 				for (const line of lines) {
-					process.stdout.write(chalk.gray('│ ') + '  ' + line + '\n');
+					process.stdout.write(chalk.gray('│ ') + line + '\n');
 				}
 			});
 
-			child.stderr?.on('data', (chunk) => {
-				const lines = chunk.toString().split('\n').filter(Boolean);
+			child.stderr?.on('data', (data) => {
+				const lines = data.toString().split('\n').filter(Boolean);
 				for (const line of lines) {
-					process.stdout.write(chalk.red('│ ') + '  ' + line + '\n');
+					process.stdout.write(chalk.red('│ ') + line + '\n');
 				}
 			});
 
@@ -264,16 +268,5 @@ async function installDeps(manager, cwd, deps, devDeps) {
 				else reject(new Error(`${cmd} exited with code ${code}`));
 			});
 		});
-	};
-
-	if (manager === 'pnpm') {
-		await runWithPrefix('pnpm', ['add', ...deps]);
-		await runWithPrefix('pnpm', ['add', '-D', ...devDeps]);
-	} else if (manager === 'npm') {
-		await runWithPrefix('npm', ['install', ...deps]);
-		await runWithPrefix('npm', ['install', '-D', ...devDeps]);
-	} else if (manager === 'yarn') {
-		await runWithPrefix('yarn', ['add', ...deps]);
-		await runWithPrefix('yarn', ['add', '--dev', ...devDeps]);
 	}
 }
