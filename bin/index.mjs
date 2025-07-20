@@ -223,44 +223,37 @@ function copyDir(src, dest) {
 }
 
 /**
- * * Install dependencies with the chosen package manager and capture logs line-by-line
+ * * Install dependencies with the chosen package manager
+ * and print logs with clack-style left bar and indentation
  * @param {string} manager
  * @param {string} cwd
  * @param {string[]} deps
  * @param {string[]} devDeps
  */
 async function installDeps(manager, cwd, deps, devDeps) {
-	/** @type {Array<[string, string[]]>} */
-	const installCmds = [];
-
-	if (manager === 'pnpm') {
-		installCmds.push(['pnpm', ['add', ...deps]]);
-		installCmds.push(['pnpm', ['add', '-D', ...devDeps]]);
-	} else if (manager === 'npm') {
-		installCmds.push(['npm', ['install', ...deps]]);
-		installCmds.push(['npm', ['install', '-D', ...devDeps]]);
-	} else if (manager === 'yarn') {
-		installCmds.push(['yarn', ['add', ...deps]]);
-		installCmds.push(['yarn', ['add', '--dev', ...devDeps]]);
-	}
-
-	for (const [cmd, args] of installCmds) {
-		await new Promise((resolve, reject) => {
+	/**
+	 * Run a single command and stream output
+	 * @param {string} cmd
+	 * @param {string[]} args
+	 */
+	const runWithPrefix = (cmd, args) => {
+		return new Promise((resolve, reject) => {
 			const child = execa(cmd, args, { cwd });
 
-			child.stdout?.on('data', (data) => {
-				/** @type {string[]} */
-				const lines = data.toString().split('\n').filter(Boolean);
+			// handle stdout
+			child.stdout?.on('data', (chunk) => {
+				const lines = chunk.toString().split('\n').filter(Boolean);
 				for (const line of lines) {
-					process.stdout.write(chalk.gray('\n│ ') + line);
+					// left vertical bar and indent with two spaces
+					process.stdout.write(chalk.gray('│ ') + '  ' + line + '\n');
 				}
 			});
 
-			child.stderr?.on('data', (data) => {
-				/** @type {string[]} */
-				const lines = data.toString().split('\n').filter(Boolean);
+			// handle stderr
+			child.stderr?.on('data', (chunk) => {
+				const lines = chunk.toString().split('\n').filter(Boolean);
 				for (const line of lines) {
-					process.stdout.write(chalk.red('\n│ ') + line);
+					process.stdout.write(chalk.red('│ ') + '  ' + line + '\n');
 				}
 			});
 
@@ -269,5 +262,16 @@ async function installDeps(manager, cwd, deps, devDeps) {
 				else reject(new Error(`${cmd} exited with code ${code}`));
 			});
 		});
+	};
+
+	if (manager === 'pnpm') {
+		await runWithPrefix('pnpm', ['add', ...deps]);
+		await runWithPrefix('pnpm', ['add', '-D', ...devDeps]);
+	} else if (manager === 'npm') {
+		await runWithPrefix('npm', ['install', ...deps]);
+		await runWithPrefix('npm', ['install', '-D', ...devDeps]);
+	} else if (manager === 'yarn') {
+		await runWithPrefix('yarn', ['add', ...deps]);
+		await runWithPrefix('yarn', ['add', '--dev', ...devDeps]);
 	}
 }
