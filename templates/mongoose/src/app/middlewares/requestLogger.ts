@@ -1,7 +1,7 @@
+import chalk from 'chalk';
 import type { RequestHandler } from 'express';
 import { chronos } from 'nhb-toolbox';
 import configs from '../configs';
-import chalk from 'chalk';
 
 /** * Logs incoming HTTP requests in a structured and readable format. */
 export const requestLogger: RequestHandler = (req, res, next): void => {
@@ -34,7 +34,7 @@ export const requestLogger: RequestHandler = (req, res, next): void => {
 
 		console.info(
 			`[${chalk.yellow(time)}] ${chalk.cyan.bold(method)} ${chalk.cyan(url)} `.concat(
-				`→ ${statusColor.bold(res.statusCode ?? 500)} - IP: ${chalk.gray(ip)} → ${durationColor(durationMs.toFixed(2) + 'ms')}`,
+				`→ ${statusColor.bold(` ${chalk.white(res.statusCode ?? 500)} `)} - IP: ${chalk.gray(ip)} → ${durationColor(durationMs.toFixed(2) + 'ms')}`,
 			),
 		);
 	});
