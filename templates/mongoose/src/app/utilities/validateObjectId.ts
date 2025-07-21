@@ -1,4 +1,5 @@
 import { isValidObjectId, type Types } from 'mongoose';
+import z from 'zod';
 import { ErrorWithStatus } from '../classes/ErrorWithStatus';
 import { STATUS_CODES } from '../constants';
 import type { TCollection } from '../types';
@@ -23,3 +24,19 @@ export const validateObjectId = (
 		);
 	}
 };
+
+/**
+ * * Zod schema for validating MongoDB `ObjectId`.
+ * @param collection Collection name to generate relevant error message.
+ * @returns Zod schema for ObjectId validation.
+ */
+export const objectIdSchema = (collection: Lowercase<TCollection>) =>
+	z.string().check((val) => {
+		if (!isValidObjectId(val.value)) {
+			val.issues.push({
+				code: 'custom',
+				message: `Invalid ObjectId for ${collection}: ${val.value}`,
+				input: val.value,
+			});
+		}
+	});
