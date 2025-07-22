@@ -4,6 +4,16 @@ Quickly bootstrap a production‑ready **Express + TypeScript + Zod** server wit
 
 > Currently limited to only `MongoDB` and `Mongoose`, `PostgreSQL` (`Prisma` and `Drizzle`) coming soon...
 
+## ⚡ Compatibility
+
+<img src="https://img.shields.io/badge/Node.js-Version%2022+-teal?style=flat&logo=node.js&logoColor=green" alt="Node.js 22+" />
+
+### ✅ Requirements
+
+- Node.js **22 or newer**
+- Stable internet connection
+- `npm`, `pnpm`, or `yarn` for installation
+
 ---
 
 ## ✨ Features
