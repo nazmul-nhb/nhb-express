@@ -276,7 +276,7 @@ async function installDeps(manager, cwd, deps, devDeps) {
  */
 async function removeExistingDir(targetDir) {
 	const s = spinner();
-	s.start(chalk.yellowBright('⛔  Removing existing directory'));
+	s.start(chalk.yellowBright('⛔ Removing existing directory'));
 
 	try {
 		await rmAsync(targetDir, { recursive: true, force: true });
