@@ -8,4 +8,11 @@ const getAllUsers = catchAsync(async (_req, res) => {
 	sendResponse(res, 'User', 'GET', users);
 });
 
-export const userControllers = { getAllUsers };
+/** * Get current logged in user. */
+const getCurrentUser = catchAsync(async (req, res) => {
+	const user = await userServices.getCurrentUserFromDB(req?.user?.email);
+
+	sendResponse(res, 'User', 'GET', user);
+});
+
+export const userControllers = { getAllUsers, getCurrentUser };
