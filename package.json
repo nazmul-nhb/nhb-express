@@ -1,6 +1,6 @@
 {
   "name": "nhb-express",
-  "version": "1.4.20",
+  "version": "1.4.21",
   "description": "Express TypeScript Server Scaffold",
   "main": "bin/index.mjs",
   "type": "module",
@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.0.10",
-    "nhb-scripts": "^1.8.9",
+    "nhb-scripts": "^1.8.10",
     "prettier": "^3.6.2"
   },
   "engines": {

@@ -22,6 +22,7 @@ export default defineScriptConfig({
         excludePaths: ['node_modules', 'dist', 'build']
     },
     module: {
+        force: false,
         destination: 'src/app/modules',
         defaultTemplate: 'express-mongoose-zod',
         templates: {
@@ -31,6 +32,5 @@ export default defineScriptConfig({
                 files: expressMongooseZodTemplate
             }
         },
-        force: false,
     }
 });
