@@ -1,6 +1,6 @@
 // @ts-check
 
-import { defineScriptConfig } from 'nhb-scripts';
+import { defineScriptConfig, expressMongooseZodTemplate } from 'nhb-scripts';
 
 export default defineScriptConfig({
     format: {
@@ -23,7 +23,14 @@ export default defineScriptConfig({
     },
     module: {
         destination: 'src/app/modules',
-        template: 'express-mongoose-zod',
+        defaultTemplate: 'express-mongoose-zod',
+        templates: {
+            'express-mongoose-zod': {
+                createFolder: true,
+                destination: 'src/app/modules',
+                files: expressMongooseZodTemplate
+            }
+        },
         force: false,
     }
 });
