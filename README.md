@@ -1,4 +1,19 @@
-# 🚀 Express TypeScript Server Scaffold with `nhb-express`
+# 🚀 Scaffold Express + TypeScript Server
+
+<p>
+  <a href="https://www.npmjs.com/package/nhb-express" aria-label="Downloads">
+    <img src="https://img.shields.io/npm/dm/nhb-express.svg?label=DOWNLOADS&style=flat&color=red&logo=npm" alt="Downloads" />
+  </a>
+  <a href="https://www.npmjs.com/package/nhb-express" aria-label="Version">
+    <img src="https://img.shields.io/npm/v/nhb-express.svg?label=nhb-express&style=flat&color=teal&logo=npm" alt="Latest Version" />
+  </a>
+  <!-- <a href="https://bundlephobia.com/result?p=nhb-express" aria-label="Bundle size">
+    <img src="https://img.shields.io/bundlephobia/minzip/nhb-express?style=flat&color=purple&label=SIZE&logo=nodedotjs" alt="Bundle Size" />
+  </a> -->
+  <a href="https://www.npmjs.com/package/nhb-express" aria-label="License">
+    <img src="https://img.shields.io/npm/l/nhb-express.svg?label=LICENSE&style=flat&color=orange&logo=open-source-initiative" alt="License" />
+  </a>
+</p>
 
 Quickly bootstrap a production‑ready **Express + TypeScript + Zod** server with a single command.
 

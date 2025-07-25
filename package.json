@@ -1,6 +1,6 @@
 {
   "name": "nhb-express",
-  "version": "1.4.22",
+  "version": "1.4.23",
   "description": "Express TypeScript Server Scaffold",
   "main": "bin/index.mjs",
   "type": "module",
@@ -10,7 +10,8 @@
   "scripts": {
     "commit": "nhb-commit",
     "count": "nhb-count",
-    "format": "nhb-format"
+    "format": "nhb-format",
+    "delete": "nhb-delete"
   },
   "publishConfig": {
     "access": "public"
@@ -53,7 +54,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.0.10",
-    "nhb-scripts": "^1.8.10",
+    "nhb-scripts": "^1.8.23",
     "prettier": "^3.6.2"
   },
   "engines": {
