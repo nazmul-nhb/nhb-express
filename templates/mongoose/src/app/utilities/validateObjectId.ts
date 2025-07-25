@@ -30,7 +30,7 @@ export const validateObjectId = (
  * @param collection Collection name to generate relevant error message.
  * @returns Zod schema for ObjectId validation.
  */
-export const objectIdSchema = (collection: Lowercase<TCollection>) =>
+export const objectIdSchema = (collection: Lowercase<Exclude<TCollection, 'N/A'>>) =>
 	z.string().check((val) => {
 		if (!isValidObjectId(val.value)) {
 			val.issues.push({
