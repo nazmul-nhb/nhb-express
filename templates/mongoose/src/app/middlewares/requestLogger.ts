@@ -1,15 +1,16 @@
 import chalk from 'chalk';
 import type { RequestHandler } from 'express';
-import { chronos } from 'nhb-toolbox';
+import { Chronos, roundNumber } from 'nhb-toolbox';
 import configs from '../configs';
 
 /** * Logs incoming HTTP requests in a structured and readable format. */
 export const requestLogger: RequestHandler = (req, res, next): void => {
-	const now = chronos();
+	const now = new Chronos();
+
 	const time =
 		configs.NODE_ENV === 'development' ?
-			now.format('mmm DD, YYYY HH:mm:ss:mss [Local]')
-		:	now.formatUTC('mmm DD, YYYY HH:mm:ss:mss [GMT]');
+			now.format(`ddd, mmm DD, YYYY HH:mm:ss:mss [${now.getTimeZoneName()}]`)
+		:	now.formatUTC('ddd, mmm DD, YYYY HH:mm:ss:mss [GMT]');
 
 	const method = req.method;
 	const url = req.originalUrl;
@@ -19,7 +20,7 @@ export const requestLogger: RequestHandler = (req, res, next): void => {
 
 	res.on('finish', () => {
 		const end = process.hrtime.bigint();
-		const durationMs = Number(end - start) / 1_000_000;
+		const durationMs = roundNumber(Number(end - start) / 1_000_000);
 
 		const durationColor =
 			durationMs > 1000 ? chalk.red
@@ -33,9 +34,11 @@ export const requestLogger: RequestHandler = (req, res, next): void => {
 			: chalk.bgGreen;
 
 		console.info(
-			`[${chalk.yellow(time)}] ${chalk.cyan.bold(method)} ${chalk.cyan(url)} `.concat(
-				`→ ${statusColor.bold(` ${chalk.white(res.statusCode ?? 500)} `)} - IP: ${chalk.gray(ip)} → ${durationColor(durationMs.toFixed(2) + 'ms')}`,
-			),
+			`🕒 ${chalk.yellow(time)}\n` +
+				`📡 ${chalk.cyan.bold(method)} ${chalk.cyan(url)} → ` +
+				`${statusColor.bold(` ${chalk.white(res.statusCode ?? 500)} `)} ` +
+				`🌍 IP: ${chalk.gray(ip)} → ` +
+				`⏱️ ${durationColor(durationMs + 'ms')}`,
 		);
 	});
 

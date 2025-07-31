@@ -4,5 +4,6 @@
 	"tabWidth": 4,
 	"useTabs": true,
 	"printWidth": 92,
+	"trailingComma": "es5",
 	"experimentalTernaries": true
 }

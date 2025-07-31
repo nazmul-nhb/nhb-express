@@ -1,6 +1,6 @@
 // @ts-check
 
-import { defineScriptConfig, expressMongooseZodTemplate } from 'nhb-scripts';
+import { defineScriptConfig, expressMongooseZodTemplate, updateCollection, updateRoutes } from 'nhb-scripts';
 
 export default defineScriptConfig({
     format: {
@@ -19,7 +19,7 @@ export default defineScriptConfig({
     },
     count: {
         defaultPath: 'src',
-        excludePaths: ['node_modules', 'dist', 'build']
+        excludePaths: ['node_modules', 'dist']
     },
     module: {
         force: false,
@@ -30,7 +30,13 @@ export default defineScriptConfig({
                 createFolder: true,
                 destination: 'src/app/modules',
                 files: expressMongooseZodTemplate
-            }
+            },
         },
+        hooks: {
+            onComplete: (moduleName) => {
+                updateCollection(moduleName);
+                updateRoutes(moduleName);
+            }
+        }
     }
 });

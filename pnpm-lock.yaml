@@ -18,8 +18,8 @@ importers:
         specifier: ^9.5.2
         version: 9.6.0
       nhb-toolbox:
-        specifier: ^4.13.6
-        version: 4.13.6
+        specifier: ^4.13.9
+        version: 4.13.9
       type-fest:
         specifier: ^4.41.0
         version: 4.41.0
@@ -28,8 +28,8 @@ importers:
         specifier: ^24.0.10
         version: 24.0.14
       nhb-scripts:
-        specifier: ^1.8.23
-        version: 1.8.23
+        specifier: ^1.8.31
+        version: 1.8.31
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
@@ -283,16 +283,13 @@ packages:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
 
-  nhb-scripts@1.8.23:
-    resolution: {integrity: sha512-aJFUWKBa5/DmYMM97TYK8Pza9n+HNeXWFYavxcsi0iuWqFNK3LSt8K8Y92KwH295lvAcrDu+rLn8YoZNPeyVPg==}
+  nhb-scripts@1.8.31:
+    resolution: {integrity: sha512-0GuTWTKGStCHbJH8ZhssKoVHTI5Tb81QpU83GvXud/YPO67+a5gOXeNp29/y/e8WlajVm3XBZZueM7abehsOvA==}
     engines: {node: '>=18'}
     hasBin: true
 
-  nhb-toolbox@4.13.6:
-    resolution: {integrity: sha512-0v7Kv3tI5Vylq65P/N6AkyY++cbGzuVJ2yoS3n7jN606YBrHlVjM/mGR5EqUq+L39+B9t7g06l3nc+UCL0lTuA==}
-
-  nhb-toolbox@4.13.7:
-    resolution: {integrity: sha512-Ar3vXoxLTxKVeedbt4T9ayqzlHjo5EursEace8g/YLKq4N6YePRarggz1Rp9Xmh2qi2xpW73Xob3BkCiZ9RaMw==}
+  nhb-toolbox@4.13.9:
+    resolution: {integrity: sha512-SHWaNJvTdNUd95XBB4jxJyCHsLVfPyxwPulytFEZ9IniC4nRHpAdLl23ycqU9PhsNog5vvue20ARrjgmkheidA==}
 
   npm-run-path@6.0.0:
     resolution: {integrity: sha512-9qny7Z9DsQU8Ou39ERsPU4OZQlSTP47ShQzuKZ6PRXpYLtIFgl/DEBYEXKlvcEa+9tHVcK8CF81Y2V72qaZhWA==}
@@ -430,8 +427,8 @@ packages:
     resolution: {integrity: sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==}
     engines: {node: '>=16'}
 
-  typescript@5.8.3:
-    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
+  typescript@5.9.2:
+    resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -699,23 +696,21 @@ snapshots:
 
   minipass@7.1.2: {}
 
-  nhb-scripts@1.8.23:
+  nhb-scripts@1.8.31:
     dependencies:
       '@clack/prompts': 0.11.0
       chalk: 5.4.1
       execa: 9.6.0
       globby: 14.1.0
       minimist: 1.2.8
-      nhb-toolbox: 4.13.7
+      nhb-toolbox: 4.13.9
       progress-estimator: 0.3.1
       rimraf: 6.0.1
       semver: 7.7.2
       type-fest: 4.41.0
-      typescript: 5.8.3
+      typescript: 5.9.2
 
-  nhb-toolbox@4.13.6: {}
-
-  nhb-toolbox@4.13.7: {}
+  nhb-toolbox@4.13.9: {}
 
   npm-run-path@6.0.0:
     dependencies:
@@ -833,7 +828,7 @@ snapshots:
 
   type-fest@4.41.0: {}
 
-  typescript@5.8.3: {}
+  typescript@5.9.2: {}
 
   undici-types@7.8.0: {}
 
