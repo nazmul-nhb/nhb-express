@@ -33,7 +33,6 @@ const deps = /* @__PURE__ */ Object.freeze({
 		'dotenv',
 		'express',
 		'jsonwebtoken',
-		'module-alias',
 		'multer',
 		'nhb-toolbox',
 		'zod',
@@ -65,6 +64,7 @@ const devDeps = /* @__PURE__ */ Object.freeze({
 		'nodemon',
 		'prettier',
 		'ts-node',
+		'tsc-alias',
 		'typescript',
 		'typescript-eslint',
 	],
@@ -192,9 +192,6 @@ const pkgJson = {
 	},
 	license: 'ISC',
 	keywords: [projectName, 'server', 'express', 'typescript', dbChoice],
-	_moduleAliases: {
-		'@': 'dist/app',
-	},
 };
 
 fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkgJson, null, 2));
