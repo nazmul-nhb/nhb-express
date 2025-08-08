@@ -1,6 +1,6 @@
 {
   "name": "nhb-express",
-  "version": "1.4.40",
+  "version": "1.4.41",
   "description": "Express TypeScript Server Scaffold",
   "main": "bin/index.mjs",
   "type": "module",
