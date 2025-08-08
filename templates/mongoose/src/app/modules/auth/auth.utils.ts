@@ -1,8 +1,8 @@
-import { ErrorWithStatus } from '../../classes/ErrorWithStatus';
-import configs from '../../configs';
-import { STATUS_CODES } from '../../constants';
-import { comparePassword, generateToken } from '../../utilities/authUtilities';
-import type { IPlainUser, IUserDoc } from '../user/user.types';
+import { ErrorWithStatus } from '@/classes/ErrorWithStatus';
+import configs from '@/configs';
+import { STATUS_CODES } from '@/constants';
+import type { IPlainUser, IUserDoc } from '@/modules/user/user.types';
+import { comparePassword, generateToken } from '@/utilities/authUtilities';
 
 /**
  * Process user login.
@@ -19,7 +19,7 @@ export const processLogin = async <T extends IUserDoc>(password: string, user: T
 			'Authorization Error',
 			`Invalid credentials!`,
 			STATUS_CODES.UNAUTHORIZED,
-			'auth',
+			'auth'
 		);
 	}
 
@@ -32,13 +32,13 @@ export const processLogin = async <T extends IUserDoc>(password: string, user: T
 	const accessToken = generateToken(
 		jwtPayload,
 		configs.accessSecret,
-		configs.accessExpireTime,
+		configs.accessExpireTime
 	);
 
 	const refreshToken = generateToken(
 		jwtPayload,
 		configs.refreshSecret,
-		configs.refreshExpireTime,
+		configs.refreshExpireTime
 	);
 
 	const { password: _, __v, ...userInfo } = user.toObject<IPlainUser>();

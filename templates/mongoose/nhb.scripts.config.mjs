@@ -1,11 +1,16 @@
 // @ts-check
 
-import { defineScriptConfig, expressMongooseZodTemplate, updateCollection, updateRoutes } from 'nhb-scripts';
+import {
+    defineScriptConfig,
+    expressMongooseZodTemplate,
+    updateCollection,
+    updateRoutes,
+} from 'nhb-scripts';
 
 export default defineScriptConfig({
     format: {
         args: ['--write'],
-        files: ['src'],
+        files: ['src', 'nhb.scripts.config.mjs'],
         ignorePath: '.prettierignore',
     },
     lint: { folders: ['src'], patterns: ['**/*.ts'] },
@@ -15,11 +20,11 @@ export default defineScriptConfig({
     },
     build: {
         distFolder: 'dist',
-        commands: [{ cmd: 'tsc', }],
+        commands: [{ cmd: 'tsc' }],
     },
     count: {
         defaultPath: 'src',
-        excludePaths: ['node_modules', 'dist']
+        excludePaths: ['node_modules', 'dist'],
     },
     module: {
         force: false,
@@ -29,14 +34,14 @@ export default defineScriptConfig({
             'express-mongoose-zod': {
                 createFolder: true,
                 destination: 'src/app/modules',
-                files: expressMongooseZodTemplate
+                files: (moduleName) => expressMongooseZodTemplate(moduleName, true),
             },
         },
         hooks: {
             onComplete: (moduleName) => {
                 updateCollection(moduleName);
-                updateRoutes(moduleName);
-            }
-        }
-    }
+                updateRoutes(moduleName, true);
+            },
+        },
+    },
 });

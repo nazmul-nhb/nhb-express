@@ -1,9 +1,14 @@
-import configs from '../../configs';
-import type { DecodedUser } from '../../types/interfaces';
-import { generateToken, verifyToken } from '../../utilities/authUtilities';
-import { User } from '../user/user.model';
-import type { ILoginCredentials, IPlainUser, ITokens, IUser } from '../user/user.types';
-import { processLogin } from './auth.utils';
+import configs from '@/configs';
+import { processLogin } from '@/modules/auth/auth.utils';
+import { User } from '@/modules/user/user.model';
+import type {
+	ILoginCredentials,
+	IPlainUser,
+	ITokens,
+	IUser,
+} from '@/modules/user/user.types';
+import type { DecodedUser } from '@/types/interfaces';
+import { generateToken, verifyToken } from '@/utilities/authUtilities';
 
 /**
  * Create a new user in MongoDB `user` collection.
@@ -60,7 +65,7 @@ const refreshToken = async (token: string): Promise<{ token: string }> => {
 	const accessToken = generateToken(
 		jwtPayload,
 		configs.accessSecret,
-		configs.accessExpireTime,
+		configs.accessExpireTime
 	);
 
 	return { token: accessToken };

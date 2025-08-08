@@ -1,6 +1,6 @@
+import configs from '@/configs';
 import chalk from 'chalk';
 import mongoose from 'mongoose';
-import configs from './index';
 
 /** * Connect to MongoDB using Mongoose. */
 export const connectDB = async (): Promise<void> => {
@@ -21,9 +21,7 @@ export const connectDB = async (): Promise<void> => {
 
 		// Listen for connection errors
 		mongoose.connection.on('error', (err) => {
-			console.error(
-				chalk.red(`⛔ MongoDB Connection Error: ${err.message}`),
-			);
+			console.error(chalk.red(`⛔ MongoDB Connection Error: ${err.message}`));
 		});
 
 		// Optional: Listen for disconnection

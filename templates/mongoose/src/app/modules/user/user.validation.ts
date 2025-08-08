@@ -1,5 +1,5 @@
+import { authValidations } from '@/modules/auth/auth.validation';
 import { z } from 'zod';
-import { authValidations } from '../auth/auth.validation';
 
 /** Validation Schema for Creating new User */
 const creationSchema = authValidations.loginSchema

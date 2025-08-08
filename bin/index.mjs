@@ -33,6 +33,7 @@ const deps = /* @__PURE__ */ Object.freeze({
 		'dotenv',
 		'express',
 		'jsonwebtoken',
+		'module-alias',
 		'multer',
 		'nhb-toolbox',
 		'zod',
@@ -51,6 +52,7 @@ const devDeps = /* @__PURE__ */ Object.freeze({
 		'@types/cors',
 		'@types/express',
 		'@types/jsonwebtoken',
+		'@types/ms',
 		'@types/multer',
 		'@types/node',
 		'@typescript-eslint/eslint-plugin',
@@ -99,7 +101,7 @@ const projectName = normalizeResult(
 		message: chalk.yellowBright('📂 Project name:'),
 		initialValue: 'my-server',
 		validate: (v) => (v.trim() ? undefined : 'Project name is required!'),
-	}),
+	})
 );
 
 const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
@@ -112,7 +114,7 @@ const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
 				{ value: 'drizzle', label: 'PostgreSQL + Drizzle (Coming Soon...)' },
 			],
 			initialValue: 'mongoose',
-		}),
+		})
 	)
 );
 
@@ -125,7 +127,7 @@ const pkgManager = normalizeResult(
 			{ value: 'yarn', label: 'yarn' },
 		],
 		initialValue: 'pnpm',
-	}),
+	})
 );
 
 const targetDir = path.resolve(process.cwd(), projectName);
@@ -190,6 +192,9 @@ const pkgJson = {
 	},
 	license: 'ISC',
 	keywords: [projectName, 'server', 'express', 'typescript', dbChoice],
+	_moduleAliases: {
+		'@': 'dist/app',
+	},
 };
 
 fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkgJson, null, 2));
@@ -200,14 +205,14 @@ await installDeps(
 	pkgManager,
 	targetDir,
 	[...deps.common, ...deps[dbChoice]],
-	[...devDeps.common, ...devDeps[dbChoice]],
+	[...devDeps.common, ...devDeps[dbChoice]]
 );
 
 mimicClack(chalk.green('✅ Dependencies installed!'), false);
 
 note(
 	chalk.cyan(`cd ${projectName}\n${pkgManager} run dev`),
-	chalk.yellowBright('⏭️ Next Steps'),
+	chalk.yellowBright('⏭️ Next Steps')
 );
 
 outro(chalk.green('🎉 Project created successfully!'));
@@ -223,10 +228,7 @@ outro(chalk.green('🎉 Project created successfully!'));
  */
 export function mimicClack(message, suffix = true) {
 	console.log(
-		chalk.gray('│\n') +
-			chalk.green('◇  ') +
-			message +
-			(suffix ? chalk.gray('\n│') : ''),
+		chalk.gray('│\n') + chalk.green('◇  ') + message + (suffix ? chalk.gray('\n│') : '')
 	);
 }
 

@@ -1,7 +1,7 @@
+import configs from '@/configs';
 import chalk from 'chalk';
 import type { RequestHandler } from 'express';
 import { Chronos, roundNumber } from 'nhb-toolbox';
-import configs from '../configs';
 
 /** * Logs incoming HTTP requests in a structured and readable format. */
 export const requestLogger: RequestHandler = (req, res, next): void => {
@@ -38,7 +38,7 @@ export const requestLogger: RequestHandler = (req, res, next): void => {
 				`📡 ${chalk.cyan.bold(method)} ${chalk.cyan(url)} → ` +
 				`${statusColor.bold(` ${chalk.white(res.statusCode ?? 500)} `)} ` +
 				`🌍 IP: ${chalk.gray(ip)} → ` +
-				`⏱️ ${durationColor(durationMs + 'ms')}`,
+				`⏱️ ${durationColor(durationMs + 'ms')}`
 		);
 	});
 

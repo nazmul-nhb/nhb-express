@@ -1,9 +1,9 @@
+import { ErrorWithStatus } from '@/classes/ErrorWithStatus';
+import configs from '@/configs';
+import { STATUS_CODES } from '@/constants';
+import processErrors from '@/errors/processErrors';
 import chalk from 'chalk';
 import type { ErrorRequestHandler, RequestHandler } from 'express';
-import { ErrorWithStatus } from '../classes/ErrorWithStatus';
-import configs from '../configs';
-import { STATUS_CODES } from '../constants';
-import processErrors from '../errors/processErrors';
 
 /** * Middleware to Handle "Route Not Found" Errors.*/
 export const handleRouteNotFound: RequestHandler = (req, _res, next) => {
@@ -11,7 +11,7 @@ export const handleRouteNotFound: RequestHandler = (req, _res, next) => {
 		'Not Found Error',
 		`Requested End-Point “${req.method}: ${req.path}” Not Found!`,
 		STATUS_CODES.NOT_FOUND,
-		req.path,
+		req.path
 	);
 
 	return next(error);

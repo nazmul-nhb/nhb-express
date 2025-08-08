@@ -1,7 +1,7 @@
-import { QueryBuilder } from '../../classes/QueryBuilder';
-import type { TEmail } from '../../types';
-import { User } from './user.model';
-import type { IPlainUser } from './user.types';
+import { QueryBuilder } from '@/classes/QueryBuilder';
+import { User } from '@/modules/user/user.model';
+import type { IPlainUser } from '@/modules/user/user.types';
+import type { TEmail } from '@/types';
 
 const getAllUsersFromDB = async (query?: Record<string, unknown>) => {
 	const userQuery = new QueryBuilder(User.find(), query).sort();

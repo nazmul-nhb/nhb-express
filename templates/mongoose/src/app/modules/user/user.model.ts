@@ -1,9 +1,9 @@
+import { ErrorWithStatus } from '@/classes/ErrorWithStatus';
+import { STATUS_CODES, USER_ROLES } from '@/constants';
+import type { IUserDoc, IUserModel } from '@/modules/user/user.types';
+import type { TEmail } from '@/types';
+import { hashPassword } from '@/utilities/authUtilities';
 import { Schema, model } from 'mongoose';
-import { ErrorWithStatus } from '../../classes/ErrorWithStatus';
-import { STATUS_CODES, USER_ROLES } from '../../constants';
-import type { TEmail } from '../../types';
-import { hashPassword } from '../../utilities/authUtilities';
-import type { IUserDoc, IUserModel } from './user.types';
 
 const userSchema = new Schema<IUserDoc>(
 	{
@@ -50,7 +50,7 @@ const userSchema = new Schema<IUserDoc>(
 			updatedAt: 'updated_at',
 		},
 		versionKey: false,
-	},
+	}
 );
 
 // * Hash password and create username before saving the user in DB.
@@ -77,7 +77,7 @@ userSchema.statics.validateUser = async function (email?: TEmail) {
 			'Authentication Error',
 			'Please provide a valid email!',
 			STATUS_CODES.BAD_REQUEST,
-			'user',
+			'user'
 		);
 	}
 
@@ -88,7 +88,7 @@ userSchema.statics.validateUser = async function (email?: TEmail) {
 			'Not Found Error',
 			`No user found with email: ${email}!`,
 			STATUS_CODES.NOT_FOUND,
-			'user',
+			'user'
 		);
 	}
 
@@ -97,7 +97,7 @@ userSchema.statics.validateUser = async function (email?: TEmail) {
 			'Authentication Error',
 			`User with email ${email} is not active!`,
 			STATUS_CODES.FORBIDDEN,
-			'user',
+			'user'
 		);
 	}
 

@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.0.10",
-    "nhb-scripts": "^1.8.31",
+    "nhb-scripts": "^1.8.50",
     "prettier": "^3.6.2"
   },
   "engines": {

@@ -1,17 +1,9 @@
-import { MongooseError } from 'mongoose';
+import type { IDuplicateError, INestedError, IParserError } from '@/types/interfaces';
 import type { CastError } from 'mongoose';
-import type {
-	IDuplicateError,
-	IParserError,
-	INestedError,
-} from '../types/interfaces';
+import { MongooseError } from 'mongoose';
 
-/**
- * Type guard to check if an error is a MongoDB Duplicate Error.
- */
-export const isMongoDuplicateError = (
-	error: unknown,
-): error is IDuplicateError => {
+/** * Type guard to check if an error is a MongoDB Duplicate Error. */
+export const isMongoDuplicateError = (error: unknown): error is IDuplicateError => {
 	return (
 		typeof error === 'object' &&
 		error !== null &&
@@ -50,16 +42,14 @@ export const isCastError = (error: unknown): error is CastError => {
 				typeof nestedError === 'object' &&
 				nestedError !== null &&
 				'name' in nestedError &&
-				nestedError.name === 'CastError',
+				nestedError.name === 'CastError'
 		);
 	}
 
 	return false;
 };
 
-/**
- * Type guard to check if an error is an Express Body Parser Error.
- */
+/** * Type guard to check if an error is an Express Body Parser Error. */
 export const isParserError = (error: unknown): error is IParserError => {
 	return (
 		typeof error === 'object' &&

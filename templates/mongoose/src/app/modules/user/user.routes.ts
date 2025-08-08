@@ -1,7 +1,7 @@
+import { ADMIN_ROLES, USER_ROLES } from '@/constants';
+import authorizeUser from '@/middlewares/authorizeUser';
+import { userControllers } from '@/modules/user/user.controllers';
 import { Router } from 'express';
-import { ADMIN_ROLES, USER_ROLES } from '../../constants';
-import authorizeUser from '../../middlewares/authorizeUser';
-import { userControllers } from './user.controllers';
 
 const router = Router();
 

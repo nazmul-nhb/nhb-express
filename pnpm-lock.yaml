@@ -28,8 +28,8 @@ importers:
         specifier: ^24.0.10
         version: 24.0.14
       nhb-scripts:
-        specifier: ^1.8.31
-        version: 1.8.31
+        specifier: ^1.8.50
+        version: 1.8.50
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
@@ -283,8 +283,8 @@ packages:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
 
-  nhb-scripts@1.8.31:
-    resolution: {integrity: sha512-0GuTWTKGStCHbJH8ZhssKoVHTI5Tb81QpU83GvXud/YPO67+a5gOXeNp29/y/e8WlajVm3XBZZueM7abehsOvA==}
+  nhb-scripts@1.8.50:
+    resolution: {integrity: sha512-cQ1EjWv1NLLEe2qLV8nVZlOwv254pN5tNiMoMwg+Xa8xnyhwpinhLLsIK5FbcpI/Fcs+G4829SpNPwfkmWKMOQ==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -696,7 +696,7 @@ snapshots:
 
   minipass@7.1.2: {}
 
-  nhb-scripts@1.8.31:
+  nhb-scripts@1.8.50:
     dependencies:
       '@clack/prompts': 0.11.0
       chalk: 5.4.1
