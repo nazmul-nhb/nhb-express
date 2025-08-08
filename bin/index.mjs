@@ -65,6 +65,7 @@ const devDeps = /* @__PURE__ */ Object.freeze({
 		'prettier',
 		'ts-node',
 		'tsc-alias',
+		'tsconfig-paths',
 		'typescript',
 		'typescript-eslint',
 	],
