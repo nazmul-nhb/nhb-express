@@ -1,11 +1,11 @@
 import { ErrorWithStatus } from '@/classes/ErrorWithStatus';
 import configs from '@/configs';
-import { STATUS_CODES } from '@/constants';
 import type { IUser } from '@/modules/user/user.types';
 import type { DecodedUser } from '@/types/interfaces';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import type { StringValue } from 'ms';
+import { STATUS_CODES } from 'nhb-toolbox/constants';
 
 /**
  * * Utility function to hash password using `bcrypt`.
