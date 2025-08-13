@@ -5,6 +5,7 @@ import type { DecodedUser } from '@/types/interfaces';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import type { StringValue } from 'ms';
+import { Chronos } from 'nhb-toolbox';
 import { STATUS_CODES } from 'nhb-toolbox/constants';
 
 /**
@@ -81,7 +82,7 @@ export const verifyToken = (secret: string, token?: string): DecodedUser => {
 	if (!token) {
 		throw new ErrorWithStatus(
 			'Authorization Error',
-			'Invalid credentials!',
+			'Bad or Invalid token!',
 			STATUS_CODES.UNAUTHORIZED,
 			'auth'
 		);
@@ -98,3 +99,50 @@ export const verifyToken = (secret: string, token?: string): DecodedUser => {
 		);
 	}
 };
+
+/**
+ * * Decode a token. it does not verify the token, uses `jwt.decode.`
+ * @param token Token to decode.
+ * @returns Decoded token.
+ */
+export function decodeToken(token: string) {
+	if (!token) {
+		throw new ErrorWithStatus(
+			'Authorization Error',
+			'Bad or Invalid token!',
+			STATUS_CODES.UNAUTHORIZED,
+			'auth'
+		);
+	}
+
+	try {
+		return jwt.decode(token, { json: true }) as DecodedUser | null;
+	} catch (_error) {
+		throw new ErrorWithStatus(
+			'Authorization Error',
+			'Your token is invalid or expired!',
+			STATUS_CODES.UNAUTHORIZED,
+			'auth'
+		);
+	}
+}
+
+/**
+ * * Check the expiry of a `jwt` encoded token.
+ * @param token Token to check for expiry in.
+ * @returns The difference between the current time and expiry time in seconds.
+ */
+export function checkTokenExpiry(token: string) {
+	const decoded = decodeToken(token);
+
+	if (!decoded || !decoded?.exp) {
+		throw new ErrorWithStatus(
+			'Bad Token',
+			'Your token is invalid!',
+			STATUS_CODES.UNAUTHORIZED,
+			'auth'
+		);
+	}
+
+	return new Chronos().diff(decoded.exp * 1000, 'second');
+}
