@@ -84,41 +84,41 @@ pnpm dev     # or npm run dev / yarn dev
 
 ## 📁 Project Structure: Mongoose
 
-```text
-<your-project-name>/
- ├─ .github/
- │   └─ workflows/
- │       └─ publish.yml     # GitHub Actions workflow for CI/CD (vercel deployment) 
- ├─ .vscode/
- │   └─ settings.json       # VS Code Settings for better formatting
- ├─ src/
- │   |─ app/
- │   |   ├─ classes/        # Utility classes e.g. `QueryBuilder`, `ErrorWihStatus`
- │   |   ├─ configs/        # App configurations
- │   |   ├─ constants/      # Constant values
- │   |   ├─ errors/         # Custom error processors/handlers
- │   |   ├─ middlewares/    # Custom Express middlewares
- │   |   ├─ modules/        # Feature modules (controllers, services, etc.)
- │   |   ├─ routes/         # Route definitions
- │   |   ├─ types/          # Types for the App
- │   |   └─ utilities/      # Helper functions
+```ini
+📁 <your-project-name>/
+ ├─ 📁 .github/
+ │   └─ 📁 workflows/
+ │       └─ ⚙️ publish.yml     # GitHub Actions workflow for CI/CD (vercel deployment) 
+ ├─ 📁 .vscode/
+ │   └─ 📄 settings.json       # VS Code Settings for better formatting
+ ├─ 📁 src/
+ │   ├─ 📁 app/
+ │   |   ├─ 📁 classes/        # Utility classes e.g. `QueryBuilder`, `ErrorWihStatus`
+ │   |   ├─ 📁 configs/        # App configurations
+ │   |   ├─ 📁 constants/      # Constant values
+ │   |   ├─ 📁 errors/         # Custom error processors/handlers
+ │   |   ├─ 📁 middlewares/    # Custom Express middlewares
+ │   |   ├─ 📁 modules/        # Feature modules (controllers, services, etc.)
+ │   |   ├─ 📁 routes/         # Route definitions
+ │   |   ├─ 📁 types/          # Types for the App
+ │   |   └─ 📁 utilities/      # Helper functions
  │   |
- │   ├─ app.ts              # Express app setup
- │   ├─ index.d.ts          # Global type declarations
- │   └─ server.ts           # Server bootstrap
+ │   ├─ 📄 app.ts              # Express app setup
+ │   ├─ 📄 index.d.ts          # Global type declarations
+ │   └─ 📄 server.ts           # Server bootstrap
  │
- ├─ .env                    # Environment variables
- ├─ .gitignore              # Ignore files/folders from being pushed/committed
- ├─ .prettierignore         # Ignore files/folders from being formatted with prettier
- ├─ .prettierrc.json        # Prettier config
- ├─ eslint.config.mjs       # ESLint config (flat config, ready for TS)
- ├─ nhb.scripts.config.mjs  # Config for nhb-scripts
- ├─ nodemon.json            # Nodemon settings
- ├─ package.json
- ├─ README.md
- ├─ secret.mjs              # Generate secrets for jwt (using crypto module, just run in cli: node secret.mjs or pnpm/npm/yarn run secret)
- ├─ tsconfig.json           # Ready to use tsconfig
- └─ vercel.json             # Deployment config for Vercel
+ ├─ 🔒 .env                    # Environment variables
+ ├─ 🚫 .gitignore              # Ignore files/folders from being pushed/committed
+ ├─ 🚫 .prettierignore         # Ignore files/folders from being formatted with prettier
+ ├─ ⚙️ .prettierrc.json        # Prettier config
+ ├─ ⚙️ eslint.config.mjs       # ESLint config (flat config, ready for TS)
+ ├─ ⚙️ nhb.scripts.config.mjs  # Config for nhb-scripts
+ ├─ ⚙️ nodemon.json            # Nodemon config
+ ├─ ⚙️ package.json            # Auto-generated `package.json`
+ ├─ 📃 README.md               # Instructions
+ ├─ 📄 secret.mjs              # Generate secrets for jwt (using crypto module, just run in cli: node pnpm/npm/yarn run secret)
+ ├─ ⚙️ tsconfig.json           # Ready to use tsconfig
+ └─ ⚙️ vercel.json             # Deployment config for Vercel
 ```
 
 ---
@@ -127,7 +127,7 @@ pnpm dev     # or npm run dev / yarn dev
 
 A ready‑to‑use **GitHub Actions workflow** is included in:
 
-```text
+```ini
 .github/workflows/publish.yml
 ```
 
@@ -157,11 +157,11 @@ This project comes integrated with **[nhb-scripts](https://www.npmjs.com/package
 
 ✨ **What you get:**
 
-- `pnpm run build` → builds your project
-- `pnpm run commit` → guided commit with semantic messages
-- `pnpm run module` → scaffolds new modules
-- `pnpm run fix` → auto‑fix lint issues
-- `pnpm run format` → formats with Prettier
+- `npm/pnpm/yarn run build` → builds your project
+- `npm/pnpm/yarn run commit` → guided commit with semantic messages
+- `npm/pnpm/yarn run module` → scaffolds new modules
+- `npm/pnpm/yarn run fix` → auto‑fix lint issues
+- `npm/pnpm/yarn run format` → formats with Prettier
 - and _more…_ configurable via `nhb.scripts.config.mjs`
 
 You can explore and extend `nhb-scripts` in your project as needed.

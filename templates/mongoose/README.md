@@ -33,57 +33,59 @@ pnpm dev     # or npm run dev / yarn dev
 
 ## 📁 Structure
 
-```text
-<your-project-name>/
- ├─ .github/
- │   └─ workflows/
- │       └─ publish.yml     # GitHub Actions workflow for CI/CD (vercel deployment) 
- ├─ .vscode/
- │   └─ settings.json       # VS Code Settings for better formatting
- ├─ src/
- │   |─ app/
- │   |   ├─ classes/        # Utility classes e.g. `QueryBuilder`, `ErrorWihStatus`
- │   |   ├─ configs/        # App configurations
- │   |   ├─ constants/      # Constant values
- │   |   ├─ errors/         # Custom error processors/handlers
- │   |   ├─ middlewares/    # Custom Express middlewares
- │   |   ├─ modules/        # Feature modules (controllers, services, etc.)
- │   |   ├─ routes/         # Route definitions
- │   |   ├─ types/          # Types for the App
- │   |   └─ utilities/      # Helper functions
+```ini
+📁 <your-project-name>/
+ ├─ 📁 .github/
+ │   └─ 📁 workflows/
+ │       └─ ⚙️ publish.yml     # GitHub Actions workflow for CI/CD (vercel deployment) 
+ ├─ 📁 .vscode/
+ │   └─ 📄 settings.json       # VS Code Settings for better formatting
+ ├─ 📁 src/
+ │   ├─ 📁 app/
+ │   |   ├─ 📁 classes/        # Utility classes e.g. `QueryBuilder`, `ErrorWihStatus`
+ │   |   ├─ 📁 configs/        # App configurations
+ │   |   ├─ 📁 constants/      # Constant values
+ │   |   ├─ 📁 errors/         # Custom error processors/handlers
+ │   |   ├─ 📁 middlewares/    # Custom Express middlewares
+ │   |   ├─ 📁 modules/        # Feature modules (controllers, services, etc.)
+ │   |   ├─ 📁 routes/         # Route definitions
+ │   |   ├─ 📁 types/          # Types for the App
+ │   |   └─ 📁 utilities/      # Helper functions
  │   |
- │   ├─ app.ts              # Express app setup
- │   ├─ index.d.ts          # Global type declarations
- │   └─ server.ts           # Server bootstrap
+ │   ├─ 📄 app.ts              # Express app setup
+ │   ├─ 📄 index.d.ts          # Global type declarations
+ │   └─ 📄 server.ts           # Server bootstrap
  │
- ├─ .env                    # Environment variables
- ├─ .gitignore              # Ignore files/folders from being pushed/committed
- ├─ .prettierignore         # Ignore files/folders from being formatted with prettier
- ├─ .prettierrc.json        # Prettier config
- ├─ eslint.config.mjs       # ESLint config (flat config, ready for TS)
- ├─ nhb.scripts.config.mjs  # Config for nhb-scripts
- ├─ nodemon.json            # Nodemon settings
- ├─ package.json
- ├─ README.md
- ├─ secret.mjs              # Generate secrets for jwt (using crypto module, just run in cli: node secret.mjs or pnpm/npm/yarn run secret)
- ├─ tsconfig.json           # Ready to use tsconfig
- └─ vercel.json             # Deployment config for Vercel
+ ├─ 🔒 .env                    # Environment variables
+ ├─ 🚫 .gitignore              # Ignore files/folders from being pushed/committed
+ ├─ 🚫 .prettierignore         # Ignore files/folders from being formatted with prettier
+ ├─ ⚙️ .prettierrc.json        # Prettier config
+ ├─ ⚙️ eslint.config.mjs       # ESLint config (flat config, ready for TS)
+ ├─ ⚙️ nhb.scripts.config.mjs  # Config for nhb-scripts
+ ├─ ⚙️ nodemon.json            # Nodemon config
+ ├─ ⚙️ package.json            # Auto-generated `package.json`
+ ├─ 📃 README.md               # This file
+ ├─ 📄 secret.mjs              # Generate secrets for jwt (using crypto module, just run in cli: node pnpm/npm/yarn run secret)
+ ├─ ⚙️ tsconfig.json           # Ready to use tsconfig
+ └─ ⚙️ vercel.json             # Deployment config for Vercel
 ```
 
 ---
 
 ## 🛠️ Scripts
 
-- `pnpm dev` – Start in dev mode with hot reload
-- `pnpm start` – Run the built server
-- `pnpm deploy` – Build the project and deploy to Vercel (`nhb-build && vercel --prod`)
-- `pnpm build` – Build the project for production (`nhb-build`)
-- `pnpm format` – Format the codebase (`nhb-format`)
-- `pnpm lint` – Lint the code (`nhb-lint`)
-- `pnpm fix` – Auto‑fix lint issues (`nhb-fix`)
-- `pnpm commit` – Guided commit workflow (`nhb-commit`)
-- `pnpm count` – Count exports (`nhb-count`)
-- `pnpm module` – Scaffold new modules (`nhb-module`)
+- `pnpm/npm/yarn run dev` – Start in dev mode with `nodemon` and `ts-node`
+- `pnpm/npm/yarn run start` – Run the built server
+- `pnpm/npm/yarn run deploy` – Build the project and deploy to Vercel (`nhb-build && vercel --prod`)
+- `pnpm/npm/yarn run build` – Build the project for production (`nhb-build`)
+- `pnpm/npm/yarn run format` – Format the codebase (`nhb-format`)
+- `pnpm/npm/yarn run lint` – Lint the code (`nhb-lint`)
+- `pnpm/npm/yarn run fix` – Auto‑fix lint issues (`nhb-fix`)
+- `pnpm/npm/yarn run commit` – Guided commit workflow (`nhb-commit`)
+- `pnpm/npm/yarn run count` – Count exports (`nhb-count`)
+- `pnpm/npm/yarn run module` – Scaffold new modules (`nhb-module`)
+- `pnpm/npm/yarn run delete` – Delete any file/folder from the CLI (`nhb-delete`)
+- `pnpm/npm/yarn run secret` – Generate secrets for jwt (using crypto module, just run in cli: node pnpm/npm/yarn run secret)
 
 ---
 
@@ -91,7 +93,7 @@ pnpm dev     # or npm run dev / yarn dev
 
 A ready‑to‑use **GitHub Actions workflow** is included in:
 
-```text
+```ini
 .github/workflows/publish.yml
 ```
 

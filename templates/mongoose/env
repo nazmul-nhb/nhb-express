@@ -15,3 +15,8 @@ CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=cloudinary_api_key
 CLOUDINARY_API_SECRET=cloudinary_api_secret
 CLOUDINARY_IMAGE_BASE_URL=https://res.cloudinary.com/your_cloud_name/image/upload/
+
+EMAIL=your_email@gmail.com
+EMAIL_PASSWORD=your_gmail_password_OR_app_password
+
+PASSWORD_RESET_LINK=client_lint_to_reset_password
