@@ -18,8 +18,8 @@ importers:
         specifier: ^9.6.0
         version: 9.6.0
       nhb-toolbox:
-        specifier: ^4.14.8
-        version: 4.14.8
+        specifier: ^4.14.9
+        version: 4.14.9
       type-fest:
         specifier: ^4.41.0
         version: 4.41.0
@@ -34,8 +34,8 @@ importers:
         specifier: ^16.1.5
         version: 16.1.5
       nhb-scripts:
-        specifier: ^1.8.56
-        version: 1.8.56
+        specifier: ^1.8.57
+        version: 1.8.57
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
@@ -376,13 +376,13 @@ packages:
     resolution: {integrity: sha512-21t+ozMQDAL/UGgQVBbZ/xXvNO10++ZPuTmKRO8k9V3AClVRht49ahtDjfY8l1q6nSHOrE5ASfthzH3ol6R/hg==}
     engines: {node: '>=20.17'}
 
-  nhb-scripts@1.8.56:
-    resolution: {integrity: sha512-ePwatNH8/vg8R6o70Mol70yw1/7kKZ1WFL5l2OyvlCClKv82C/AefzVmuIBVfKvNRiPex/3aiBT6BktvDz9TwA==}
+  nhb-scripts@1.8.57:
+    resolution: {integrity: sha512-iw7QvaVbfDUz+QdHSg9B814R/lIcyPL7frKSGYrQxS3vmvKUFBT2cWYDdQs4EAKynE4pX0fuO5DdH+GsDfgDDA==}
     engines: {node: '>=18'}
     hasBin: true
 
-  nhb-toolbox@4.14.8:
-    resolution: {integrity: sha512-Lz05RHTyuyZ1P/Lr3WNkCPtiNEFtxgfJB1ngQX8oWGKvBN+ZcYhyUMJagj16GJR6wZXenV65llJsyZ38EMk4KQ==}
+  nhb-toolbox@4.14.9:
+    resolution: {integrity: sha512-s68j+Bx53LTzBKBOSgvS9AErZt/FVRpLhbCcS5nK0Jp9znDh21na0gAaoJhJGwOLoKyO1D9qgH2WUDLUKhzhHg==}
 
   npm-run-path@6.0.0:
     resolution: {integrity: sha512-9qny7Z9DsQU8Ou39ERsPU4OZQlSTP47ShQzuKZ6PRXpYLtIFgl/DEBYEXKlvcEa+9tHVcK8CF81Y2V72qaZhWA==}
@@ -909,21 +909,21 @@ snapshots:
 
   nano-spawn@1.0.2: {}
 
-  nhb-scripts@1.8.56:
+  nhb-scripts@1.8.57:
     dependencies:
       '@clack/prompts': 0.11.0
       chalk: 5.4.1
       execa: 9.6.0
       globby: 14.1.0
       minimist: 1.2.8
-      nhb-toolbox: 4.14.8
+      nhb-toolbox: 4.14.9
       progress-estimator: 0.3.1
       rimraf: 6.0.1
       semver: 7.7.2
       type-fest: 4.41.0
       typescript: 5.9.2
 
-  nhb-toolbox@4.14.8: {}
+  nhb-toolbox@4.14.9: {}
 
   npm-run-path@6.0.0:
     dependencies:

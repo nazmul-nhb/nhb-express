@@ -1,6 +1,6 @@
 {
   "name": "nhb-express",
-  "version": "1.4.54",
+  "version": "1.4.55",
   "description": "Express TypeScript Server Scaffold",
   "main": "bin/index.mjs",
   "type": "module",
@@ -50,14 +50,14 @@
     "@clack/prompts": "^0.11.0",
     "chalk": "5.5.0",
     "execa": "^9.6.0",
-    "nhb-toolbox": "^4.14.8",
+    "nhb-toolbox": "^4.14.9",
     "type-fest": "^4.41.0"
   },
   "devDependencies": {
     "@types/node": "^24.2.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.5",
-    "nhb-scripts": "^1.8.56",
+    "nhb-scripts": "^1.8.57",
     "prettier": "^3.6.2"
   },
   "engines": {
