@@ -19,7 +19,7 @@ export const handleZodErrors = (error: ZodError, stack?: string): IErrorResponse
 
 	return {
 		statusCode: 400,
-		name: 'Zod Validation Error',
+		name: 'Validation Error',
 		errorSource,
 		stack: error.stack || stack,
 	};

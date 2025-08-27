@@ -66,7 +66,7 @@ export const handleValidationError = (
 
 	return {
 		statusCode: 400,
-		name: 'Mongo Validation Error',
+		name: 'Validation Error',
 		errorSource,
 		stack,
 	};
