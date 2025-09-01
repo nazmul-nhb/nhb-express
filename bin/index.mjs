@@ -27,7 +27,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const deps = /* @__PURE__ */ Object.freeze({
 	common: [
 		'bcrypt',
-		'chalk@4.1.2',
 		'cloudinary',
 		'cookie-parser',
 		'cors',

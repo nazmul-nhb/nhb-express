@@ -1,6 +1,6 @@
 import configs from '@/configs';
-import chalk from 'chalk';
 import mongoose from 'mongoose';
+import { Stylog } from 'nhb-toolbox/stylog';
 
 /** * Connect to MongoDB using Mongoose. */
 export const connectDB = async (): Promise<void> => {
@@ -12,27 +12,29 @@ export const connectDB = async (): Promise<void> => {
 
 		await mongoose.connect(configs.mongoUri);
 
-		console.info(chalk.cyanBright('🔗 MongoDB is Connected!'));
+		console.info(Stylog.cyan.string('🔗 MongoDB is Connected!'));
 
 		// Listen for established connection
 		mongoose.connection.on('connected', () => {
-			console.info(chalk.cyanBright('🔗 MongoDB is Connected!'));
+			console.info(Stylog.cyan.string('🔗 MongoDB is Connected!'));
 		});
 
 		// Listen for connection errors
 		mongoose.connection.on('error', (err) => {
-			console.error(chalk.red(`⛔ MongoDB Connection Error: ${err.message}`));
+			console.error(
+				Stylog.error.string(`⛔ MongoDB Connection Error: ${err.message}`)
+			);
 		});
 
 		// Optional: Listen for disconnection
 		mongoose.connection.on('disconnected', () => {
-			console.error(chalk.red('⛔ MongoDB is Disconnected!'));
+			console.error(Stylog.error.string('⛔ MongoDB is Disconnected!'));
 		});
 	} catch (error) {
 		if (error instanceof Error) {
-			console.error(chalk.red(`🚫 MongoDB Error: ${error.message}`));
+			console.error(Stylog.error.string(`🚫 MongoDB Error: ${error.message}`));
 		} else {
-			console.error(chalk.red('🛑 Unknown Error Occurred!'));
+			console.error(Stylog.error.string('🛑 Unknown Error Occurred!'));
 		}
 	}
 };

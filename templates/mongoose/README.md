@@ -10,7 +10,7 @@ Bootstrapped with [**nhb-express**](https://www.npmjs.com/package/nhb-express)
 - ✅ **Express.js** pre‑configured with custom middlewares
 - ✅ **Zod** for schema validation
 - ✅ **Mongoose** for MongoDB integration
-- ✅ **Chalk** for colorful logging
+- ✅ **Stylog** from [`nhb-toolbox`](https://toolbox.nazmul-nhb.dev/docs/utilities/misc/stylog) for colorful logging
 - ✅ **[nhb-scripts](https://www.npmjs.com/package/nhb-scripts)** for easy build, commit, module scaffolding, formatting, linting, and more. [see below](#️-scripts)
 - ✅ **Scaffolding via CLI** – choose package manager, DB, etc.
 - ✅ Built‑in [**CI/CD workflow**](#️-cicd-workflow) for automatic deployment to Vercel

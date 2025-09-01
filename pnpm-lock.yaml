@@ -18,8 +18,8 @@ importers:
         specifier: ^9.6.0
         version: 9.6.0
       nhb-toolbox:
-        specifier: ^4.14.13
-        version: 4.14.13
+        specifier: ^4.20.16
+        version: 4.20.16
       type-fest:
         specifier: ^4.41.0
         version: 4.41.0
@@ -377,8 +377,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  nhb-toolbox@4.14.13:
-    resolution: {integrity: sha512-9zM/mMOO8A5wTr/TZ2i9DnvmCpU+6hIIx/CmGmS014ystAJdnoHCpIn/h6cTUPG7HD+SCYfcr2k/vNgljjz2Ow==}
+  nhb-toolbox@4.20.16:
+    resolution: {integrity: sha512-IifI/ddRkdMMQb+7Mbcs/teDsVQHTgzCj9tYqD3r5q4Hw2cep7IoFI7beLWKENWVjZUHexzH5ebrmXxsWJGxvg==}
 
   npm-run-path@6.0.0:
     resolution: {integrity: sha512-9qny7Z9DsQU8Ou39ERsPU4OZQlSTP47ShQzuKZ6PRXpYLtIFgl/DEBYEXKlvcEa+9tHVcK8CF81Y2V72qaZhWA==}
@@ -910,14 +910,14 @@ snapshots:
       execa: 9.6.0
       globby: 14.1.0
       minimist: 1.2.8
-      nhb-toolbox: 4.14.13
+      nhb-toolbox: 4.20.16
       progress-estimator: 0.3.1
       rimraf: 6.0.1
       semver: 7.7.2
       type-fest: 4.41.0
       typescript: 5.9.2
 
-  nhb-toolbox@4.14.13: {}
+  nhb-toolbox@4.20.16: {}
 
   npm-run-path@6.0.0:
     dependencies:
