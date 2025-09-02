@@ -48,16 +48,15 @@
   "license": "MIT",
   "dependencies": {
     "@clack/prompts": "^0.11.0",
-    "chalk": "5.6.0",
     "execa": "^9.6.0",
-    "nhb-toolbox": "^4.20.16",
+    "nhb-toolbox": "^4.20.17",
     "type-fest": "^4.41.0"
   },
   "devDependencies": {
     "@types/node": "^24.3.0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.1.5",
-    "nhb-scripts": "^1.8.58",
+    "lint-staged": "^16.1.6",
+    "nhb-scripts": "^1.8.64",
     "prettier": "^3.6.2"
   },
   "engines": {

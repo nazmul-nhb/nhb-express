@@ -14,9 +14,9 @@ import {
 	spinner,
 	text,
 } from '@clack/prompts';
-import chalk from 'chalk';
 import { execa } from 'execa';
 import { capitalizeString } from 'nhb-toolbox';
+import { Stylog } from 'nhb-toolbox/stylog';
 import fs from 'node:fs';
 import { rm as rmAsync } from 'node:fs/promises';
 import path from 'node:path';
@@ -77,7 +77,7 @@ const devDeps = /* @__PURE__ */ Object.freeze({
 
 /** Show cancel message with outro and graceful exit */
 function showCancelMessage() {
-	outro(chalk.redBright('🛑 Process cancelled by user!'));
+	outro(Stylog.error.string('🛑 Process cancelled by user!'));
 	process.exit(0);
 }
 
@@ -96,11 +96,11 @@ function normalizeResult(result) {
 // ----------------------
 // ! Entry
 // ----------------------
-intro(chalk.cyan('🚀 Create Express + TypeScript App with "nhb-express"'));
+intro(Stylog.cyan.bold.string('🚀 Create Express + TypeScript App with "nhb-express"'));
 
 const projectName = normalizeResult(
 	await text({
-		message: chalk.yellowBright('📂 Project name:'),
+		message: Stylog.yellow.bold.string('📂 Project name:'),
 		initialValue: 'my-server',
 		validate: (v) => (v.trim() ? undefined : 'Project name is required!'),
 	})
@@ -109,7 +109,7 @@ const projectName = normalizeResult(
 const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
 	normalizeResult(
 		await select({
-			message: chalk.cyanBright('🛢️ Select a database:'),
+			message: Stylog.cyan.bold.string('🛢️ Select a database:'),
 			options: [
 				{ value: 'mongoose', label: 'MongoDB + Mongoose', hint: 'default' },
 				{ value: 'prisma', label: 'PostgreSQL + Prisma (Coming Soon...)' },
@@ -122,7 +122,7 @@ const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
 
 const pkgManager = normalizeResult(
 	await select({
-		message: chalk.yellowBright('📦 Choose a package manager:'),
+		message: Stylog.yellow.bold.string('📦 Choose a package manager:'),
 		options: [
 			{ value: 'pnpm', label: 'pnpm' },
 			{ value: 'npm', label: 'npm' },
@@ -145,7 +145,7 @@ function renameDotFile(fileName) {
 // ! if exists, confirm overwrite
 if (fs.existsSync(targetDir)) {
 	const overwrite = await confirm({
-		message: chalk.redBright(`⛔ ${projectName} already exists. Overwrite?`),
+		message: Stylog.error.bold.string(`⛔ ${projectName} already exists. Overwrite?`),
 		initialValue: false,
 	});
 
@@ -198,7 +198,7 @@ const pkgJson = {
 
 fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkgJson, null, 2));
 
-mimicClack(chalk.cyanBright('🔄️ Installing dependencies...'));
+mimicClack(Stylog.warning.string('🔄️ Installing dependencies...'));
 
 await installDeps(
 	pkgManager,
@@ -207,14 +207,14 @@ await installDeps(
 	[...devDeps.common, ...devDeps[dbChoice]]
 );
 
-mimicClack(chalk.green('✅ Dependencies installed!'), false);
+mimicClack(Stylog.success.string('✅ Dependencies installed!'), false);
 
 note(
-	chalk.cyan(`cd ${projectName}\n${pkgManager} run dev`),
-	chalk.yellowBright('⏭️ Next Steps')
+	Stylog.cyan.string(`cd ${projectName}\n${pkgManager} run dev`),
+	Stylog.yellow.string('⏭️ Next Steps')
 );
 
-outro(chalk.green('🎉 Project created successfully!'));
+outro(Stylog.success.string('🎉 Project created successfully!'));
 
 // ----------------------
 // ! Helpers
@@ -227,7 +227,10 @@ outro(chalk.green('🎉 Project created successfully!'));
  */
 export function mimicClack(message, suffix = true) {
 	console.log(
-		chalk.gray('│\n') + chalk.green('◇  ') + message + (suffix ? chalk.gray('\n│') : '')
+		Stylog.gray.string('│\n') +
+			Stylog.green.string('◇  ') +
+			message +
+			(suffix ? Stylog.gray.string('\n│') : '')
 	);
 }
 
@@ -278,13 +281,13 @@ async function installDeps(manager, cwd, deps, devDeps) {
  */
 async function removeExistingDir(targetDir) {
 	const s = spinner();
-	s.start(chalk.yellowBright('⛔ Removing existing directory'));
+	s.start(Stylog.yellow.string('⛔ Removing existing directory'));
 
 	try {
 		await rmAsync(targetDir, { recursive: true, force: true });
-		s.stop(chalk.green('✅ Existing directory removed!'));
+		s.stop(Stylog.success.string('✅ Existing directory removed!'));
 	} catch (err) {
-		s.stop(chalk.redBright('❌ Failed to remove directory!', err));
+		s.stop(Stylog.error.string('❌ Failed to remove directory!', err));
 		process.exit(0);
 	}
 }
