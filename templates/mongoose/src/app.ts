@@ -5,11 +5,10 @@ import router from '@/routes';
 import sendResponse from '@/utilities/sendResponse';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import type { Application } from 'express';
 import express from 'express';
 
 // * Create an Express App
-const app: Application = express();
+const app = express();
 
 app.set('trust proxy', true);
 
