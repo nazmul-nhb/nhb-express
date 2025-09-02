@@ -198,7 +198,7 @@ const pkgJson = {
 
 fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkgJson, null, 2));
 
-mimicClack(Stylog.warning.string('🔄️ Installing dependencies...'));
+mimicClack(Stylog.info.string('🔄️ Installing dependencies...'));
 
 await installDeps(
 	pkgManager,
@@ -228,7 +228,7 @@ outro(Stylog.success.string('🎉 Project created successfully!'));
 export function mimicClack(message, suffix = true) {
 	console.log(
 		Stylog.gray.string('│\n') +
-			Stylog.green.string('◇  ') +
+			Stylog.yellowgreen.string('◇  ') +
 			message +
 			(suffix ? Stylog.gray.string('\n│') : '')
 	);
@@ -281,7 +281,7 @@ async function installDeps(manager, cwd, deps, devDeps) {
  */
 async function removeExistingDir(targetDir) {
 	const s = spinner();
-	s.start(Stylog.yellow.string('⛔ Removing existing directory'));
+	s.start(Stylog.info.string('⛔ Removing existing directory'));
 
 	try {
 		await rmAsync(targetDir, { recursive: true, force: true });
