@@ -12,29 +12,27 @@ export const connectDB = async (): Promise<void> => {
 
 		await mongoose.connect(configs.mongoUri);
 
-		console.info(Stylog.cyan.string('🔗 MongoDB is Connected!'));
+		console.info(Stylog.cyan.toANSI('🔗 MongoDB is Connected!'));
 
 		// Listen for established connection
 		mongoose.connection.on('connected', () => {
-			console.info(Stylog.cyan.string('🔗 MongoDB is Connected!'));
+			console.info(Stylog.cyan.toANSI('🔗 MongoDB is Connected!'));
 		});
 
 		// Listen for connection errors
 		mongoose.connection.on('error', (err) => {
-			console.error(
-				Stylog.error.string(`⛔ MongoDB Connection Error: ${err.message}`)
-			);
+			console.error(Stylog.error.toANSI(`⛔ MongoDB Connection Error: ${err.message}`));
 		});
 
 		// Optional: Listen for disconnection
 		mongoose.connection.on('disconnected', () => {
-			console.error(Stylog.error.string('⛔ MongoDB is Disconnected!'));
+			console.error(Stylog.error.toANSI('⛔ MongoDB is Disconnected!'));
 		});
 	} catch (error) {
 		if (error instanceof Error) {
-			console.error(Stylog.error.string(`🚫 MongoDB Error: ${error.message}`));
+			console.error(Stylog.error.toANSI(`🚫 MongoDB Error: ${error.message}`));
 		} else {
-			console.error(Stylog.error.string('🛑 Unknown Error Occurred!'));
+			console.error(Stylog.error.toANSI('🛑 Unknown Error Occurred!'));
 		}
 	}
 };

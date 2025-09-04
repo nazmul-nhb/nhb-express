@@ -103,9 +103,7 @@ export const handleDuplicateError = (error: IDuplicateError, stack?: string) => 
 	const value = fields[field] ?? error?.keyValue?.[field] ?? 'duplicate';
 
 	const docName =
-		collection ?
-			pluralizer.toSingular(capitalizeString(collection?.trim()))
-		:	'Document';
+		collection ? pluralizer.toSingular(capitalizeString(collection?.trim())) : 'Document';
 
 	return {
 		statusCode: 409,

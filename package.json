@@ -1,6 +1,6 @@
 {
   "name": "nhb-express",
-  "version": "1.4.62",
+  "version": "1.4.64",
   "description": "Express TypeScript Server Scaffold",
   "main": "bin/index.mjs",
   "type": "module",
@@ -12,6 +12,7 @@
     "count": "nhb-count",
     "format": "nhb-format",
     "delete": "nhb-delete",
+    "check:m": "tsc -p ./templates/mongoose/tsconfig.json --noEmit",
     "prepare": "husky"
   },
   "publishConfig": {
@@ -49,18 +50,38 @@
   "dependencies": {
     "@clack/prompts": "^0.11.0",
     "execa": "^9.6.0",
-    "nhb-toolbox": "^4.20.17",
+    "nhb-toolbox": "^4.20.20",
     "type-fest": "^4.41.0"
   },
   "devDependencies": {
-    "@types/node": "^24.3.0",
+    "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.9",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/ms": "^2.1.0",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^24.3.1",
+    "@types/nodemailer": "^7.0.1",
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^2.7.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
     "husky": "^9.1.7",
+    "jsonwebtoken": "^9.0.2",
     "lint-staged": "^16.1.6",
+    "mongoose": "^8.18.0",
+    "multer": "^2.0.2",
     "nhb-scripts": "^1.8.64",
-    "prettier": "^3.6.2"
+    "nodemailer": "^7.0.6",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2",
+    "zod": "^4.1.5"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
-  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
+  "packageManager": "pnpm@10.15.1+sha512.34e538c329b5553014ca8e8f4535997f96180a1d0f614339357449935350d924e22f8614682191264ec33d1462ac21561aff97f6bb18065351c162c7e8f6de67"
 }

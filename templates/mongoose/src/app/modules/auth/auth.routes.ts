@@ -14,11 +14,7 @@ router.post(
 	authControllers.registerUser
 );
 
-router.post(
-	'/login',
-	validateRequest(authValidations.loginSchema),
-	authControllers.loginUser
-);
+router.post('/login', validateRequest(authValidations.loginSchema), authControllers.loginUser);
 
 router.post('/refresh-token', authControllers.refreshToken);
 

@@ -34,11 +34,11 @@ export const requestLogger: RequestHandler = (req, res, next): void => {
 			: Stylog.bgTeal.whitesmoke;
 
 		console.info(
-			`🕒 ${Stylog.yellow.string(time)}\n` +
-				`📡 ${Stylog.cyan.bold.string(method)} ${Stylog.cyan.string(url)} → ` +
-				`${statusColor.bold.string(` ${Stylog.white.string(res.statusCode ?? 500)} `)} ` +
-				`🌍 IP: ${Stylog.gray.string(ip)} → ` +
-				`⏱️ ${durationColor.string(durationMs + 'ms')}`
+			`🕒 ${Stylog.yellow.toANSI(time)}\n` +
+				`📡 ${Stylog.cyan.bold.toANSI(method)} ${Stylog.cyan.toANSI(url)} → ` +
+				`${statusColor.bold.toANSI(` ${Stylog.white.toANSI(res.statusCode ?? 500)} `)} ` +
+				`🌍 IP: ${Stylog.gray.toANSI(ip)} → ` +
+				`⏱️ ${durationColor.toANSI(durationMs + 'ms')}`
 		);
 	});
 

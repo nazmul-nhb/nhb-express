@@ -26,11 +26,7 @@ cloudinary.config({
  * res.json(result);
  * });
  */
-export async function uploadToCloudinary(
-	public_id: string,
-	buffer: Buffer,
-	folder = 'server'
-) {
+export async function uploadToCloudinary(public_id: string, buffer: Buffer, folder = 'server') {
 	return new Promise<UploadApiResponse>((resolve, reject) => {
 		cloudinary.uploader
 			.upload_stream(

@@ -4,16 +4,7 @@
 
 /** @import { PackageJson } from 'type-fest'; */
 
-import {
-	confirm,
-	intro,
-	isCancel,
-	note,
-	outro,
-	select,
-	spinner,
-	text,
-} from '@clack/prompts';
+import { confirm, intro, isCancel, note, outro, select, spinner, text } from '@clack/prompts';
 import { execa } from 'execa';
 import { capitalizeString } from 'nhb-toolbox';
 import { Stylog } from 'nhb-toolbox/stylog';
@@ -23,6 +14,13 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const yellow = Stylog.ansi16('yellow');
+const cyan = Stylog.ansi16('cyanBright');
+const gray = Stylog.ansi16('blackBright');
+const green = Stylog.ansi16('green');
+const red = Stylog.ansi16('red');
+const blue = Stylog.ansi16('blue');
 
 const deps = /* @__PURE__ */ Object.freeze({
 	common: [
@@ -77,7 +75,7 @@ const devDeps = /* @__PURE__ */ Object.freeze({
 
 /** Show cancel message with outro and graceful exit */
 function showCancelMessage() {
-	outro(Stylog.error.string('🛑 Process cancelled by user!'));
+	outro(red.toANSI('🛑 Process cancelled by user!'));
 	process.exit(0);
 }
 
@@ -96,11 +94,11 @@ function normalizeResult(result) {
 // ----------------------
 // ! Entry
 // ----------------------
-intro(Stylog.cyan.bold.string('🚀 Create Express + TypeScript App with "nhb-express"'));
+intro(cyan.bold.toANSI('🚀 Create Express + TypeScript App with "nhb-express"'));
 
 const projectName = normalizeResult(
 	await text({
-		message: Stylog.yellow.bold.string('📂 Project name:'),
+		message: yellow.bold.toANSI('📂 Project Name:'),
 		initialValue: 'my-server',
 		validate: (v) => (v.trim() ? undefined : 'Project name is required!'),
 	})
@@ -109,11 +107,11 @@ const projectName = normalizeResult(
 const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
 	normalizeResult(
 		await select({
-			message: Stylog.cyan.bold.string('🛢️ Select a database:'),
+			message: yellow.bold.toANSI('📁 Select a Database:'),
 			options: [
 				{ value: 'mongoose', label: 'MongoDB + Mongoose', hint: 'default' },
-				{ value: 'prisma', label: 'PostgreSQL + Prisma (Coming Soon...)' },
-				{ value: 'drizzle', label: 'PostgreSQL + Drizzle (Coming Soon...)' },
+				// { value: 'prisma', label: 'PostgreSQL + Prisma', hint: 'Coming Soon...' },
+				// { value: 'drizzle', label: 'PostgreSQL + Drizzle', hint: 'Coming Soon...' },
 			],
 			initialValue: 'mongoose',
 		})
@@ -122,7 +120,7 @@ const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
 
 const pkgManager = normalizeResult(
 	await select({
-		message: Stylog.yellow.bold.string('📦 Choose a package manager:'),
+		message: yellow.bold.toANSI('📦 Choose a Package Manager:'),
 		options: [
 			{ value: 'pnpm', label: 'pnpm' },
 			{ value: 'npm', label: 'npm' },
@@ -145,7 +143,7 @@ function renameDotFile(fileName) {
 // ! if exists, confirm overwrite
 if (fs.existsSync(targetDir)) {
 	const overwrite = await confirm({
-		message: Stylog.error.bold.string(`⛔ ${projectName} already exists. Overwrite?`),
+		message: red.bold.toANSI(`⛔ "${projectName}" already exists. Overwrite?`),
 		initialValue: false,
 	});
 
@@ -198,7 +196,7 @@ const pkgJson = {
 
 fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkgJson, null, 2));
 
-mimicClack(Stylog.info.string('🔄️ Installing dependencies...'));
+mimicClack(blue.toANSI('🔄️ Installing dependencies...'));
 
 await installDeps(
 	pkgManager,
@@ -207,14 +205,11 @@ await installDeps(
 	[...devDeps.common, ...devDeps[dbChoice]]
 );
 
-mimicClack(Stylog.success.string('✅ Dependencies installed!'), false);
+mimicClack(green.toANSI('✅ Dependencies installed!'), false);
 
-note(
-	Stylog.cyan.string(`cd ${projectName}\n${pkgManager} run dev`),
-	Stylog.yellow.string('⏭️ Next Steps')
-);
+note(yellow.toANSI(`cd ${projectName}\n${pkgManager} run dev`), blue.toANSI('🛈 Next Steps'));
 
-outro(Stylog.success.string('🎉 Project created successfully!'));
+outro(green.toANSI(`🎉 Project "${projectName}" has been created successfully!`));
 
 // ----------------------
 // ! Helpers
@@ -227,10 +222,7 @@ outro(Stylog.success.string('🎉 Project created successfully!'));
  */
 export function mimicClack(message, suffix = true) {
 	console.log(
-		Stylog.gray.string('│\n') +
-			Stylog.yellowgreen.string('◇  ') +
-			message +
-			(suffix ? Stylog.gray.string('\n│') : '')
+		gray.toANSI('│\n') + green.toANSI('◇  ') + message + (suffix ? gray.toANSI('\n│') : '')
 	);
 }
 
@@ -281,13 +273,14 @@ async function installDeps(manager, cwd, deps, devDeps) {
  */
 async function removeExistingDir(targetDir) {
 	const s = spinner();
-	s.start(Stylog.info.string('⛔ Removing existing directory'));
+	s.start(red.toANSI(`⛔ Removing existing "${projectName}" directory`));
 
 	try {
 		await rmAsync(targetDir, { recursive: true, force: true });
-		s.stop(Stylog.success.string('✅ Existing directory removed!'));
-	} catch (err) {
-		s.stop(Stylog.error.string('❌ Failed to remove directory!', err));
+		s.stop(green.toANSI(`✅ Existing "${projectName}" directory has been removed!`));
+	} catch (error) {
+		s.stop(red.toANSI(`❌ Failed to remove directory: "${projectName}"!`));
+		console.error(error);
 		process.exit(0);
 	}
 }

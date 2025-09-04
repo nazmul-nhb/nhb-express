@@ -27,8 +27,7 @@ export type ExcludeField<T> = `-${Extract<ExcludeVirtuals<FilterKeys<T>>, string
 
 /** * Utility type to extract keys from `T` where the value is `string`, `number`, `boolean`, `Date` or `ObjectId`. */
 type FilterKeys<T> = {
-	[K in keyof T]: T[K] extends string | number | boolean | Date | Types.ObjectId ? K
-	:	never;
+	[K in keyof T]: T[K] extends string | number | boolean | Date | Types.ObjectId ? K : never;
 }[keyof T];
 
 /** * Utility type to exclude Mongoose virtual properties (e.g., isNew). */

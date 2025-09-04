@@ -5,7 +5,13 @@ import { defineScriptConfig } from 'nhb-scripts';
 export default defineScriptConfig({
 	format: {
 		args: ['--write'],
-		files: ['bin'],
+		files: [
+			'bin',
+			'templates/mongoose/src',
+			// 'templates/prisma/src',
+			// 'templates/drizzle/src',
+			'nhb.scripts.config.mjs',
+		],
 		ignorePath: '.prettierignore',
 	},
 	commit: {

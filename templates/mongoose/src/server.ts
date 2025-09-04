@@ -14,14 +14,14 @@ const bootStrap = async () => {
 		// Listen to the Server
 		server = app.listen(configs.port, () => {
 			console.info(
-				Stylog.yellow.string(`👂 Server is Listening on Port: ${configs.port}`)
+				Stylog.yellow.toANSI(`👂 Server is Listening on Port: ${configs.port}`)
 			);
 		});
 	} catch (error) {
 		if (error instanceof Error) {
-			console.error(Stylog.error.string(`🚫 Error Occurred: ${error.message}`));
+			console.error(Stylog.error.toANSI(`🚫 Error Occurred: ${error.message}`));
 		} else {
-			console.error(Stylog.error.string('🛑 Unknown Error Occurred!'));
+			console.error(Stylog.error.toANSI('🛑 Unknown Error Occurred!'));
 		}
 	}
 };
@@ -30,9 +30,7 @@ bootStrap().catch(console.dir);
 
 process.on('unhandledRejection', () => {
 	console.error(
-		Stylog.error.string(
-			`🚫 Unhandled Rejection Detected!\n🛑 Server is Shutting Down...`
-		)
+		Stylog.error.toANSI(`🚫 Unhandled Rejection Detected!\n🛑 Server is Shutting Down...`)
 	);
 
 	if (server) {
@@ -46,9 +44,7 @@ process.on('unhandledRejection', () => {
 
 process.on('uncaughtException', () => {
 	console.error(
-		Stylog.error.string(
-			`🚫 Uncaught Exception Detected!\n🛑 Server is Shutting Down...`
-		)
+		Stylog.error.toANSI(`🚫 Uncaught Exception Detected!\n🛑 Server is Shutting Down...`)
 	);
 
 	process.exit(1);

@@ -1,12 +1,7 @@
 import configs from '@/configs';
 import { processLogin } from '@/modules/auth/auth.utils';
 import { User } from '@/modules/user/user.model';
-import type {
-	ILoginCredentials,
-	IPlainUser,
-	ITokens,
-	IUser,
-} from '@/modules/user/user.types';
+import type { ILoginCredentials, IPlainUser, ITokens, IUser } from '@/modules/user/user.types';
 import type { DecodedUser } from '@/types/interfaces';
 import { generateToken, verifyToken } from '@/utilities/authUtilities';
 import { pickFields } from 'nhb-toolbox';
