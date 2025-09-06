@@ -35,12 +35,10 @@ export default defineScriptConfig({
 				createFolder: true,
 				destination: 'src/app/modules',
 				files: (moduleName) => expressMongooseZodTemplate(moduleName, true),
-			},
-		},
-		hooks: {
-			onComplete: (moduleName) => {
-				updateCollection(moduleName);
-				updateRoutes(moduleName, true);
+				onComplete: (moduleName) => {
+					updateCollection(moduleName);
+					updateRoutes(moduleName, true);
+				},
 			},
 		},
 	},

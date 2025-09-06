@@ -1,6 +1,6 @@
 {
   "name": "nhb-express",
-  "version": "1.4.66",
+  "version": "1.4.67",
   "description": "Express TypeScript Server Scaffold",
   "main": "bin/index.mjs",
   "type": "module",
@@ -74,7 +74,7 @@
     "lint-staged": "^16.1.6",
     "mongoose": "^8.18.0",
     "multer": "^2.0.2",
-    "nhb-scripts": "^1.8.64",
+    "nhb-scripts": "^1.8.66",
     "nodemailer": "^7.0.6",
     "prettier": "^3.6.2",
     "typescript": "^5.9.2",
