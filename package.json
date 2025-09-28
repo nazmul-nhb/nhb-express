@@ -63,6 +63,7 @@
     "@types/multer": "^2.0.0",
     "@types/node": "^24.5.2",
     "@types/nodemailer": "^7.0.1",
+    "@types/serve-favicon": "^2.5.7",
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.7.0",
     "cookie-parser": "^1.4.7",
@@ -77,6 +78,7 @@
     "nhb-scripts": "^1.8.80",
     "nodemailer": "^7.0.6",
     "prettier": "^3.6.2",
+    "serve-favicon": "^2.5.1",
     "typescript": "^5.9.2",
     "zod": "^4.1.11"
   },
