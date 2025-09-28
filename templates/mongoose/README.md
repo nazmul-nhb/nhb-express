@@ -26,7 +26,7 @@ Run in development mode:
 
 ```bash
 pnpm dev     # or npm run dev / yarn dev
-# Runs on port: 4242
+# Runs on port: 4242 by default
 ```
 
 ---
@@ -41,7 +41,7 @@ pnpm dev     # or npm run dev / yarn dev
  ├─ 📁 .vscode/
  │   └─ 📄 settings.json       # VS Code Settings for better formatting
  ├─ 📁 src/
- │   ├─ 📁 app/
+ │   ├─ 📁 app/                # All source (*.ts) files
  │   |   ├─ 📁 classes/        # Utility classes e.g. `QueryBuilder`, `ErrorWihStatus`
  │   |   ├─ 📁 configs/        # App configurations
  │   |   ├─ 📁 constants/      # Constant values
@@ -51,6 +51,9 @@ pnpm dev     # or npm run dev / yarn dev
  │   |   ├─ 📁 routes/         # Route definitions
  │   |   ├─ 📁 types/          # Types for the App
  │   |   └─ 📁 utilities/      # Helper functions
+ │   |
+ │   ├─ 📁 public/             # Folder contains static files
+ │   |   └─ 🖼️ favicon.png     # Favicon to show in client application(s) if supported, e.g. Browsers
  │   |
  │   ├─ 📄 app.ts              # Express app setup
  │   ├─ 📄 index.d.ts          # Global type declarations
