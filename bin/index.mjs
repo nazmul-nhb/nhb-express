@@ -83,7 +83,7 @@ intro(cyan.bold.toANSI('🚀 Create Express + TypeScript App with "nhb-express"'
 const projectName = normalizeResult(
 	await text({
 		message: yellow.bold.toANSI('📂 Project Name:'),
-		placeholder: 'my-server',
+		placeholder: 'e.g. my-server',
 		validate: (v) => (v.trim() ? undefined : 'Project name is required!'),
 	})
 );
