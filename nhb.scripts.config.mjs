@@ -16,6 +16,7 @@ export default defineScriptConfig({
 	},
 	commit: {
 		runFormatter: false,
+		wrapPrefixWith: '`',
 	},
 	count: {
 		defaultPath: 'bin',

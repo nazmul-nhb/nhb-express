@@ -75,24 +75,6 @@ const devDeps = /* @__PURE__ */ Object.freeze({
 	drizzle: [],
 });
 
-/** Show cancel message with outro and graceful exit */
-function showCancelMessage() {
-	outro(red.toANSI('🛑 Process cancelled by user!'));
-	process.exit(0);
-}
-
-/**
- * * Normalize clack result to string
- * @param {string | symbol} result
- * @returns {string}
- */
-function normalizeResult(result) {
-	if (isCancel(result)) {
-		showCancelMessage();
-	}
-	return typeof result === 'string' ? result?.trim() : '';
-}
-
 // ----------------------
 // ! Entry
 // ----------------------
@@ -101,7 +83,7 @@ intro(cyan.bold.toANSI('🚀 Create Express + TypeScript App with "nhb-express"'
 const projectName = normalizeResult(
 	await text({
 		message: yellow.bold.toANSI('📂 Project Name:'),
-		initialValue: 'my-server',
+		placeholder: 'my-server',
 		validate: (v) => (v.trim() ? undefined : 'Project name is required!'),
 	})
 );
@@ -216,6 +198,24 @@ outro(green.toANSI(`🎉 Project "${projectName}" has been created successfully!
 // ----------------------
 // ! Helpers
 // ----------------------
+
+/** Show cancel message with outro and graceful exit */
+function showCancelMessage() {
+	outro(red.toANSI('🛑 Process cancelled by user!'));
+	process.exit(0);
+}
+
+/**
+ * * Normalize clack result to string
+ * @param {string | symbol} result
+ * @returns {string}
+ */
+function normalizeResult(result) {
+	if (isCancel(result)) {
+		showCancelMessage();
+	}
+	return typeof result === 'string' ? result?.trim() : '';
+}
 
 /**
  * * Mimic clack left vertical line before a message
