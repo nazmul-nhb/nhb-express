@@ -39,10 +39,7 @@ export default [
 			'no-undef': 'error',
 			'@typescript-eslint/no-empty-object-type': 'off',
 			'@typescript-eslint/no-unused-expressions': 'error',
-			'@typescript-eslint/consistent-type-imports': [
-				'warn',
-				{ prefer: 'type-imports' },
-			],
+			'@typescript-eslint/consistent-type-imports': ['warn', { prefer: 'type-imports' }],
 			'no-unused-vars': [
 				'off',
 				{
@@ -71,10 +68,11 @@ export default [
 	},
 	{
 		files: [
+			'src/app/types/**/*.ts',
 			'src/app/modules/**/*.types.ts',
 			'src/app/modules/**/*.interfaces.ts',
 		],
-		rules: { 'no-unused-vars': 'off' },
+		rules: { 'no-unused-vars': 'off', 'no-undef': 'off' },
 	},
 	{
 		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],

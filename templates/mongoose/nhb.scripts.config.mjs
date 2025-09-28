@@ -17,6 +17,7 @@ export default defineScriptConfig({
 	fix: { folders: ['src'], patterns: ['**/*.ts'] },
 	commit: {
 		runFormatter: true,
+		wrapPrefixWith: '`',
 	},
 	build: {
 		distFolder: 'dist',

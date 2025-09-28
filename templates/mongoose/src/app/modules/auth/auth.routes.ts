@@ -18,10 +18,6 @@ router.post('/login', validateRequest(authValidations.loginSchema), authControll
 
 router.post('/refresh-token', authControllers.refreshToken);
 
-router.get(
-	'/profile',
-	authorizeUser(...Object.values(USER_ROLES)),
-	authControllers.getCurrentUser
-);
+router.get('/profile', authorizeUser(...USER_ROLES), authControllers.getCurrentUser);
 
 export const authRoutes = router;
