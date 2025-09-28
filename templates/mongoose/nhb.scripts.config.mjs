@@ -24,6 +24,7 @@ export default defineScriptConfig({
 	build: {
 		distFolder: 'dist',
 		commands: [{ cmd: 'tsc' }, { cmd: 'tsc-alias' }],
+		after: [copyFolder],
 	},
 	count: {
 		defaultPath: 'src',
