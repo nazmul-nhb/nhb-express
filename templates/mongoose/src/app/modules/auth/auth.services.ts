@@ -22,12 +22,7 @@ const registerUserInDB = async (payload: IUser) => {
 /**
  * * Login user.
  * @param payload Login credentials (`email` and `password`).
- * @returns Token as object.
- */
-/**
- * * Login user.
- * @param payload Login credentials (`email` and `password`).
- * @returns Token as object.
+ * @returns Tokens (access and refresh) along with the user info.
  */
 const loginUser = async (payload: ILoginCredentials): Promise<ITokens> => {
 	// * Validate and extract user from DB.
@@ -39,7 +34,7 @@ const loginUser = async (payload: ILoginCredentials): Promise<ITokens> => {
 };
 
 /**
- * Refresh token.
+ * Refresh access token.
  * @param token Refresh token from client.
  * @returns New access token.
  */
