@@ -38,8 +38,8 @@ const deps = /* @__PURE__ */ Object.freeze({
 		'zod',
 	],
 	mongoose: ['mongoose'],
-	prisma: [],
-	drizzle: [],
+	prisma: ['@prisma/client'],
+	drizzle: ['drizzle-orm', 'postgres'],
 });
 
 const devDeps = /* @__PURE__ */ Object.freeze({
@@ -69,10 +69,11 @@ const devDeps = /* @__PURE__ */ Object.freeze({
 		'tsconfig-paths',
 		'typescript',
 		'typescript-eslint',
+		'vercel',
 	],
-	mongoose: ['vercel'],
-	prisma: [],
-	drizzle: [],
+	mongoose: [],
+	prisma: ['prisma'],
+	drizzle: ['drizzle-kit', 'tsx'],
 });
 
 // ----------------------
