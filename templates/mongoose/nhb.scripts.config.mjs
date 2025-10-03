@@ -32,7 +32,6 @@ export default defineScriptConfig({
 	},
 	module: {
 		force: false,
-		destination: 'src/app/modules',
 		defaultTemplate: 'express-mongoose-zod',
 		templates: {
 			'express-mongoose-zod': {

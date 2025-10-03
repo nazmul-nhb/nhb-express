@@ -9,7 +9,7 @@ export default defineScriptConfig({
 			'bin',
 			'templates/mongoose/src',
 			// 'templates/prisma/src',
-			// 'templates/drizzle/src',
+			'templates/drizzle/src',
 			'nhb.scripts.config.mjs',
 		],
 		ignorePath: '.prettierignore',

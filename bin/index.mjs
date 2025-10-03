@@ -39,7 +39,7 @@ const deps = /* @__PURE__ */ Object.freeze({
 	],
 	mongoose: ['mongoose'],
 	prisma: ['@prisma/client'],
-	drizzle: ['drizzle-orm', 'postgres'],
+	drizzle: ['drizzle-orm', 'drizzle-zod', 'postgres'],
 });
 
 const devDeps = /* @__PURE__ */ Object.freeze({
@@ -76,6 +76,49 @@ const devDeps = /* @__PURE__ */ Object.freeze({
 	drizzle: ['drizzle-kit', 'tsx'],
 });
 
+const scripts = /* @__PURE__ */ Object.freeze({
+	common: {
+		dev: 'nodemon',
+		start: 'node dist/server.js',
+		deploy: 'nhb-build && vercel --prod',
+		build: 'nhb-build',
+		format: 'nhb-format',
+		lint: 'nhb-lint',
+		fix: 'nhb-fix',
+		commit: 'nhb-commit',
+		count: 'nhb-count',
+		delete: 'nhb-delete',
+	},
+	mongoose: {
+		module: 'nhb-module -t express-mongoose-zod -d src/app/modules',
+		secret: 'node secret.mjs',
+	},
+	drizzle: {
+		'build:gen':
+			'drizzle-kit generate --name=drizzle --config=drizzle.config.ts && nhb-build',
+		gen: 'drizzle-kit generate --name=drizzle --config=drizzle.config.ts',
+		migrate: 'drizzle-kit migrate --config=drizzle.config.ts',
+		drop: 'drizzle-kit drop --config=drizzle.config.ts',
+		push: 'drizzle-kit push --config=drizzle.config.ts',
+		pull: 'drizzle-kit pull --config=drizzle.config.ts',
+		export: 'drizzle-kit export --config=drizzle.config.ts',
+		check: 'drizzle-kit check --config=drizzle.config.ts',
+		'drizzle:up': 'drizzle-kit up --config=drizzle.config.ts',
+		studio: 'drizzle-kit studio --config=drizzle.config.ts',
+		schema: 'nhb-module -t drizzle-postgres-schema -d src/drizzle/schema',
+		module: 'nhb-module -t express-drizzle-postgres -d src/app/modules',
+		secret: 'node scripts/generateSecret.mjs',
+	},
+	prisma: {
+		'build:gen': 'prisma generate && nhb-build',
+		migrate: 'prisma migrate dev',
+		gen: 'prisma generate',
+		studio: 'prisma studio',
+		module: 'nhb-module -t express-prisma-postgres -d src/app/modules',
+		secret: 'node scripts/generateSecret.mjs',
+	},
+});
+
 // ----------------------
 // ! Entry
 // ----------------------
@@ -92,11 +135,15 @@ const projectName = normalizeResult(
 const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
 	normalizeResult(
 		await select({
-			message: yellow.bold.toANSI('📁 Select a Database:'),
+			message: yellow.bold.toANSI('📁 Select Database + ODM/ORM:'),
 			options: [
 				{ value: 'mongoose', label: 'MongoDB + Mongoose', hint: 'default' },
+				{
+					value: 'drizzle',
+					label: 'PostgreSQL + Drizzle',
+					hint: 'Driver: postgres-js',
+				},
 				// { value: 'prisma', label: 'PostgreSQL + Prisma', hint: 'Coming Soon...' },
-				// { value: 'drizzle', label: 'PostgreSQL + Drizzle', hint: 'Coming Soon...' },
 			],
 			initialValue: 'mongoose',
 		})
@@ -156,20 +203,10 @@ renameDotFile('gitignore');
 const pkgJson = {
 	name: projectName,
 	version: '0.1.0',
-	description: `Express TypeScript ${capitalizeString(dbChoice)} Server`,
+	description: `Express TypeScript ${capitalizeString(dbChoice)} (${dbChoice === 'mongoose' ? 'MongoDB' : 'PostgreSQL'}) Server`,
 	scripts: {
-		dev: 'nodemon',
-		start: 'node dist/server.js',
-		deploy: 'nhb-build && vercel --prod',
-		build: 'nhb-build',
-		format: 'nhb-format',
-		lint: 'nhb-lint',
-		fix: 'nhb-fix',
-		commit: 'nhb-commit',
-		count: 'nhb-count',
-		module: 'nhb-module',
-		delete: 'nhb-delete',
-		secret: 'node secret.mjs',
+		...scripts.common,
+		...scripts[dbChoice],
 	},
 	author: {
 		name: 'Nazmul Hassan',
@@ -200,7 +237,7 @@ outro(green.toANSI(`🎉 Project "${projectName}" has been created successfully!
 // ! Helpers
 // ----------------------
 
-/** Show cancel message with outro and graceful exit */
+/** * Show cancel message with outro and graceful exit */
 function showCancelMessage() {
 	outro(red.toANSI('🛑 Process cancelled by user!'));
 	process.exit(0);
@@ -271,7 +308,7 @@ async function installDeps(manager, cwd, deps, devDeps) {
 }
 
 /**
- * Remove an existing directory with spinner feedback
+ * * Remove an existing directory with spinner feedback
  * @param {string} targetDir
  */
 async function removeExistingDir(targetDir) {
