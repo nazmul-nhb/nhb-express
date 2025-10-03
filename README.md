@@ -7,9 +7,6 @@
   <a href="https://www.npmjs.com/package/nhb-express" aria-label="Version">
     <img src="https://img.shields.io/npm/v/nhb-express.svg?label=nhb-express&style=flat&color=teal&logo=npm" alt="Latest Version" />
   </a>
-  <!-- <a href="https://bundlephobia.com/result?p=nhb-express" aria-label="Bundle size">
-    <img src="https://img.shields.io/bundlephobia/minzip/nhb-express?style=flat&color=purple&label=SIZE&logo=nodedotjs" alt="Bundle Size" />
-  </a> -->
   <a href="https://www.npmjs.com/package/nhb-express" aria-label="License">
     <img src="https://img.shields.io/npm/l/nhb-express.svg?label=LICENSE&style=flat&color=orange&logo=open-source-initiative" alt="License" />
   </a>
@@ -17,7 +14,7 @@
 
 Quickly bootstrap a production‑ready **Express + TypeScript + Zod** server with a single command.
 
-> Currently limited to only `MongoDB` and `Mongoose`, `PostgreSQL` (`Prisma` and `Drizzle`) coming soon...
+> 3 Built-in templates for `MongoDB` + `Mongoose`, `PostgreSQL` + (`Prisma` and `Drizzle`)
 
 ## ⚡ Compatibility
 
@@ -36,12 +33,12 @@ Quickly bootstrap a production‑ready **Express + TypeScript + Zod** server wit
 - ✅ **TypeScript** with `ts-node` and `nodemon` for development and pre-configured `tsconfig.json`
 - ✅ **Express.js** pre‑configured with custom middlewares
 - ✅ **Zod** for schema validation
-- ✅ **Mongoose** for MongoDB integration (PostgreSQL with ORMs coming soon...)
+- ✅ **Mongoose** for `MongoDB` integration
+- ✅ **Drizzle** and **Prisma** for `PostgreSQL` integration
 - ✅ **Stylog** from [`nhb-toolbox`](https://toolbox.nazmul-nhb.dev/docs/utilities/misc/stylog) for colorful logging
 - ✅ **[nhb-scripts](https://www.npmjs.com/package/nhb-scripts)** for easy build, commit, module scaffolding, formatting, linting, and more
 - ✅ **Scaffolding via CLI** – choose package manager, DB, etc.
-- ✅ Built‑in [**CI/CD workflow**](#️-cicd-workflow) for automatic deployment to Vercel
-- ✅ Easily **extendable** _(PostgreSQL+Prisma/Drizzle planned!)_
+- ✅ Built‑in [**CI/CD workflow**](#️-cicd-workflow) for automatic deployment to Vercel (Currently only available for Mongoose setup)
 
 ---
 
@@ -221,14 +218,6 @@ This project comes integrated with **[nhb-scripts](https://www.npmjs.com/package
 - and _more…_ configurable via `nhb.scripts.config.mjs`
 
 You can explore and extend `nhb-scripts` in your project as needed.
-
----
-
-## 🔧 Extending
-
-Future versions of `nhb-express` will allow:
-
-- Choosing PostgreSQL (Prisma, Drizzle, etc.)
 
 ---
 

@@ -43,7 +43,7 @@ pnpm dev     # or npm run dev / yarn dev
  ├─ 📁 public/                 # Folder contains static files
  |   └─ 🖼️ favicon.png         # Favicon to show in client application(s) if supported, e.g. Browsers
  │
- ├─ 📁 scripts/                # Helper scripts for development purposes
+ ├─ 📁 scripts/                # Helper scripts for development purpose
  │
  ├─ 📁 src/                    # All source (*.ts) files
  │   ├─ 📁 app/                # Application logic and internal configs

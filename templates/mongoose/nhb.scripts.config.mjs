@@ -1,6 +1,5 @@
 // @ts-check
 
-import { cpSync } from 'fs';
 import {
 	defineScriptConfig,
 	expressMongooseZodTemplate,
@@ -26,7 +25,7 @@ export default defineScriptConfig({
 	},
 	count: {
 		defaultPath: 'src',
-		excludePaths: ['node_modules', 'dist'],
+		excludePaths: ['node_modules', 'dist', 'public'],
 	},
 	module: {
 		force: false,

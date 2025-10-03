@@ -23,7 +23,7 @@ export default defineScriptConfig({
 	},
 	count: {
 		defaultPath: 'src',
-		excludePaths: ['node_modules', 'dist'],
+		excludePaths: ['node_modules', 'dist', 'public'],
 	},
 	module: {
 		force: false,

@@ -1,4 +1,4 @@
-import type { NextFunction, Request, Response } from 'express';
+import catchAsync from '@/utilities/catchAsync';
 import type { ZodObject, ZodOptional, ZodPipe } from 'zod';
 
 /**
@@ -8,14 +8,10 @@ import type { ZodObject, ZodOptional, ZodPipe } from 'zod';
  * @returns An asynchronous Express middleware function.
  */
 const validateRequest = (schema: ZodObject | ZodOptional | ZodPipe) => {
-	return async (req: Request, _res: Response, next: NextFunction) => {
-		try {
-			await schema.parseAsync(req.body);
-			next();
-		} catch (error) {
-			next(error);
-		}
-	};
+	return catchAsync(async (req, _res, next) => {
+		await schema.parseAsync(req.body);
+		next();
+	});
 };
 
 export default validateRequest;
