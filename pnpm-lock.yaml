@@ -15,15 +15,15 @@ importers:
         specifier: ^9.6.0
         version: 9.6.0
       nhb-toolbox:
-        specifier: ^4.20.56
-        version: 4.20.56
+        specifier: ^4.20.66
+        version: 4.20.66
       type-fest:
         specifier: ^5.0.1
         version: 5.0.1
     devDependencies:
       '@eslint/js':
-        specifier: ^9.36.0
-        version: 9.36.0
+        specifier: ^9.37.0
+        version: 9.37.0
       '@prisma/client':
         specifier: ^6.16.3
         version: 6.16.3(typescript@5.9.3)
@@ -112,8 +112,8 @@ importers:
         specifier: ^1.8.81
         version: 1.8.81
       nodemailer:
-        specifier: ^7.0.6
-        version: 7.0.6
+        specifier: ^7.0.7
+        version: 7.0.7
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
@@ -592,6 +592,10 @@ packages:
     resolution: {integrity: sha512-uhCbYtYynH30iZErszX78U+nR3pJU3RHGQ57NXy5QupD4SBVwDeU8TNBy+MjMngc1UyIW9noKqsRqfjQTBU2dw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@eslint/js@9.37.0':
+    resolution: {integrity: sha512-jaS+NJ+hximswBG6pjNX0uEJZkrT0zwpVi3BA3vX22aFGjJjmgSTSmPpZCRKmoBL5VY/M6p0xsSJx7rk7sy5gg==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
   '@eslint/object-schema@2.1.6':
     resolution: {integrity: sha512-RBMg5FRL0I0gs51M/guSAj5/e14VQ4tpZnQNWwuDT66P14I43ItmPfIZRhO9fUVIPOAQXU47atlywZ/czoqFPA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -893,11 +897,14 @@ packages:
   '@types/send@0.17.5':
     resolution: {integrity: sha512-z6F2D3cOStZvuk2SaP6YrwkNO65iTZcwA2ZkSABegdkAh/lf+Aa/YQndZVfmEXT5vgAp6zv06VQ3ejSVjAny4w==}
 
+  '@types/send@1.2.0':
+    resolution: {integrity: sha512-zBF6vZJn1IaMpg3xUF25VK3gd3l8zwE0ZLRX7dsQyQi+jp4E8mMDJNGDYnYse+bQhYwWERTxVwHpi3dMOq7RKQ==}
+
   '@types/serve-favicon@2.5.7':
     resolution: {integrity: sha512-z9TNUQXdQ+W/OJMP1e3KOYUZ99qJS4+ZfFOIrPGImcayqKoyifbJSEFkVq1MCKBbqjMZpjPj3B5ilrQAR2+TOw==}
 
-  '@types/serve-static@1.15.8':
-    resolution: {integrity: sha512-roei0UY3LhpOJvjbIP6ZZFngyLKl5dskOtDhxY5THRSpO+ZI+nzJ+m5yUMzGrp89YRa7lvknKkMYjqQFGwA7Sg==}
+  '@types/serve-static@1.15.9':
+    resolution: {integrity: sha512-dOTIuqpWLyl3BBXU3maNQsS4A3zuuoYRNIvYSxxhebPfXg2mzWQEPne/nlJ37yOse6uGgR386uTpdsx4D0QZWA==}
 
   '@types/webidl-conversions@7.0.3':
     resolution: {integrity: sha512-CiJJvcRtIgzadHCYXw7dqEnMNRjhGZlYK05Mj9OyktqV8uVT8fD2BFOB7S1uwBE3Kj2Z+4UyPmFw/Ixgw/LAlA==}
@@ -1860,8 +1867,8 @@ packages:
     engines: {node: '>=22'}
     hasBin: true
 
-  nhb-toolbox@4.20.56:
-    resolution: {integrity: sha512-tDK53NUYbcNfrA8Sx2nBCZfnBGpNU9YLmQlWMFg0Fw20x4p5fP3ObS91e7eysHCFvl03Ds1htlzF06xBK0XSfQ==}
+  nhb-toolbox@4.20.66:
+    resolution: {integrity: sha512-5/+qJQ27OAWkv9I+ijckzcMqIR6nuoo/QDABMukr8nGuQnZOVJP7RjW9K+3vJWCgs67Ls4gN+udmBthwwQr5xw==}
 
   node-addon-api@8.5.0:
     resolution: {integrity: sha512-/bRZty2mXUIFY/xU5HLvveNHlswNJej+RnxBjOMkidWfwZzgTbPG1E3K5TOxRLOR+5hX7bSofy8yf1hZevMS8A==}
@@ -1871,8 +1878,8 @@ packages:
     resolution: {integrity: sha512-LA4ZjwlnUblHVgq0oBF3Jl/6h/Nvs5fzBLwdEF4nuxnFdsfajde4WfxtJr3CaiH+F6ewcIB/q4jQ4UzPyid+CQ==}
     hasBin: true
 
-  nodemailer@7.0.6:
-    resolution: {integrity: sha512-F44uVzgwo49xboqbFgBGkRaiMgtoBrBEWCVincJPK9+S9Adkzt/wXCLKbf7dxucmxfTI5gHGB+bEmdyzN6QKjw==}
+  nodemailer@7.0.7:
+    resolution: {integrity: sha512-jGOaRznodf62TVzdyhKt/f1Q/c3kYynk8629sgJHpRzGZj01ezbgMMWJSAjHADcwTKxco3B68/R+KHJY2T5BaA==}
     engines: {node: '>=6.0.0'}
 
   npm-run-path@6.0.0:
@@ -2924,6 +2931,8 @@ snapshots:
 
   '@eslint/js@9.36.0': {}
 
+  '@eslint/js@9.37.0': {}
+
   '@eslint/object-schema@2.1.6': {}
 
   '@eslint/plugin-kit@0.3.5':
@@ -3283,13 +3292,13 @@ snapshots:
       '@types/node': 24.6.2
       '@types/qs': 6.14.0
       '@types/range-parser': 1.2.7
-      '@types/send': 0.17.5
+      '@types/send': 1.2.0
 
   '@types/express@5.0.3':
     dependencies:
       '@types/body-parser': 1.19.6
       '@types/express-serve-static-core': 5.0.7
-      '@types/serve-static': 1.15.8
+      '@types/serve-static': 1.15.9
 
   '@types/http-errors@2.0.5': {}
 
@@ -3328,11 +3337,15 @@ snapshots:
       '@types/mime': 1.3.5
       '@types/node': 24.6.2
 
+  '@types/send@1.2.0':
+    dependencies:
+      '@types/node': 24.6.2
+
   '@types/serve-favicon@2.5.7':
     dependencies:
       '@types/express': 5.0.3
 
-  '@types/serve-static@1.15.8':
+  '@types/serve-static@1.15.9':
     dependencies:
       '@types/http-errors': 2.0.5
       '@types/node': 24.6.2
@@ -4299,20 +4312,20 @@ snapshots:
       execa: 9.6.0
       globby: 15.0.0
       minimist: 1.2.8
-      nhb-toolbox: 4.20.56
+      nhb-toolbox: 4.20.66
       progress-estimator: 0.3.1
       rimraf: 6.0.1
       semver: 7.7.2
       type-fest: 5.0.1
       typescript: 5.9.3
 
-  nhb-toolbox@4.20.56: {}
+  nhb-toolbox@4.20.66: {}
 
   node-addon-api@8.5.0: {}
 
   node-gyp-build@4.8.4: {}
 
-  nodemailer@7.0.6: {}
+  nodemailer@7.0.7: {}
 
   npm-run-path@6.0.0:
     dependencies:
