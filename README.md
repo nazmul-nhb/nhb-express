@@ -15,6 +15,7 @@
 Quickly bootstrap a production‑ready **Express + TypeScript + Zod** server with a single command.
 
 > 3 Built-in templates for `MongoDB` + `Mongoose`, `PostgreSQL` + (`Prisma` and `Drizzle`)
+> `PostgreSQL` + `Prisma` is coming soon...
 
 ## ⚡ Compatibility
 

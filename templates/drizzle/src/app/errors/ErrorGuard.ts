@@ -1,6 +1,6 @@
 import type { DrizzleErrorCause, IParserError } from '@/types/interfaces';
 import { DrizzleError, DrizzleQueryError } from 'drizzle-orm';
-import { isObject, isObjectWithKeys, isString } from 'nhb-toolbox';
+import { isObjectWithKeys, isString } from 'nhb-toolbox';
 
 class ErrorGuard {
 	/** * Type guard to check if an error is an Express Body Parser Error. */
@@ -17,7 +17,7 @@ class ErrorGuard {
 		return error instanceof DrizzleQueryError || error instanceof DrizzleError;
 	}
 
-	/** * Type guard to check if cause property of `DrizzleQueryError` has certain properties */
+	/** * Type guard to check if `cause` property of `DrizzleQueryError` has certain properties */
 	isDrizzleErrorCause(error: unknown): error is DrizzleErrorCause {
 		return isObjectWithKeys(error, ['code', 'detail', 'table_name']);
 	}
