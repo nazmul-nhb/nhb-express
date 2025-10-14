@@ -1,7 +1,10 @@
 import configs from '@/configs';
 import type { RequestHandler } from 'express';
 import { Chronos, roundNumber } from 'nhb-toolbox';
+import { timeZonePlugin } from 'nhb-toolbox/plugins/timeZonePlugin';
 import { Stylog } from 'nhb-toolbox/stylog';
+
+Chronos.use(timeZonePlugin);
 
 /** * Logs incoming HTTP requests in a structured and readable format. */
 export const requestLogger: RequestHandler = (req, res, next): void => {

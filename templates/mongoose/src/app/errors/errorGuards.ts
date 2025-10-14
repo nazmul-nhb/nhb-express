@@ -23,7 +23,7 @@ export const isCastError = (error: unknown): error is CastError => {
 	}
 
 	// Check if the error is a ValidationError containing CastError(s)
-	if (isObject(error) && 'errors' in error && error instanceof MongooseError) {
+	if (isObject(error) && error instanceof MongooseError && 'errors' in error) {
 		const errors = error.errors as StrictObject;
 		return Object.values(errors).some(
 			(nestedError) =>

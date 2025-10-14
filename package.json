@@ -1,6 +1,6 @@
 {
   "name": "nhb-express",
-  "version": "1.6.1",
+  "version": "1.6.4",
   "description": "Express TypeScript Server Scaffold",
   "main": "bin/index.mjs",
   "type": "module",
@@ -13,6 +13,8 @@
     "format": "nhb-format",
     "delete": "nhb-delete",
     "check:m": "tsc -p ./templates/mongoose/tsconfig.json --noEmit",
+    "check:d": "tsc -p ./templates/drizzle/tsconfig.json --noEmit",
+    "check:p": "tsc -p ./templates/prisma/tsconfig.json --noEmit",
     "prepare": "husky"
   },
   "publishConfig": {
@@ -50,12 +52,12 @@
   "dependencies": {
     "@clack/prompts": "^0.11.0",
     "execa": "^9.6.0",
-    "nhb-toolbox": "^4.20.66",
-    "type-fest": "^5.0.1"
+    "nhb-toolbox": "^4.21.14",
+    "type-fest": "^5.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.37.0",
-    "@prisma/client": "^6.16.3",
+    "@prisma/client": "^6.17.1",
     "@types/bcrypt": "^6.0.0",
     "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.19",
@@ -63,11 +65,11 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/ms": "^2.1.0",
     "@types/multer": "^2.0.0",
-    "@types/node": "^24.6.2",
+    "@types/node": "^24.7.2",
     "@types/nodemailer": "^7.0.2",
     "@types/serve-favicon": "^2.5.7",
-    "@typescript-eslint/eslint-plugin": "^8.45.0",
-    "@typescript-eslint/parser": "^8.45.0",
+    "@typescript-eslint/eslint-plugin": "^8.46.1",
+    "@typescript-eslint/parser": "^8.46.1",
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.7.0",
     "cookie-parser": "^1.4.7",
@@ -75,21 +77,22 @@
     "dotenv": "^17.2.3",
     "drizzle-kit": "^0.31.5",
     "drizzle-orm": "^0.44.6",
+    "drizzle-zod": "^0.8.3",
     "eslint-config-prettier": "^10.1.8",
     "express": "^5.1.0",
     "globals": "^16.4.0",
     "husky": "^9.1.7",
     "jsonwebtoken": "^9.0.2",
-    "lint-staged": "^16.2.3",
-    "mongoose": "^8.19.0",
+    "lint-staged": "^16.2.4",
+    "mongoose": "^8.19.1",
     "multer": "^2.0.2",
     "nhb-scripts": "^1.8.81",
-    "nodemailer": "^7.0.7",
+    "nodemailer": "^7.0.9",
     "prettier": "^3.6.2",
     "serve-favicon": "^2.5.1",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.45.0",
-    "zod": "^4.1.11"
+    "typescript-eslint": "^8.46.1",
+    "zod": "^4.1.12"
   },
   "engines": {
     "node": ">=22"
