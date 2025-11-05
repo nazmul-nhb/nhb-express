@@ -15,7 +15,9 @@ const bootStrap = async () => {
 		// Listen to the Server
 		server.listen(configs.port, () => {
 			console.info(
-				Stylog.yellow.toANSI(`👂 Server is Listening on Port: ${configs.port}`)
+				Stylog.yellow.toANSI(`👂 Server is Listening on Port: ${configs.port}\n`) +
+					Stylog.bold.toANSI('🌍 Access from: ') +
+					Stylog.royalblue.bold.toANSI(`http://localhost:${configs.port}`)
 			);
 		});
 
