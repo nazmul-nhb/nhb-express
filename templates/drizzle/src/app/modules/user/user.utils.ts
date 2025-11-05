@@ -12,7 +12,7 @@ export const { password, ...userCols } = getTableColumns(users);
 /**
  * * Find a specific user using user email.
  * @param email User email
- * @param withPassword Whether to retrieve user with or without password.Defaults to `false`.
+ * @param withPassword Whether to retrieve user with or without password. Defaults to `false`.
  * @returns USer object from database.
  */
 export async function findUserByEmail<Pass extends boolean = false>(
@@ -22,7 +22,7 @@ export async function findUserByEmail<Pass extends boolean = false>(
 	if (!isEmail(email)) {
 		throw new ErrorWithStatus(
 			'Bad Request',
-			`${email} is not a valid email`,
+			`${email} is not a valid email!`,
 			STATUS_CODES.BAD_REQUEST,
 			'email'
 		);
