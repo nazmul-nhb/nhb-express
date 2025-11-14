@@ -1,10 +1,7 @@
 import configs from '@/configs';
 import type { RequestHandler } from 'express';
 import { Chronos, roundNumber } from 'nhb-toolbox';
-import { timeZonePlugin } from 'nhb-toolbox/plugins/timeZonePlugin';
 import { Stylog } from 'nhb-toolbox/stylog';
-
-Chronos.use(timeZonePlugin);
 
 /** * Logs incoming HTTP requests in a structured and readable format. */
 export const requestLogger: RequestHandler = (req, res, next): void => {
@@ -12,7 +9,7 @@ export const requestLogger: RequestHandler = (req, res, next): void => {
 
 	const time =
 		configs.NODE_ENV === 'development' ?
-			now.format(`ddd, mmm DD, YYYY HH:mm:ss:mss [${now.getTimeZoneName()}]`)
+			now.format(`ddd, mmm DD, YYYY HH:mm:ss:mss [${now.timeZoneName}]`)
 		:	now.formatUTC('ddd, mmm DD, YYYY HH:mm:ss:mss [GMT]');
 
 	const method = req.method;

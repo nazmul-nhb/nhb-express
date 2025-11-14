@@ -9,7 +9,9 @@ import type { ZodObject, ZodOptional, ZodPipe } from 'zod';
  */
 const validateRequest = (schema: ZodObject | ZodOptional | ZodPipe) => {
 	return catchAsync(async (req, _res, next) => {
-		await schema.parseAsync(req.body);
+		const parsed = await schema.parseAsync(req.body);
+		req.body = parsed;
+
 		next();
 	});
 };
