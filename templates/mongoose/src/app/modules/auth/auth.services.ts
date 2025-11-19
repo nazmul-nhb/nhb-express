@@ -14,9 +14,7 @@ import { pickFields } from 'nhb-toolbox';
 const registerUserInDB = async (payload: IUser) => {
 	const newUser = await User.create(payload);
 
-	const user = pickFields(newUser, ['_id', 'user_name', 'email']);
-
-	return user;
+	return pickFields(newUser, ['_id', 'user_name', 'email']);
 };
 
 /**
@@ -28,9 +26,7 @@ const loginUser = async (payload: ILoginCredentials): Promise<ITokens> => {
 	// * Validate and extract user from DB.
 	const user = await User.validateUser(payload.email);
 
-	const result = await processLogin(payload?.password, user);
-
-	return result;
+	return await processLogin(payload?.password, user);
 };
 
 /**

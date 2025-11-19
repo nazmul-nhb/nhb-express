@@ -3,13 +3,12 @@ import { User } from '@/modules/user/user.model';
 import type { IPlainUser } from '@/modules/user/user.types';
 import type { TEmail } from '@/types';
 
+/** * Get all users from DB. */
 const getAllUsersFromDB = async (query?: Record<string, unknown>) => {
 	const userQuery = new QueryBuilder(User.find(), query).sort();
 	// const users = await User.find({});
 
-	const users = await userQuery.modelQuery;
-
-	return users;
+	return await userQuery.modelQuery;
 };
 
 /** * Get current user from DB. */

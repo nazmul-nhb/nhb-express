@@ -11,6 +11,11 @@ import { pickFields } from 'nhb-toolbox';
 import { STATUS_CODES } from 'nhb-toolbox/constants';
 
 class AuthServices {
+	/**
+	 * * Register a user in the database.
+	 * @param payload Required data to register a user.
+	 * @returns The registered user info or throws error if error occurs.
+	 */
 	async registerUserInDB(payload: InsertUser) {
 		const hashedPass = await hashPassword(payload.password);
 
@@ -40,9 +45,7 @@ class AuthServices {
 		// * Validate and extract user from DB.
 		const user = await findUserByEmail(payload.email, true);
 
-		const result = await processLogin(payload?.password, user);
-
-		return result;
+		return await processLogin(payload?.password, user);
 	}
 
 	/**
@@ -74,9 +77,7 @@ class AuthServices {
 	 * @returns The user details without the password field.
 	 */
 	async getCurrentUserFromDB(client: DecodedUser | undefined) {
-		const user = await findUserByEmail(client?.email);
-
-		return user;
+		return await findUserByEmail(client?.email);
 	}
 }
 
