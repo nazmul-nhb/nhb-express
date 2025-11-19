@@ -38,13 +38,11 @@ class UserServices {
 				)
 			:	[];
 
-		const result = await db
+		return await db
 			.select(userCols)
 			.from(users)
 			.orderBy(users.id)
 			.where(or(...filters));
-
-		return result;
 	}
 
 	/**
@@ -53,9 +51,7 @@ class UserServices {
 	 * @returns The user details without the password field.
 	 */
 	async getCurrentUserFromDB(email: TEmail | undefined) {
-		const user = await findUserByEmail(email);
-
-		return user;
+		return await findUserByEmail(email);
 	}
 
 	/**
