@@ -135,9 +135,7 @@ class ${capModule}Services {
     async getAll${pluralCapModule}FromDB(query?: TQueries<Insert${capModule}>) {
         console.log(query);
 
-        const result = await db.select().from(${pluralModule}).orderBy(${pluralModule}.id);
-
-        return result;
+        return await db.select().from(${pluralModule}).orderBy(${pluralModule}.id);
     }
             
     /**
