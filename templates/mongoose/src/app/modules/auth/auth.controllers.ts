@@ -37,7 +37,7 @@ const refreshToken = catchAsync(async (req, res) => {
 const getCurrentUser = catchAsync(async (req, res) => {
 	const user = await authServices.getCurrentUserFromDB(req.user);
 
-	sendResponse(res, 'User', 'GET', user);
+	sendResponse(res, 'User', 'GET', user, 'Successfully retrieved user profile!');
 });
 
 export const authControllers = {

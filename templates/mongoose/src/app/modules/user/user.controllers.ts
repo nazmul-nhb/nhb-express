@@ -12,7 +12,7 @@ const getAllUsers = catchAsync(async (_req, res) => {
 const getCurrentUser = catchAsync(async (req, res) => {
 	const user = await userServices.getCurrentUserFromDB(req?.user?.email);
 
-	sendResponse(res, 'User', 'GET', user);
+	sendResponse(res, 'User', 'GET', user, 'Successfully retrieved user profile!');
 });
 
 export const userControllers = { getAllUsers, getCurrentUser };

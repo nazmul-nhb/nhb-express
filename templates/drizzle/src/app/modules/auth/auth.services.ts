@@ -59,7 +59,6 @@ class AuthServices {
 
 		// * Validate and extract user from DB.
 		const user = await findUserByEmail(email);
-		// const [user] = await db.select({email: users.email, role: users.role }).from(users).where(eq(users.email, email));
 
 		// * Create token and send to the client.
 		const accessToken = generateToken(

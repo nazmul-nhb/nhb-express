@@ -13,9 +13,7 @@ class AuthControllers {
 
 	/** * Login a user */
 	loginUser = catchAsync(async (req, res) => {
-		const result = await authServices.loginUser(req.body);
-
-		const { refresh_token, access_token, user } = result;
+		const { refresh_token, access_token, user } = await authServices.loginUser(req.body);
 
 		res.cookie('refresh_token', refresh_token, {
 			secure: configs.NODE_ENV === 'production',
@@ -38,7 +36,7 @@ class AuthControllers {
 	getCurrentUser = catchAsync(async (req, res) => {
 		const user = await authServices.getCurrentUserFromDB(req.user);
 
-		sendResponse(res, 'User', 'GET', user);
+		sendResponse(res, 'User', 'GET', user, 'Successfully retrieved user profile!');
 	});
 }
 
