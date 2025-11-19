@@ -18,7 +18,7 @@ export type TUserRole = (typeof USER_ROLES)[number];
 export type TEmail = Branded<string, 'email'>;
 
 export type TQueries<T extends GenericObject> = {
-	[K in keyof T]?: T[K];
+	[K in keyof T]?: T[K] extends string | boolean ? T[K] : string;
 };
 
 // ! May not need
