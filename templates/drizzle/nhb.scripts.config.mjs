@@ -1,9 +1,15 @@
 // @ts-check
 
-import { defineScriptConfig, updateCollection, updateRoutes } from 'nhb-scripts';
+import {
+	defineScriptConfig,
+	generateModule,
+	updateCollection,
+	updateRoutes,
+} from 'nhb-scripts';
 import { createDrizzlePostgresSchema } from './scripts/createSchema.mjs';
 import { expressDrizzlePostgresTemplate } from './scripts/moduleTemplate.mjs';
 import { updateDrizzleInstance } from './scripts/updateDrizzle.mjs';
+import { runExeca } from 'nhb-scripts';
 
 export default defineScriptConfig({
 	format: {
@@ -15,6 +21,7 @@ export default defineScriptConfig({
 	fix: { folders: ['src'], patterns: ['**/*.ts'] },
 	commit: {
 		runFormatter: true,
+		emojiBeforePrefix: true,
 		wrapPrefixWith: '`',
 	},
 	build: {
@@ -24,7 +31,7 @@ export default defineScriptConfig({
 	},
 	count: {
 		defaultPath: 'src',
-		excludePaths: ['node_modules', 'dist', 'public'],
+		excludePaths: ['node_modules', 'dist'],
 	},
 	module: {
 		force: false,
@@ -34,17 +41,53 @@ export default defineScriptConfig({
 				createFolder: true,
 				destination: 'src/app/modules',
 				files: expressDrizzlePostgresTemplate,
-				onComplete: (moduleName) => {
+				onComplete: async (moduleName) => {
+					generateModule(moduleName, {
+						createFolder: false,
+						defaultTemplate: 'drizzle-schema',
+						templates: {
+							'drizzle-schema': {
+								createFolder: false,
+								destination: 'src/drizzle/schema',
+								files: createDrizzlePostgresSchema,
+							},
+						},
+					});
 					updateCollection(moduleName);
 					updateRoutes(moduleName, true);
+					updateDrizzleInstance(moduleName);
+					await runExeca(
+						'drizzle-kit',
+						['generate', '--name=drizzle', '--config=drizzle.config.ts'],
+						{ stdout: 'inherit' }
+					);
+					// await runExeca(
+					// 	'drizzle-kit',
+					// 	['migrate', 'dev', '--config=drizzle.config.ts'],
+					// 	{
+					// 		stdout: 'inherit',
+					// 	}
+					// );
 				},
 			},
 			'drizzle-postgres-schema': {
 				createFolder: false,
 				destination: 'src/drizzle/schema',
 				files: createDrizzlePostgresSchema,
-				onComplete: (schemaName) => {
+				onComplete: async (schemaName) => {
 					updateDrizzleInstance(schemaName);
+					await runExeca(
+						'drizzle-kit',
+						['generate', '--name=drizzle', '--config=drizzle.config.ts'],
+						{ stdout: 'inherit' }
+					);
+					// await runExeca(
+					// 	'drizzle-kit',
+					// 	['migrate', 'dev', '--config=drizzle.config.ts'],
+					// 	{
+					// 		stdout: 'inherit',
+					// 	}
+					// );
 				},
 			},
 		},

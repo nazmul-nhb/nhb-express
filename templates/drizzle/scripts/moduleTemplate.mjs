@@ -113,9 +113,9 @@ class ${capModule}Services {
      * @returns Created new ${moduleName}.
      */
     async create${capModule}InDB(payload: Insert${capModule}) {
-        const [${moduleName}] = await db.insert(${pluralModule}).values(payload).returning();
+        const [new${capModule}] = await db.insert(${pluralModule}).values(payload).returning();
 
-		if (!${moduleName}) {
+		if (!new${capModule}) {
 			throw new ErrorWithStatus(
 				'Creation Error',
 				'Cannot create ${moduleName} right now! Please try again later!',
@@ -124,7 +124,7 @@ class ${capModule}Services {
 			);
 		}
 
-        return ${moduleName};
+        return new${capModule};
     }
     
     /**
@@ -144,11 +144,11 @@ class ${capModule}Services {
      * @returns The matched ${moduleName} against the provided id.
      */
     async get${capModule}ByIdFromDB(id: number) {
-        const ${moduleName} = await db.query.${pluralModule}.findFirst({
+        const ${moduleName}_1 = await db.query.${pluralModule}.findFirst({
             where: (ut, q) => q.eq(ut.id, id),
         });
 
-        if (!${moduleName}) {
+        if (!${moduleName}_1) {
             throw new ErrorWithStatus(
                 'Not Found Error',
                 \`${capModule} not found with id \${id}!\`,
@@ -157,7 +157,7 @@ class ${capModule}Services {
             );
         }
 
-        return ${moduleName};
+        return ${moduleName}_1;
     }
 
     /**

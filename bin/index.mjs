@@ -112,6 +112,7 @@ const scripts = /* @__PURE__ */ Object.freeze({
 	prisma: {
 		'build:gen': 'prisma generate && nhb-build',
 		migrate: 'prisma migrate dev',
+		reset: 'prisma migrate reset',
 		gen: 'prisma generate',
 		studio: 'prisma studio',
 		module: 'nhb-module -t express-prisma-postgres -d src/app/modules',
