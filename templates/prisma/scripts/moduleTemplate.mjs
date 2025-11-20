@@ -99,7 +99,7 @@ export const ${moduleName}Controllers = new ${capModule}Controllers();
 			name: `${moduleName}.services.ts`,
 			content: `import { prisma, type Prisma, type ${capModule} } from '@/configs/prisma';
 import { ErrorWithStatus } from '${baseAlias}/errors/ErrorWithStatus';
-import type { Update${capModule} } from '@/modules/${moduleName}/${moduleName}.types';
+import type { Insert${capModule}, Update${capModule} } from '@/modules/${moduleName}/${moduleName}.types';
 import type { TQueries } from '${baseAlias}/types';
 import { isNotEmptyObject } from 'nhb-toolbox';
 import { STATUS_CODES } from 'nhb-toolbox/constants';
@@ -110,7 +110,7 @@ class ${capModule}Services {
      * @param payload All the required fields to create ${moduleName}.
      * @returns Created new ${moduleName}.
      */
-    async create${capModule}InDB(payload: Prisma.${capModule}CreateInput) {
+    async create${capModule}InDB(payload: Insert${capModule}) {
         const ${moduleName} = await prisma.${moduleName}.create({ data: payload });
 
 		if (!${moduleName}) {
@@ -233,8 +233,9 @@ export const ${moduleName}Validations = { creationSchema, updateSchema };
 		{
 			name: `${moduleName}.types.ts`,
 			content: `import type { Prisma } from '@/configs/prisma';
+export type Insert${capModule} = Omit<Prisma.${capModule}CreateInput, 'id' | 'created_at' | 'updated_at'>;
 
-export type Update${capModule} = Partial<Prisma.${capModule}CreateInput>;
+export type Update${capModule} = Partial<Insert${capModule}>;
             `,
 		},
 	];
