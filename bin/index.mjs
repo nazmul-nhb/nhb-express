@@ -94,9 +94,8 @@ const scripts = /* @__PURE__ */ Object.freeze({
 		module: 'nhb-module -t express-mongoose-zod -d src/app/modules',
 	},
 	drizzle: {
-		'build:gen':
-			'drizzle-kit generate --name=drizzle --config=drizzle.config.ts && nhb-build',
-		gen: 'drizzle-kit generate --name=drizzle --config=drizzle.config.ts',
+		'build:gen': 'drizzle-kit generate --config=drizzle.config.ts && nhb-build',
+		gen: 'drizzle-kit generate --config=drizzle.config.ts',
 		migrate: 'drizzle-kit migrate --config=drizzle.config.ts',
 		drop: 'drizzle-kit drop --config=drizzle.config.ts',
 		push: 'drizzle-kit push --config=drizzle.config.ts',
@@ -305,7 +304,7 @@ function copyDir(src, dest) {
  */
 async function installDeps(manager, cwd, deps, devDeps) {
 	/** @type {import('execa').Options} */
-	const options = { cwd, stdout: 'inherit', stderr: 'inherit' };
+	const options = { cwd, stdout: 'inherit', stderr: 'inherit', stdin: 'inherit' };
 
 	if (manager === 'pnpm') {
 		await execa('pnpm', ['add', ...deps], options);

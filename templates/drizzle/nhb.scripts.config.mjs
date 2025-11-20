@@ -51,18 +51,7 @@ export default defineScriptConfig({
 					updateCollection(moduleName);
 					updateRoutes(moduleName, true);
 					updateDrizzleInstance(moduleName);
-					await runExeca(
-						'drizzle-kit',
-						['generate', '--name=drizzle', '--config=drizzle.config.ts'],
-						{ stdout: 'inherit' }
-					);
-					// await runExeca(
-					// 	'drizzle-kit',
-					// 	['migrate', 'dev', '--config=drizzle.config.ts'],
-					// 	{
-					// 		stdout: 'inherit',
-					// 	}
-					// );
+					await runDrizzleMigration(moduleName);
 				},
 			},
 			'drizzle-postgres-schema': {
@@ -71,20 +60,36 @@ export default defineScriptConfig({
 				files: createDrizzlePostgresSchema,
 				onComplete: async (schemaName) => {
 					updateDrizzleInstance(schemaName);
-					await runExeca(
-						'drizzle-kit',
-						['generate', '--name=drizzle', '--config=drizzle.config.ts'],
-						{ stdout: 'inherit' }
-					);
-					// await runExeca(
-					// 	'drizzle-kit',
-					// 	['migrate', 'dev', '--config=drizzle.config.ts'],
-					// 	{
-					// 		stdout: 'inherit',
-					// 	}
-					// );
+					await runDrizzleMigration(schemaName);
 				},
 			},
 		},
 	},
 });
+
+/**
+ * * Run Drizzle migration related commands.
+ * @param {string} schemaName Name of the schema to append with the migration filename.
+ */
+async function runDrizzleMigration(schemaName) {
+	await runExeca(
+		'drizzle-kit',
+		['generate', `--name=${schemaName}`, '--config=drizzle.config.ts'],
+		{ stdout: 'inherit', stderr: 'inherit', stdin: 'inherit' }
+	);
+	await runExeca('drizzle-kit', ['push', '--force', '--config=drizzle.config.ts'], {
+		stdout: 'inherit',
+		stderr: 'inherit',
+		stdin: 'inherit',
+	});
+	// await runExeca(
+	// 	'drizzle-kit',
+	// 	['drop', '--config=drizzle.config.ts'],
+	// 	{ stdout: 'inherit', stderr: 'inherit', stdin: 'inherit' }
+	// );
+	// await runExeca(
+	// 	'drizzle-kit',
+	// 	['migrate', '--config=drizzle.config.ts'],
+	// 	{ stdout: 'inherit', stderr: 'inherit', stdin: 'inherit' }
+	// );
+}

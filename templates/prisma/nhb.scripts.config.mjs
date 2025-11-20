@@ -40,12 +40,26 @@ export default defineScriptConfig({
 					updatePrismaSchema(moduleName);
 					updateCollection(moduleName);
 					updateRoutes(moduleName, true);
-					await runExeca('prisma', ['generate'], { stdout: 'inherit' });
-					await runExeca('prisma', ['migrate', 'dev', '--name', moduleName], {
-						stdout: 'inherit',
-					});
+					await runPrismaMigration(moduleName);
 				},
 			},
 		},
 	},
 });
+
+/**
+ * * Run Prisma migration related commands.
+ * @param {string} schemaName Name of the schema to append with the migration filename.
+ */
+async function runPrismaMigration(schemaName) {
+	await runExeca('prisma', ['generate'], {
+		stdout: 'inherit',
+		stderr: 'inherit',
+		stdin: 'inherit',
+	});
+	await runExeca('prisma', ['migrate', 'dev', '--name', schemaName], {
+		stdout: 'inherit',
+		stderr: 'inherit',
+		stdin: 'inherit',
+	});
+}
