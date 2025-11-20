@@ -38,7 +38,7 @@ const deps = /* @__PURE__ */ Object.freeze({
 		'zod',
 	],
 	mongoose: ['mongoose'],
-	prisma: ['@prisma/client'],
+	prisma: ['@prisma/adapter-pg', '@prisma/client', '@prisma/client-runtime-utils', 'pg'],
 	drizzle: ['drizzle-orm', 'drizzle-zod', 'postgres'],
 });
 
@@ -72,7 +72,7 @@ const devDeps = /* @__PURE__ */ Object.freeze({
 		'vercel',
 	],
 	mongoose: [],
-	prisma: ['prisma'],
+	prisma: ['prisma', 'tsx'],
 	drizzle: ['drizzle-kit', 'tsx'],
 });
 
@@ -143,7 +143,11 @@ const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
 					label: 'PostgreSQL + Drizzle',
 					hint: 'Driver: postgres-js',
 				},
-				// { value: 'prisma', label: 'PostgreSQL + Prisma', hint: 'Coming Soon...' },
+				{
+					value: 'prisma',
+					label: 'PostgreSQL + Prisma',
+					hint: 'Driver: "pg" with "@prisma/adapter-pg" & "prisma-client-js"',
+				},
 			],
 			initialValue: 'mongoose',
 		})
@@ -211,6 +215,7 @@ const pkgJson = {
 	author: {
 		name: 'Nazmul Hassan',
 		email: 'nazmulnhb@gmail.com',
+		url: 'https://nazmul-nhb.dev',
 	},
 	license: 'ISC',
 	keywords: [projectName, 'server', 'express', 'typescript', dbChoice],
@@ -322,5 +327,29 @@ async function removeExistingDir(targetDir) {
 		s.stop(red.toANSI(`❌ Failed to remove directory: "${projectName}"!`));
 		console.error(error);
 		process.exit(0);
+	}
+}
+
+/**
+ * * Run migration and generate for `prisma` and `drizzle`.
+ * @param {'mongoose' | 'prisma' | 'drizzle'} orm
+ */
+async function runMigration(orm) {
+	/** @type {import('execa').Options} */
+	const options = { stdout: 'inherit', stderr: 'inherit' };
+
+	switch (orm) {
+		case 'drizzle':
+			await execa(
+				'drizzle-kit',
+				['generate', '--name=drizzle', '--config=drizzle.config.ts'],
+				options
+			);
+			await execa('drizzle-kit', ['migrate', '--config=drizzle.config.ts'], options);
+			break;
+		case 'prisma':
+			await execa('prisma', ['generate'], options);
+			await execa('prisma', ['migrate', 'dev', '--name', 'init'], options);
+			break;
 	}
 }

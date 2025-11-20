@@ -1,6 +1,6 @@
 {
   "name": "nhb-express",
-  "version": "1.6.10",
+  "version": "1.7.0-beta.1",
   "description": "Express TypeScript Server Scaffold",
   "main": "bin/index.mjs",
   "type": "module",
@@ -46,7 +46,8 @@
   ],
   "author": {
     "name": "Nazmul Hassan",
-    "email": "nazmulnhb@gmail.com"
+    "email": "nazmulnhb@gmail.com",
+    "url": "https://nazmul-nhb.dev"
   },
   "license": "MIT",
   "dependencies": {

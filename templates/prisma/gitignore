@@ -1,0 +1,7 @@
+node_modules
+dist
+.env
+__*.*
+
+.estimator
+/generated/prisma
