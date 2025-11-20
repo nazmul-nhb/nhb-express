@@ -46,10 +46,12 @@ pnpm dev     # or npm run dev / yarn dev
  ├─ 📁 public/                 # Folder contains static files
  |   └─ 🖼️ favicon.png         # Favicon to show in client application(s) if supported, e.g. Browsers
  │
+ ├─ 📁 scripts/                # Helper scripts for development purpose
+ │
  ├─ 📁 src/
  │   ├─ 📁 app/                # All source (*.ts) files
  │   |   ├─ 📁 classes/        # Utility classes e.g. `QueryBuilder`, `ErrorWihStatus`
- │   |   ├─ 📁 configs/        # App configurations
+ │   |   ├─ 📁 configs/        # App configurations (CORS, Database, ENV etc.)
  │   |   ├─ 📁 constants/      # Constant values
  │   |   ├─ 📁 errors/         # Custom error processors/handlers
  │   |   ├─ 📁 middlewares/    # Custom Express middlewares
@@ -71,7 +73,6 @@ pnpm dev     # or npm run dev / yarn dev
  ├─ ⚙️ nodemon.json            # Nodemon config
  ├─ ⚙️ package.json            # Auto-generated `package.json`
  ├─ 📃 README.md               # This file
- ├─ 📄 secret.mjs              # Generate secrets for jwt (using crypto module, just run in cli: node pnpm/npm/yarn run secret)
  ├─ ⚙️ tsconfig.json           # Ready to use tsconfig
  └─ ⚙️ vercel.json             # Deployment config for Vercel
 ```
@@ -91,7 +92,7 @@ pnpm dev     # or npm run dev / yarn dev
 - `pnpm/npm/yarn run count` – Count exports (`nhb-count`)
 - `pnpm/npm/yarn run module` – Scaffold new modules (`nhb-module`)
 - `pnpm/npm/yarn run delete` – Delete any file/folder from the CLI (`nhb-delete`)
-- `pnpm/npm/yarn run secret` – Generate secrets for jwt (using crypto module, just run in cli: node pnpm/npm/yarn run secret)
+- `pnpm/npm/yarn run secret` – Generate secrets for jwt (using crypto module)
 
 ---
 

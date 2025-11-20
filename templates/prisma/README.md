@@ -35,10 +35,6 @@ pnpm dev     # or npm run dev / yarn dev
 
 ```ini
 📁 <your-project-name>/
- ├─ 📁 .github/
- │   └─ 📁 workflows/
- │       └─ ⚙️ publish.yml     # GitHub Actions workflow for CI/CD (vercel deployment) 
- │
  ├─ 📁 .vscode/
  │   ├─ 📄 extensions.json     # Recommended Extensions for VS Code
  │   └─ 📄 settings.json       # VS Code Settings for better formatting
@@ -53,7 +49,7 @@ pnpm dev     # or npm run dev / yarn dev
  │
  ├─ 📁 src/
  │   ├─ 📁 app/                # All source (*.ts) files
- │   |   ├─ 📁 configs/        # App configurations (Database, ENV etc.)
+ │   |   ├─ 📁 configs/        # App configurations (CORS, Database, ENV etc.)
  │   |   ├─ 📁 constants/      # Constant values
  │   |   ├─ 📁 errors/         # Custom error Class/processors/handlers
  │   |   ├─ 📁 middlewares/    # Custom Express middlewares
@@ -73,6 +69,7 @@ pnpm dev     # or npm run dev / yarn dev
  ├─ ⚙️ eslint.config.mjs       # ESLint config (flat config, ready for TS)
  ├─ ⚙️ nhb.scripts.config.mjs  # Config for nhb-scripts
  ├─ ⚙️ nodemon.json            # Nodemon config
+ ├─ ⚙️ prisma.config.ts        # Prisma config
  ├─ ⚙️ package.json            # Auto-generated `package.json`
  ├─ 📃 README.md               # This file
  ├─ ⚙️ tsconfig.json           # Ready to use tsconfig
@@ -87,14 +84,19 @@ pnpm dev     # or npm run dev / yarn dev
 - `pnpm/npm/yarn run start` – Run the built server
 - `pnpm/npm/yarn run deploy` – Build the project and deploy to Vercel (`nhb-build && vercel --prod`)
 - `pnpm/npm/yarn run build` – Build the project for production (`nhb-build`)
+- `pnpm/npm/yarn run build:gen` - Run `prisma generate` and build the project
+- `pnpm/npm/yarn run migrate` - Run `prisma migrate dev` to make new migration
+- `pnpm/npm/yarn run reset` - Run `prisma migrate reset` to reset migration
+- `pnpm/npm/yarn run studio` - Run `prisma studio` to view/edit data in the browser
+- `pnpm/npm/yarn run gen` - Run `prisma generate` to generate Prisma Client
 - `pnpm/npm/yarn run format` – Format the codebase (`nhb-format`)
 - `pnpm/npm/yarn run lint` – Lint the code (`nhb-lint`)
 - `pnpm/npm/yarn run fix` – Auto‑fix lint issues (`nhb-fix`)
 - `pnpm/npm/yarn run commit` – Guided commit workflow (`nhb-commit`)
 - `pnpm/npm/yarn run count` – Count exports (`nhb-count`)
-- `pnpm/npm/yarn run module` – Scaffold new modules (`nhb-module`)
+- `pnpm/npm/yarn run module` - Scaffold new module (service, controller, routes, schema etc.) from template using `nhb-module`
 - `pnpm/npm/yarn run delete` – Delete any file/folder from the CLI (`nhb-delete`)
-- `pnpm/npm/yarn run secret` – Generate secrets for jwt (using crypto module, just run in cli: node pnpm/npm/yarn run secret)
+- `pnpm/npm/yarn run secret` – Generate secrets for jwt (using crypto module)
 
 ---
 <!-- 

@@ -1,6 +1,6 @@
 {
   "name": "nhb-express",
-  "version": "1.7.0-beta.3",
+  "version": "2.0.0",
   "description": "Express TypeScript Server Scaffold",
   "main": "bin/index.mjs",
   "type": "module",
@@ -58,6 +58,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@prisma/adapter-pg": "^7.0.0",
     "@prisma/client": "^7.0.0",
     "@types/bcrypt": "^6.0.0",
     "@types/cookie-parser": "^1.4.10",
@@ -68,6 +69,7 @@
     "@types/multer": "^2.0.0",
     "@types/node": "^24.10.1",
     "@types/nodemailer": "^7.0.4",
+    "@types/pg": "^8.15.6",
     "@types/serve-favicon": "^2.5.7",
     "@typescript-eslint/eslint-plugin": "^8.47.0",
     "@typescript-eslint/parser": "^8.47.0",
@@ -89,6 +91,7 @@
     "multer": "^2.0.2",
     "nhb-scripts": "^1.8.88",
     "nodemailer": "^7.0.10",
+    "pg": "^8.16.3",
     "prettier": "^3.6.2",
     "serve-favicon": "^2.5.1",
     "typescript": "^5.9.3",
