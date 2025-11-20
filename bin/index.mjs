@@ -232,6 +232,8 @@ await installDeps(
 	[...devDeps.common, ...devDeps[dbChoice]]
 );
 
+await runMigration(dbChoice);
+
 mimicClack(green.toANSI('✅ Dependencies installed!'), false);
 
 note(yellow.toANSI(`cd ${projectName}\n${pkgManager} run dev`), blue.toANSI('🛈 Next Steps'));
