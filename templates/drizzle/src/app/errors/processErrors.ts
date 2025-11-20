@@ -14,7 +14,7 @@ import { ZodError } from 'zod';
  * @returns Processed & structured `Error Response`.
  */
 const processErrors = (error: unknown): IErrorResponse => {
-	const stack = error instanceof Error ? error.stack : 'Stack Not Available!';
+	const stack = error instanceof Error ? error?.stack : 'Stack Not Available!';
 
 	// Zod Validation Error
 	if (error instanceof ZodError) {
