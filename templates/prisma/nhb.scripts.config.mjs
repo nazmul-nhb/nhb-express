@@ -1,8 +1,9 @@
 // @ts-check
 
-import { defineScriptConfig, runExeca, updateCollection, updateRoutes } from 'nhb-scripts';
+import { defineScriptConfig, runExeca } from 'nhb-scripts';
 import { expressPrismaPostgresTemplate } from './scripts/moduleTemplate.mjs';
 import { updatePrismaSchema } from './scripts/updateSchema.mjs';
+import { updateCollection, updateRoutes } from './scripts/updateTemplate.mjs';
 
 export default defineScriptConfig({
 	format: {
