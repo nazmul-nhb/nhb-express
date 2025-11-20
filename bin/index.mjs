@@ -232,11 +232,17 @@ await installDeps(
 	[...devDeps.common, ...devDeps[dbChoice]]
 );
 
-await runMigration(dbChoice);
+// await runMigration(dbChoice);
 
 mimicClack(green.toANSI('✅ Dependencies installed!'), false);
 
-note(yellow.toANSI(`cd ${projectName}\n${pkgManager} run dev`), blue.toANSI('🛈 Next Steps'));
+const nextSteps = [
+	`cd ${projectName}`,
+	...(dbChoice !== 'mongoose' ? [`${pkgManager} run gen`, `${pkgManager} run migrate`] : []),
+	`${pkgManager} run dev`,
+];
+
+note(yellow.toANSI(nextSteps.filter(Boolean).join(`\n`)), blue.toANSI('🛈 Next Steps'));
 
 outro(green.toANSI(`🎉 Project "${projectName}" has been created successfully!`));
 
@@ -332,26 +338,26 @@ async function removeExistingDir(targetDir) {
 	}
 }
 
-/**
- * * Run migration and generate for `prisma` and `drizzle`.
- * @param {'mongoose' | 'prisma' | 'drizzle'} orm
- */
-async function runMigration(orm) {
-	/** @type {import('execa').Options} */
-	const options = { stdout: 'inherit', stderr: 'inherit' };
+// /**
+//  * * Run migration and generate for `prisma` and `drizzle`.
+//  * @param {'mongoose' | 'prisma' | 'drizzle'} orm
+//  */
+// async function runMigration(orm) {
+// 	/** @type {import('execa').Options} */
+// 	const options = { stdout: 'inherit', stderr: 'inherit' };
 
-	switch (orm) {
-		case 'drizzle':
-			await execa(
-				'drizzle-kit',
-				['generate', '--name=drizzle', '--config=drizzle.config.ts'],
-				options
-			);
-			await execa('drizzle-kit', ['migrate', '--config=drizzle.config.ts'], options);
-			break;
-		case 'prisma':
-			await execa('prisma', ['generate'], options);
-			await execa('prisma', ['migrate', 'dev', '--name', 'init'], options);
-			break;
-	}
-}
+// 	switch (orm) {
+// 		case 'drizzle':
+// 			await execa(
+// 				'drizzle-kit',
+// 				['generate', '--name=drizzle', '--config=drizzle.config.ts'],
+// 				options
+// 			);
+// 			await execa('drizzle-kit', ['migrate', '--config=drizzle.config.ts'], options);
+// 			break;
+// 		case 'prisma':
+// 			await execa('prisma', ['generate'], options);
+// 			await execa('prisma', ['migrate', 'dev', '--name', 'init'], options);
+// 			break;
+// 	}
+// }

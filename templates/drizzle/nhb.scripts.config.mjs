@@ -20,6 +20,7 @@ export default defineScriptConfig({
 	build: {
 		distFolder: 'dist',
 		commands: [{ cmd: 'tsc' }, { cmd: 'tsc-alias' }],
+		waitingMessage: ' 📦 Building Your Express Application...',
 	},
 	count: {
 		defaultPath: 'src',
