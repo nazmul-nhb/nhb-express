@@ -1,11 +1,8 @@
 // @ts-check
 
-import {
-	defineScriptConfig,
-	expressMongooseZodTemplate,
-	updateCollection,
-	updateRoutes,
-} from 'nhb-scripts';
+import { defineScriptConfig } from 'nhb-scripts';
+import { updateCollection, updateRoutes } from './scripts/updateTemplate.mjs';
+import { expressMongooseZodTemplate } from './scripts/moduleTemplate.mjs';
 
 export default defineScriptConfig({
 	format: {

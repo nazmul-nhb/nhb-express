@@ -88,10 +88,10 @@ const scripts = /* @__PURE__ */ Object.freeze({
 		commit: 'nhb-commit',
 		count: 'nhb-count',
 		delete: 'nhb-delete',
+		secret: 'node scripts/generateSecret.mjs',
 	},
 	mongoose: {
 		module: 'nhb-module -t express-mongoose-zod -d src/app/modules',
-		secret: 'node secret.mjs',
 	},
 	drizzle: {
 		'build:gen':
@@ -107,7 +107,6 @@ const scripts = /* @__PURE__ */ Object.freeze({
 		studio: 'drizzle-kit studio --config=drizzle.config.ts',
 		schema: 'nhb-module -t drizzle-postgres-schema -d src/drizzle/schema',
 		module: 'nhb-module -t express-drizzle-postgres -d src/app/modules',
-		secret: 'node scripts/generateSecret.mjs',
 	},
 	prisma: {
 		'build:gen': 'prisma generate && nhb-build',
@@ -116,7 +115,6 @@ const scripts = /* @__PURE__ */ Object.freeze({
 		gen: 'prisma generate',
 		studio: 'prisma studio',
 		module: 'nhb-module -t express-prisma-postgres -d src/app/modules',
-		secret: 'node scripts/generateSecret.mjs',
 	},
 });
 
