@@ -240,7 +240,7 @@ export const ${moduleName}Validations = { creationSchema, drizzleSchema, updateS
 			name: `${moduleName}.types.ts`,
 			content: `import type { ${pluralModule} } from '#/drizzle/schema/${pluralModule}';
 
-export type Insert${capModule} = typeof ${pluralModule}.$inferInsert;
+export type Insert${capModule} = Omit<typeof ${pluralModule}.$inferInsert, 'id' | 'created_at' | 'updated_at'>;
 
 export type T${capModule} = typeof ${pluralModule}.$inferSelect;
             `,

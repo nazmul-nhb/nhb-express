@@ -1,15 +1,10 @@
 // @ts-check
 
-import {
-	defineScriptConfig,
-	generateModule,
-	updateCollection,
-	updateRoutes,
-} from 'nhb-scripts';
+import { defineScriptConfig, generateModule, runExeca } from 'nhb-scripts';
 import { createDrizzlePostgresSchema } from './scripts/createSchema.mjs';
 import { expressDrizzlePostgresTemplate } from './scripts/moduleTemplate.mjs';
 import { updateDrizzleInstance } from './scripts/updateDrizzle.mjs';
-import { runExeca } from 'nhb-scripts';
+import { updateCollection, updateRoutes } from './scripts/updateTemplate.mjs';
 
 export default defineScriptConfig({
 	format: {
