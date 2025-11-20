@@ -100,7 +100,7 @@ export const ${moduleName}Controllers = new ${capModule}Controllers();
 			content: `import { db } from '#/drizzle';
 import { ${pluralModule} } from '#/drizzle/schema/${pluralModule}';
 import { ErrorWithStatus } from '${baseAlias}/errors/ErrorWithStatus';
-import type { Insert${capModule} } from '${moduleAlias}/${moduleName}.types';
+import type { Insert${capModule}, Update${capModule} } from '${moduleAlias}/${moduleName}.types';
 import type { TQueries } from '${baseAlias}/types';
 import { eq } from 'drizzle-orm';
 import { isNotEmptyObject } from 'nhb-toolbox';
@@ -188,7 +188,7 @@ class ${capModule}Services {
      * @param id ID to find ${moduleName} from DB.
      * @param payload Fields to update in ${moduleName}.
      */
-    async update${capModule}InDB(id: number, payload: Partial<Insert${capModule}>) {
+    async update${capModule}InDB(id: number, payload: Update${capModule}) {
         if (!isNotEmptyObject(payload)) {
             throw new ErrorWithStatus(
                 'Empty Payload',
@@ -243,6 +243,8 @@ export const ${moduleName}Validations = { creationSchema, drizzleSchema, updateS
 export type Insert${capModule} = Omit<typeof ${pluralModule}.$inferInsert, 'id' | 'created_at' | 'updated_at'>;
 
 export type T${capModule} = typeof ${pluralModule}.$inferSelect;
+
+export type Update${capModule} = Partial<Insert${capModule}>;
             `,
 		},
 	];

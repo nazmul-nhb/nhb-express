@@ -233,6 +233,7 @@ export const ${moduleName}Validations = { creationSchema, updateSchema };
 		{
 			name: `${moduleName}.types.ts`,
 			content: `import type { Prisma } from '@/configs/prisma';
+            
 export type Insert${capModule} = Omit<Prisma.${capModule}CreateInput, 'id' | 'created_at' | 'updated_at'>;
 
 export type Update${capModule} = Partial<Insert${capModule}>;

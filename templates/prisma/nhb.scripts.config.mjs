@@ -52,14 +52,15 @@ export default defineScriptConfig({
  * @param {string} schemaName Name of the schema to append with the migration filename.
  */
 async function runPrismaMigration(schemaName) {
-	await runExeca('prisma', ['generate'], {
-		stdout: 'inherit',
-		stderr: 'inherit',
-		stdin: 'inherit',
-	});
-	await runExeca('prisma', ['migrate', 'dev', '--name', schemaName], {
-		stdout: 'inherit',
-		stderr: 'inherit',
-		stdin: 'inherit',
-	});
+	/** @type {{ stdout: 'inherit', stderr: 'inherit', stdin: 'inherit' }} */
+	const options = { stdout: 'inherit', stderr: 'inherit', stdin: 'inherit' };
+
+	// Regenerate Prisma Client
+	await runExeca('prisma', ['generate'], options);
+
+	// Reset DB & migration history
+	await runExeca('prisma', ['migrate', 'reset', '--force'], options);
+
+	// Create new baseline migration
+	await runExeca('prisma', ['migrate', 'dev', '--name', schemaName], options);
 }
