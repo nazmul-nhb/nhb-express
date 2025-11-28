@@ -15,7 +15,7 @@ export function updatePrismaSchema(modelName) {
 	const content = readFileSync(filePath, 'utf8');
 
 	const newModel = `
-  model ${capModel} {
+model ${capModel} {
   id         Int      @id @default(autoincrement())
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt()

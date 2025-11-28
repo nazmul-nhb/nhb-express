@@ -37,7 +37,7 @@ const deps = /* @__PURE__ */ Object.freeze({
 		'serve-favicon',
 		'zod',
 	],
-	mongoose: ['mongoose'],
+	mongoose: ['mongoose@8.20.1'],
 	prisma: ['@prisma/adapter-pg', '@prisma/client', '@prisma/client-runtime-utils', 'pg'],
 	drizzle: ['drizzle-orm', 'drizzle-zod', 'postgres'],
 });
