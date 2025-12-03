@@ -8,7 +8,7 @@ export default defineScriptConfig({
 		files: [
 			'bin',
 			'templates/mongoose/src',
-			// 'templates/prisma/src',
+			'templates/prisma/src',
 			'templates/drizzle/src',
 			'nhb.scripts.config.mjs',
 		],
@@ -19,7 +19,7 @@ export default defineScriptConfig({
 		wrapPrefixWith: '`',
 	},
 	count: {
-		defaultPath: 'bin',
-		excludePaths: ['node_modules', '.github'],
+		defaultPath: 'templates',
+		excludePaths: ['node_modules', '.github', '.husky'],
 	},
 });

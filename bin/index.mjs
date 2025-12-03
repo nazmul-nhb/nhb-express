@@ -22,7 +22,7 @@ const green = Stylog.ansi16('green');
 const red = Stylog.ansi16('red');
 const blue = Stylog.ansi16('blue');
 
-const deps = /* @__PURE__ */ Object.freeze({
+const deps = {
 	common: [
 		'bcrypt',
 		'cloudinary',
@@ -40,9 +40,9 @@ const deps = /* @__PURE__ */ Object.freeze({
 	mongoose: ['mongoose@8.20.1'],
 	prisma: ['@prisma/adapter-pg', '@prisma/client', '@prisma/client-runtime-utils', 'pg'],
 	drizzle: ['drizzle-orm', 'drizzle-zod', 'postgres'],
-});
+};
 
-const devDeps = /* @__PURE__ */ Object.freeze({
+const devDeps = {
 	common: [
 		'@eslint/js',
 		'@types/bcrypt',
@@ -74,9 +74,9 @@ const devDeps = /* @__PURE__ */ Object.freeze({
 	mongoose: [],
 	prisma: ['prisma', 'tsx'],
 	drizzle: ['drizzle-kit', 'tsx'],
-});
+};
 
-const scripts = /* @__PURE__ */ Object.freeze({
+const scripts = {
 	common: {
 		dev: 'nodemon',
 		start: 'node dist/server.js',
@@ -115,7 +115,7 @@ const scripts = /* @__PURE__ */ Object.freeze({
 		studio: 'prisma studio',
 		module: 'nhb-module -t express-prisma-postgres -d src/app/modules',
 	},
-});
+};
 
 // ----------------------
 // ! Entry
