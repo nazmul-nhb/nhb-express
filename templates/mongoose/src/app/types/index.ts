@@ -1,6 +1,6 @@
 import type { COLLECTIONS, USER_ROLES } from '@/constants';
 import type { Types } from 'mongoose';
-import type { HttpStatusCode } from 'nhb-toolbox/http-status/types';
+import type { HttpStatusCode, StatusCode } from 'nhb-toolbox/http-status/types';
 import type { Branded } from 'nhb-toolbox/types';
 
 export type ExceptionSignal = NodeJS.UncaughtExceptionOrigin | NodeJS.Signals;
@@ -9,7 +9,7 @@ export type TCollection = (typeof COLLECTIONS)[number];
 
 export type TMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'OPTIONS' | 'OK';
 
-export type TResponseDetails = { message: string; statusCode: number };
+export type TResponseDetails = { message: string; statusCode: StatusCode };
 
 export type TStatusCode = HttpStatusCode<'clientError' | 'serverError'>;
 

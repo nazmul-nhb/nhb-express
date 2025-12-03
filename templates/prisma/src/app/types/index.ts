@@ -1,5 +1,5 @@
 import type { COLLECTIONS, USER_ROLES } from '@/constants';
-import type { HttpStatusCode } from 'nhb-toolbox/http-status/types';
+import type { HttpStatusCode, StatusCode } from 'nhb-toolbox/http-status/types';
 import type { GenericObject } from 'nhb-toolbox/object/types';
 import type { Branded } from 'nhb-toolbox/types';
 import type { LooseLiteral } from 'nhb-toolbox/utils/types';
@@ -10,7 +10,7 @@ export type TCollection = (typeof COLLECTIONS)[number];
 
 export type TMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'OPTIONS' | 'OK';
 
-export type TResponseDetails = { message: string; statusCode: number };
+export type TResponseDetails = { message: string; statusCode: StatusCode };
 
 export type TStatusCode = HttpStatusCode<'clientError' | 'serverError'>;
 
