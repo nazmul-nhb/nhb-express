@@ -69,5 +69,13 @@
 		"javascript.updateImportsOnFileMove.enabled": "always",
 		"editor.cursorSmoothCaretAnimation": "on"
 	},
-	"cSpell.words": ["ilike", "oneline", "pipefail", "royalblue", "whitesmoke", "yellowgreen"]
+	"cSpell.words": [
+		"autoincrement",
+		"ilike",
+		"oneline",
+		"pipefail",
+		"royalblue",
+		"whitesmoke",
+		"yellowgreen"
+	]
 }

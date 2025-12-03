@@ -1,106 +1,106 @@
 {
-	"name": "nhb-express",
-	"version": "2.1.1",
-	"description": "Express TypeScript Server Scaffold",
-	"main": "bin/index.mjs",
-	"type": "module",
-	"bin": {
-		"nhb-express": "bin/index.mjs"
-	},
-	"scripts": {
-		"commit": "nhb-commit",
-		"count": "nhb-count",
-		"format": "nhb-format",
-		"delete": "nhb-delete",
-		"check:m": "tsc -p ./templates/mongoose/tsconfig.json --noEmit",
-		"check:d": "tsc -p ./templates/drizzle/tsconfig.json --noEmit",
-		"check:p": "tsc -p ./templates/prisma/tsconfig.json --noEmit",
-		"check": "pnpm check:m && pnpm check:d && pnpm check:p",
-		"prepare": "husky"
-	},
-	"publishConfig": {
-		"access": "public"
-	},
-	"files": [
-		"bin",
-		"templates",
-		"README.md",
-		"LICENSE",
-		"package.json"
-	],
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/nazmul-nhb/nhb-express.git"
-	},
-	"keywords": [
-		"nhb",
-		"express",
-		"starter",
-		"mongodb",
-		"typescript",
-		"cli",
-		"node",
-		"zod",
-		"nodejs",
-		"boilerplate",
-		"mongoose"
-	],
-	"author": {
-		"name": "Nazmul Hassan",
-		"email": "nazmulnhb@gmail.com",
-		"url": "https://nazmul-nhb.dev"
-	},
-	"license": "MIT",
-	"dependencies": {
-		"@clack/prompts": "^0.11.0",
-		"execa": "^9.6.1",
-		"nhb-toolbox": "^4.28.10",
-		"type-fest": "^5.3.0"
-	},
-	"devDependencies": {
-		"@eslint/js": "^9.39.1",
-		"@prisma/adapter-pg": "^7.1.0",
-		"@prisma/client": "^7.1.0",
-		"@types/bcrypt": "^6.0.0",
-		"@types/cookie-parser": "^1.4.10",
-		"@types/cors": "^2.8.19",
-		"@types/express": "^5.0.6",
-		"@types/jsonwebtoken": "^9.0.10",
-		"@types/ms": "^2.1.0",
-		"@types/multer": "^2.0.0",
-		"@types/node": "^24.10.1",
-		"@types/nodemailer": "^7.0.4",
-		"@types/pg": "^8.15.6",
-		"@types/serve-favicon": "^2.5.7",
-		"@typescript-eslint/eslint-plugin": "^8.48.1",
-		"@typescript-eslint/parser": "^8.48.1",
-		"bcrypt": "^6.0.0",
-		"cloudinary": "^2.8.0",
-		"cookie-parser": "^1.4.7",
-		"cors": "^2.8.5",
-		"dotenv": "^17.2.3",
-		"drizzle-kit": "^0.31.7",
-		"drizzle-orm": "^0.44.7",
-		"drizzle-zod": "^0.8.3",
-		"eslint-config-prettier": "^10.1.8",
-		"express": "^5.2.1",
-		"globals": "^16.5.0",
-		"husky": "^9.1.7",
-		"jsonwebtoken": "^9.0.2",
-		"lint-staged": "^16.2.7",
-		"mongoose": "8.20.1",
-		"multer": "^2.0.2",
-		"nhb-scripts": "^1.8.88",
-		"nodemailer": "^7.0.11",
-		"pg": "^8.16.3",
-		"prettier": "^3.7.4",
-		"serve-favicon": "^2.5.1",
-		"typescript": "^5.9.3",
-		"typescript-eslint": "^8.48.1",
-		"zod": "^4.1.13"
-	},
-	"engines": {
-		"node": ">=22"
-	},
-	"packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a"
+  "name": "nhb-express",
+  "version": "2.1.10",
+  "description": "Express TypeScript Server Scaffold",
+  "main": "bin/index.mjs",
+  "type": "module",
+  "bin": {
+    "nhb-express": "bin/index.mjs"
+  },
+  "scripts": {
+    "commit": "nhb-commit",
+    "count": "nhb-count",
+    "format": "nhb-format",
+    "delete": "nhb-delete",
+    "check:m": "tsc -p ./templates/mongoose/tsconfig.json --noEmit",
+    "check:d": "tsc -p ./templates/drizzle/tsconfig.json --noEmit",
+    "check:p": "tsc -p ./templates/prisma/tsconfig.json --noEmit",
+    "check": "pnpm check:m && pnpm check:d && pnpm check:p",
+    "prepare": "husky"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "bin",
+    "templates",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nazmul-nhb/nhb-express.git"
+  },
+  "keywords": [
+    "nhb",
+    "express",
+    "starter",
+    "mongodb",
+    "typescript",
+    "cli",
+    "node",
+    "zod",
+    "nodejs",
+    "boilerplate",
+    "mongoose"
+  ],
+  "author": {
+    "name": "Nazmul Hassan",
+    "email": "nazmulnhb@gmail.com",
+    "url": "https://nazmul-nhb.dev"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@clack/prompts": "^0.11.0",
+    "execa": "^9.6.1",
+    "nhb-toolbox": "^4.28.10",
+    "type-fest": "^5.3.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@prisma/adapter-pg": "^7.1.0",
+    "@prisma/client": "^7.1.0",
+    "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/ms": "^2.1.0",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^24.10.1",
+    "@types/nodemailer": "^7.0.4",
+    "@types/pg": "^8.15.6",
+    "@types/serve-favicon": "^2.5.7",
+    "@typescript-eslint/eslint-plugin": "^8.48.1",
+    "@typescript-eslint/parser": "^8.48.1",
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^2.8.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "drizzle-kit": "^0.31.7",
+    "drizzle-orm": "^0.44.7",
+    "drizzle-zod": "^0.8.3",
+    "eslint-config-prettier": "^10.1.8",
+    "express": "^5.2.1",
+    "globals": "^16.5.0",
+    "husky": "^9.1.7",
+    "jsonwebtoken": "^9.0.2",
+    "lint-staged": "^16.2.7",
+    "mongoose": "8.20.1",
+    "multer": "^2.0.2",
+    "nhb-scripts": "^1.8.88",
+    "nodemailer": "^7.0.11",
+    "pg": "^8.16.3",
+    "prettier": "^3.7.4",
+    "serve-favicon": "^2.5.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.48.1",
+    "zod": "^4.1.13"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a"
 }

@@ -4,7 +4,6 @@ import type { TPlainUser, UpdateUser } from '@/modules/user/user.types';
 import { findUserByEmail } from '@/modules/user/user.utils';
 import type { TEmail, TQueries } from '@/types';
 import {
-	convertObjectValues,
 	isNotEmptyObject,
 	isString,
 	isValidObject,
@@ -20,9 +19,7 @@ class UserServices {
 	 * @returns All users that matched the query as an array.
 	 */
 	async getAllUsersFromDB(query?: TQueries<TPlainUser>) {
-		const converted = convertObjectValues(query!, { keys: ['id'], convertTo: 'number' });
-		const queries = pickFields(converted, [
-			'id',
+		const queries = pickFields(query!, [
 			'first_name',
 			'last_name',
 			'email',
@@ -52,18 +49,6 @@ class UserServices {
 			orderBy: { id: 'asc' },
 			omit: { password: true },
 		});
-
-		// ! Alternatives Below:
-
-		// const p = await prisma.user.findMany({
-		// 	where: {
-		// 		email: {
-		// 			contains: 'hello',
-		// 		},
-		// 	},
-		// });
-
-		// console.log(p);
 
 		// const raw = await prisma.$queryRaw<User[]>(
 		// 	Prisma.sql`select * from "User" where email like '%hello%'`

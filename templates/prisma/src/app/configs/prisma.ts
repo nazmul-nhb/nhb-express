@@ -1,12 +1,12 @@
-import { PrismaClient } from '../../../generated/prisma';
-import { Stylog } from 'nhb-toolbox/stylog';
-import { PrismaPg } from '@prisma/adapter-pg';
+import { PrismaClient } from '#/prisma/client';
 import configs from '@/configs';
+import { PrismaPg } from '@prisma/adapter-pg';
+import { Stylog } from 'nhb-toolbox/stylog';
 
 const pgAdapter = new PrismaPg({ connectionString: configs.databaseUrl });
 
 /**
- * ##  Prisma Client ʲˢ
+ * **Prisma Client**
  *
  * Type-safe database client for TypeScript & Node.js
  * @example
@@ -28,5 +28,4 @@ prisma.$on('error', (event) => {
 	Stylog.ansi16('blue').log(event.message);
 });
 
-// ! Export everything from Prisma CLient
-export * from '../../../generated/prisma/index';
+export * from '#/prisma/client';

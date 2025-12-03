@@ -6,7 +6,6 @@ import { findUserByEmail, userCols } from '@/modules/user/user.utils';
 import type { TEmail, TQueries } from '@/types';
 import { eq, ilike, or, type SQL } from 'drizzle-orm';
 import {
-	convertObjectValues,
 	isNotEmptyObject,
 	isString,
 	isValidObject,
@@ -22,9 +21,7 @@ class UserServices {
 	 * @returns All users that matched the query as an array.
 	 */
 	async getAllUsersFromDB(query?: TQueries<TPlainUser>) {
-		const converted = convertObjectValues(query!, { keys: ['id'], convertTo: 'number' });
-		const queries = pickFields(converted, [
-			'id',
+		const queries = pickFields(query!, [
 			'first_name',
 			'last_name',
 			'email',

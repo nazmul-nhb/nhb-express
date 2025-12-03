@@ -5,7 +5,7 @@ import type { Prettify } from 'nhb-toolbox/utils/types';
 type Email = { email: TEmail };
 
 export type InsertUser = Prettify<
-	Pick<Prisma.UserCreateInput, 'first_name' | 'last_name' | 'password'> & Email
+	Pick<Prisma.UserCreateInput, 'first_name' | 'last_name' | 'password' | 'user_name'> & Email
 >;
 
 export type UpdateUser = Partial<

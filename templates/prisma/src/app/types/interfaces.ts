@@ -8,7 +8,7 @@ export interface PrismaError extends Error {
 	message: string;
 	code: PrismaErrorCodes;
 	meta?: {
-		modelName?: LooseLiteral<TCollection>;
+		modelName?: LooseLiteral<Exclude<TCollection, 'N/A'>>;
 		driverAdapterError?: {
 			cause?: {
 				originalCode?: string;

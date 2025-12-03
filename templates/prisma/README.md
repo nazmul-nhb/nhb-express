@@ -57,6 +57,8 @@ pnpm dev     # or npm run dev / yarn dev
  │   |   ├─ 📁 routes/         # Route definitions
  │   |   ├─ 📁 types/          # Types for the App
  │   |   └─ 📁 utilities/      # Helper functions
+ │   | 
+ │   ├─ 📁 prisma/             # Prisma Client generated files
  │   |
  │   ├─ 📄 app.ts              # Express app setup
  │   ├─ 📄 index.d.ts          # Global type declarations

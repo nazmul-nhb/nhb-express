@@ -14,7 +14,8 @@
 		"skipLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["src/app/*"]
+			"@/*": ["src/app/*"],
+			"#/*": ["src/*"]
 		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts"],
