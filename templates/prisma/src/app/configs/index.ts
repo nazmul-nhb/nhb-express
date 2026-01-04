@@ -9,7 +9,7 @@ export default {
 	/** * Environment name, e.g. `development`, `production` etc. */
 	NODE_ENV: process.env.NODE_ENV as LooseLiteral<'development' | 'production'>,
 	/** * Port number on which the server runs. Defaults to `4242` if not specified. */
-	port: process.env.PORT || (4242 as const),
+	port: process.env.PORT ? Number(process.env.PORT) : 4242,
 	/** * Number of salt rounds for hashing passwords. */
 	saltRounds: Number(process.env.SALT_ROUNDS),
 	/** * JWT Access Token secret. */
