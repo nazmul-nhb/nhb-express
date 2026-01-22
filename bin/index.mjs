@@ -135,7 +135,7 @@ const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
 		await select({
 			message: yellow.bold.toANSI('📁 Select Database + ODM/ORM:'),
 			options: [
-				{ value: 'mongoose', label: 'MongoDB + Mongoose', hint: 'default' },
+				{ value: 'mongoose', label: 'MongoDB + Mongoose (v8.20.1)', hint: 'default' },
 				{
 					value: 'drizzle',
 					label: 'PostgreSQL + Drizzle',
@@ -144,7 +144,7 @@ const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
 				{
 					value: 'prisma',
 					label: 'PostgreSQL + Prisma',
-					hint: 'Driver: "pg" with "@prisma/adapter-pg" & "prisma-client-js"',
+					hint: 'Driver: "pg" with "@prisma/adapter-pg" & "prisma-client"',
 				},
 			],
 			initialValue: 'mongoose',
