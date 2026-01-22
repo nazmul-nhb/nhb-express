@@ -60,7 +60,7 @@ yarn dlx nhb-express@latest
 Follow the interactive prompts:
 
 - Choose a **project name**
-- Select a **database** (`MongoDB` default, more coming soon)
+- Select a **database** (`MongoDB` default)
 - Pick your **package manager**
 
 Your new server will be scaffolded in the chosen folder with all dependencies installed.
