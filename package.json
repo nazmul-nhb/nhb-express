@@ -1,6 +1,6 @@
 {
   "name": "nhb-express",
-  "version": "2.1.12",
+  "version": "2.1.13",
   "description": "Express TypeScript Server Scaffold",
   "main": "bin/index.mjs",
   "type": "module",
@@ -43,7 +43,16 @@
     "zod",
     "nodejs",
     "boilerplate",
-    "mongoose"
+    "mongoose",
+    "mongoose-odm",
+    "postgresql",
+    "postgres",
+    "prisma",
+    "prisma-client",
+    "prisma-orm",
+    "drizzle",
+    "drizzle-kit",
+    "drizzle-orm"
   ],
   "author": {
     "name": "Nazmul Hassan",
