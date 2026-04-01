@@ -9,10 +9,12 @@ import nodemailer from 'nodemailer';
 export async function sendEmail(options: EmailOptions) {
 	const { NODE_ENV, email, emailPassword } = configs;
 
+	const isProduction = NODE_ENV === 'production';
+
 	const transporter = nodemailer.createTransport({
 		host: 'smtp.gmail.com.',
-		port: 587,
-		secure: NODE_ENV === 'production',
+		port: isProduction ? 465 : 587,
+		secure: isProduction,
 		auth: { user: email, pass: emailPassword },
 	});
 

@@ -64,7 +64,7 @@ class UserServices {
 	 */
 	async getUserByIdFromDB(id: number) {
 		const user = await db.query.users.findFirst({
-			where: (ut, q) => q.eq(ut.id, id),
+			where: eq(users.id, id),
 			columns: { password: false },
 		});
 

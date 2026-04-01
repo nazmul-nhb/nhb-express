@@ -145,7 +145,7 @@ class ${capModule}Services {
      */
     async get${capModule}ByIdFromDB(id: number) {
         const ${moduleName}_1 = await db.query.${pluralModule}.findFirst({
-            where: (ut, q) => q.eq(ut.id, id),
+            where: eq(${pluralModule}.id, id),
         });
 
         if (!${moduleName}_1) {
