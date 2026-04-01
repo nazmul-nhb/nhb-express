@@ -12,10 +12,9 @@
 		// "noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"skipLibCheck": true,
-		"baseUrl": ".",
 		"paths": {
-			"@/*": ["src/app/*"],
-			"#/*": ["src/*"]
+			"@/*": ["./src/app/*"],
+			"#/*": ["./src/*"]
 		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts"],
