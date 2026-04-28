@@ -66,9 +66,10 @@ pnpm dev     # or npm run dev / yarn dev
  │
  ├─ 🔒 .env                    # Environment variables
  ├─ 🚫 .gitignore              # Ignore files/folders from being pushed/committed
- ├─ 🚫 .prettierignore         # Ignore files/folders from being formatted with prettier
- ├─ ⚙️ .prettierrc.json        # Prettier config
- ├─ ⚙️ eslint.config.mjs       # ESLint config (flat config, ready for TS)
+ ├─ 🚫 .prettierignore         # Ignore files/folders from being formatted with prettier (used if Prettier is selected as formatter)
+ ├─ ⚙️ .prettierrc.json        # Prettier config (used if Prettier is selected as formatter)
+ ├─ ⚙️ biome.json              # Biome config (used if Biome is selected as formatter)
+ ├─ ⚙️ eslint.config.mjs       # ESLint config (used if Prettier + ESLint is selected: flat config, ready for TS)
  ├─ ⚙️ nhb.scripts.config.mjs  # Config for nhb-scripts
  ├─ ⚙️ nodemon.json            # Nodemon config
  ├─ ⚙️ package.json            # Auto-generated `package.json`

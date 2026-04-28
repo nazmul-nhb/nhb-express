@@ -9,7 +9,7 @@
 
 import { confirm, intro, isCancel, note, outro, select, spinner, text } from '@clack/prompts';
 import { execa } from 'execa';
-import { capitalizeString, deleteFields } from 'nhb-toolbox';
+import { capitalizeString, deleteFields, isValidArray } from 'nhb-toolbox';
 import { Stylog } from 'nhb-toolbox/stylog';
 import fs from 'node:fs';
 import { rm as rmAsync } from 'node:fs/promises';
@@ -269,7 +269,7 @@ const pkgJson = {
 	keywords: [projectName, 'server', 'express', 'typescript', dbChoice],
 };
 
-fs.writeFileSync(path.join(targetDir, 'package.json'), JSON.stringify(pkgJson, null, 2));
+saveJsonFile(path.join(targetDir, 'package.json'), pkgJson);
 
 mimicClack(blue.toANSI('🔄️ Installing dependencies...'));
 
@@ -280,38 +280,7 @@ await installDeps(
 	[...devDeps.common, ...devDeps[dbChoice]]
 );
 
-async function updateBiomeConfig() {
-	return new Promise((resolve) => {
-		if (fmtLint === 'biome') {
-			const biomeConfigPath = path.join(targetDir, 'biome.json');
-
-			/** @type string | undefined */
-			const biomeVersion = JSON.parse(
-				fs.readFileSync(path.join(targetDir, 'package.json'), 'utf-8')
-			)?.devDependencies?.['@biomejs/biome'];
-
-			if (fs.existsSync(biomeConfigPath) && biomeVersion) {
-				/** @type Record<string, any> */
-				const biomeConfig = JSON.parse(fs.readFileSync(biomeConfigPath, 'utf-8'));
-
-				const $version = biomeVersion.match(/\d+\.\d+\.\d+(?:[-+][\w.-]+)?/)?.[0] ?? '';
-
-				const $schema = `https://biomejs.dev/schemas/${$version}/schema.json`;
-
-				const newConfig = deleteFields(biomeConfig, ['$schema']);
-
-				fs.writeFileSync(
-					biomeConfigPath,
-					JSON.stringify({ $schema, ...newConfig }, null, 2)
-				);
-			}
-		}
-
-		return resolve(true);
-	});
-}
-
-await updateBiomeConfig();
+updateConfigs();
 
 // await runMigration(dbChoice);
 
@@ -416,6 +385,69 @@ async function removeExistingDir(targetDir) {
 		s.stop(red.toANSI(`❌ Failed to remove directory: "${projectName}"!`));
 		console.error(error);
 		process.exit(0);
+	}
+}
+
+/**
+ * * Parse a JSON file and return its content as an object
+ * @param {string} filePath Path to the JSON file
+ * @return {Record<string, any>} Parsed JSON content
+ */
+function parseJsonFile(filePath) {
+	try {
+		return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+	} catch (error) {
+		console.error(red.toANSI(`❌ Failed to parse JSON file at: "${filePath}"!`));
+		console.error(error);
+		return {};
+	}
+}
+
+/**
+ * * Save an object as a JSON file with proper formatting and error handling
+ * @param {string} filePath Path to save the JSON file
+ * @param {Record<string, any>} data Data to be saved in the JSON file
+ */
+function saveJsonFile(filePath, data) {
+	fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+}
+
+function updateConfigs() {
+	const extJsonPath = path.join(targetDir, '.vscode', 'extensions.json');
+
+	if (dbChoice === 'prisma' && fs.existsSync(extJsonPath)) {
+		const extJson = parseJsonFile(extJsonPath);
+
+		/** @type string[] */
+		const recommendations = extJson?.recommendations;
+
+		if (isValidArray(recommendations) && !recommendations.includes('prisma.prisma')) {
+			saveJsonFile(extJsonPath, {
+				...extJson,
+				recommendations: [...recommendations, 'prisma.prisma'],
+			});
+		}
+	}
+
+	if (fmtLint === 'biome') {
+		const biomeConfigPath = path.join(targetDir, 'biome.json');
+
+		/** @type PackageJson */
+		const insDeps = parseJsonFile(path.join(targetDir, 'package.json'));
+
+		const biomeVersion = insDeps?.devDependencies?.['@biomejs/biome'];
+
+		if (fs.existsSync(biomeConfigPath) && biomeVersion) {
+			const biomeConfig = parseJsonFile(biomeConfigPath);
+
+			const $version = biomeVersion.match(/\d+\.\d+\.\d+(?:[-+][\w.-]+)?/)?.[0] ?? '';
+
+			const $schema = `https://biomejs.dev/schemas/${$version}/schema.json`;
+
+			const newConfig = deleteFields(biomeConfig, ['$schema']);
+
+			saveJsonFile(biomeConfigPath, { $schema, ...newConfig });
+		}
 	}
 }
 

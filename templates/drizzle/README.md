@@ -34,6 +34,10 @@ pnpm dev     # or npm run dev / yarn dev
 
 ```ini
 📁 <your-project-name>/
+ ├─ 📁 .github/
+ │   └─ 📁 workflows/
+ │       └─ ⚙️ publish.yml     # GitHub Actions workflow for CI/CD (vercel deployment) 
+ │
  ├─ 📁 .vscode/
  │   ├─ 📄 extensions.json     # Recommended Extensions for VS Code
  │   └─ 📄 settings.json       # VS Code Settings for better formatting
@@ -66,10 +70,10 @@ pnpm dev     # or npm run dev / yarn dev
  │
  ├─ 🔒 .env                    # Environment variables
  ├─ 🚫 .gitignore              # Ignore files/folders from being pushed/committed
- ├─ 🚫 .prettierignore         # Ignore files/folders from being formatted with prettier
- ├─ ⚙️ .prettierrc.json        # Prettier config
- ├─ ⚙️ drizzle.config.ts       # Drizzle config
- ├─ ⚙️ eslint.config.mjs       # ESLint config (flat config, ready for TS)
+ ├─ 🚫 .prettierignore         # Ignore files/folders from being formatted with prettier (used if Prettier is selected as formatter)
+ ├─ ⚙️ .prettierrc.json        # Prettier config (used if Prettier is selected as formatter)
+ ├─ ⚙️ biome.json              # Biome config (used if Biome is selected as formatter)
+ ├─ ⚙️ eslint.config.mjs       # ESLint config (used if Prettier + ESLint is selected: flat config, ready for TS)
  ├─ ⚙️ nhb.scripts.config.mjs  # Config for nhb-scripts
  ├─ ⚙️ nodemon.json            # Nodemon config
  ├─ ⚙️ package.json            # Auto-generated `package.json`
@@ -105,6 +109,34 @@ pnpm dev     # or npm run dev / yarn dev
 - `pnpm/npm/yarn run count` – Count exports (`nhb-count`)
 - `pnpm/npm/yarn run delete` – Delete any file/folder from the CLI (`nhb-delete`)
 - `pnpm/npm/yarn run secret` – Generate secrets for jwt (using crypto module)
+
+---
+
+## ⚙️ CI/CD Workflow
+
+A ready‑to‑use **GitHub Actions workflow** is included in:
+
+```ini
+.github/workflows/publish.yml
+```
+
+✅ **What it does:**
+
+- Runs on push to your main branch
+- Builds your project
+- Deploys automatically to **Vercel** (configured via `vercel.json`)
+
+✅ **How to use:**
+
+1. Push your project to a GitHub repository.
+2. Add your Vercel tokens/secrets as GitHub repository secrets:
+    Go to `Settings >> Secrets and variables >> Actions >> Repository secrets` and add these variables:
+    - `VERCEL_ORG_ID`
+    - `VERCEL_PROJECT_ID`
+    - `VERCEL_TOKEN`
+3. Every time you push to `main` and _version is updated_, GitHub Actions will trigger and deploy your server to Vercel.
+
+You can customize the workflow to fit your own CI/CD needs (e.g., change branches, add tests, deploy elsewhere).
 
 ---
 

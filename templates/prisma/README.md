@@ -35,6 +35,10 @@ pnpm dev     # or npm run dev / yarn dev
 
 ```ini
 📁 <your-project-name>/
+ ├─ 📁 .github/
+ │   └─ 📁 workflows/
+ │       └─ ⚙️ publish.yml     # GitHub Actions workflow for CI/CD (vercel deployment) 
+ │
  ├─ 📁 .vscode/
  │   ├─ 📄 extensions.json     # Recommended Extensions for VS Code
  │   └─ 📄 settings.json       # VS Code Settings for better formatting
@@ -66,9 +70,10 @@ pnpm dev     # or npm run dev / yarn dev
  │
  ├─ 🔒 .env                    # Environment variables
  ├─ 🚫 .gitignore              # Ignore files/folders from being pushed/committed
- ├─ 🚫 .prettierignore         # Ignore files/folders from being formatted with prettier
- ├─ ⚙️ .prettierrc.json        # Prettier config
- ├─ ⚙️ eslint.config.mjs       # ESLint config (flat config, ready for TS)
+ ├─ 🚫 .prettierignore         # Ignore files/folders from being formatted with prettier (used if Prettier is selected as formatter)
+ ├─ ⚙️ .prettierrc.json        # Prettier config (used if Prettier is selected as formatter)
+ ├─ ⚙️ biome.json              # Biome config (used if Biome is selected as formatter)
+ ├─ ⚙️ eslint.config.mjs       # ESLint config (used if Prettier + ESLint is selected: flat config, ready for TS)
  ├─ ⚙️ nhb.scripts.config.mjs  # Config for nhb-scripts
  ├─ ⚙️ nodemon.json            # Nodemon config
  ├─ ⚙️ prisma.config.ts        # Prisma config
@@ -101,7 +106,7 @@ pnpm dev     # or npm run dev / yarn dev
 - `pnpm/npm/yarn run secret` – Generate secrets for jwt (using crypto module)
 
 ---
-<!-- 
+
 ## ⚙️ CI/CD Workflow
 
 A ready‑to‑use **GitHub Actions workflow** is included in:
@@ -132,4 +137,4 @@ You can customize the workflow to fit your own CI/CD needs (e.g., change branche
 
 Made with ❤️ by [Nazmul Hassan](https://github.com/nazmul-nhb)
 
-**Powered by `nhb-express`** 🚀 -->
+**Powered by `nhb-express`** 🚀

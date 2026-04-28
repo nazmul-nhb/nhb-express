@@ -34,11 +34,12 @@ Quickly bootstrap a production‑ready **Express + TypeScript + Zod** server wit
 - ✅ **Express.js** pre‑configured with custom middlewares
 - ✅ **Zod** for schema validation
 - ✅ **Mongoose** for `MongoDB` integration
-- ✅ **Drizzle** and/or **Prisma** for `PostgreSQL` integration
+- ✅ **Drizzle** or **Prisma** for `PostgreSQL` integration
 - ✅ **Stylog** from [`nhb-toolbox`](https://toolbox.nazmul-nhb.dev/docs/utilities/misc/stylog) for colorful logging
-- ✅ **[nhb-scripts](https://www.npmjs.com/package/nhb-scripts)** for easy build, commit, module scaffolding, formatting, linting, and more
+- ✅ **Biome** or **Prettier** + **ESLint** for code formatting and linting (your choice during setup)
+- ✅ **[nhb-scripts](https://www.npmjs.com/package/nhb-scripts)** for easy build, commit, module scaffolding, and more
 - ✅ **Scaffolding via CLI** – choose package manager, DB, ORM/ODM etc.
-- ✅ Built‑in [**CI/CD workflow**](#️-cicd-workflow) for automatic deployment to Vercel (Currently only available for Mongoose setup)
+- ✅ Built‑in [**CI/CD workflow**](#️-cicd-workflow) for automatic deployment to Vercel
 
 ---
 
@@ -60,7 +61,8 @@ yarn dlx nhb-express@latest
 Follow the interactive prompts:
 
 - Choose a **project name**
-- Select a **database** (`MongoDB` default)
+- Select a **database** and **ODM/ORM**. Default is `MongoDB` + `Mongoose`.
+- Select between `Biome` or `Prettier`+`ESLint` as your **code formatter** and **linter**. Default is `Biome`.
 - Pick your **package manager**
 
 Your new server will be scaffolded in the chosen folder with all dependencies installed.
@@ -116,9 +118,10 @@ pnpm dev     # or npm run dev / yarn dev
  │
  ├─ 🔒 .env                    # Environment variables
  ├─ 🚫 .gitignore              # Ignore files/folders from being pushed/committed
- ├─ 🚫 .prettierignore         # Ignore files/folders from being formatted with prettier
- ├─ ⚙️ .prettierrc.json        # Prettier config
- ├─ ⚙️ eslint.config.mjs       # ESLint config (flat config, ready for TS)
+ ├─ 🚫 .prettierignore         # Ignore files/folders from being formatted with prettier (used if Prettier is selected as formatter)
+ ├─ ⚙️ .prettierrc.json        # Prettier config (used if Prettier is selected as formatter)
+ ├─ ⚙️ biome.json              # Biome config (used if Biome is selected as formatter)
+ ├─ ⚙️ eslint.config.mjs       # ESLint config (used if Prettier + ESLint is selected: flat config, ready for TS)
  ├─ ⚙️ nhb.scripts.config.mjs  # Config for nhb-scripts
  ├─ ⚙️ nodemon.json            # Nodemon config
  ├─ ⚙️ package.json            # Auto-generated `package.json`
@@ -131,6 +134,10 @@ pnpm dev     # or npm run dev / yarn dev
 
 ```ini
 📁 <your-project-name>/
+ ├─ 📁 .github/
+ │   └─ 📁 workflows/
+ │       └─ ⚙️ publish.yml     # GitHub Actions workflow for CI/CD (vercel deployment) 
+ │
  ├─ 📁 .vscode/
  │   ├─ 📄 extensions.json     # Recommended Extensions for VS Code
  │   └─ 📄 settings.json       # VS Code Settings for better formatting
@@ -162,9 +169,10 @@ pnpm dev     # or npm run dev / yarn dev
  │
  ├─ 🔒 .env                    # Environment variables
  ├─ 🚫 .gitignore              # Ignore files/folders from being pushed/committed
- ├─ 🚫 .prettierignore         # Ignore files/folders from being formatted with prettier
- ├─ ⚙️ .prettierrc.json        # Prettier config
- ├─ ⚙️ eslint.config.mjs       # ESLint config (flat config, ready for TS)
+ ├─ 🚫 .prettierignore         # Ignore files/folders from being formatted with prettier (used if Prettier is selected as formatter)
+ ├─ ⚙️ .prettierrc.json        # Prettier config (used if Prettier is selected as formatter)
+ ├─ ⚙️ biome.json              # Biome config (used if Biome is selected as formatter)
+ ├─ ⚙️ eslint.config.mjs       # ESLint config (used if Prettier + ESLint is selected: flat config, ready for TS)
  ├─ ⚙️ nhb.scripts.config.mjs  # Config for nhb-scripts
  ├─ ⚙️ nodemon.json            # Nodemon config
  ├─ ⚙️ prisma.config.ts        # Prisma config
@@ -178,6 +186,10 @@ pnpm dev     # or npm run dev / yarn dev
 
 ```ini
 📁 <your-project-name>/
+ ├─ 📁 .github/
+ │   └─ 📁 workflows/
+ │       └─ ⚙️ publish.yml     # GitHub Actions workflow for CI/CD (vercel deployment) 
+ │
  ├─ 📁 .vscode/
  │   ├─ 📄 extensions.json     # Recommended Extensions for VS Code
  │   └─ 📄 settings.json       # VS Code Settings for better formatting
@@ -210,10 +222,10 @@ pnpm dev     # or npm run dev / yarn dev
  │
  ├─ 🔒 .env                    # Environment variables
  ├─ 🚫 .gitignore              # Ignore files/folders from being pushed/committed
- ├─ 🚫 .prettierignore         # Ignore files/folders from being formatted with prettier
- ├─ ⚙️ .prettierrc.json        # Prettier config
- ├─ ⚙️ drizzle.config.ts       # Drizzle config
- ├─ ⚙️ eslint.config.mjs       # ESLint config (flat config, ready for TS)
+ ├─ 🚫 .prettierignore         # Ignore files/folders from being formatted with prettier (used if Prettier is selected as formatter)
+ ├─ ⚙️ .prettierrc.json        # Prettier config (used if Prettier is selected as formatter)
+ ├─ ⚙️ biome.json              # Biome config (used if Biome is selected as formatter)
+ ├─ ⚙️ eslint.config.mjs       # ESLint config (used if Prettier + ESLint is selected: flat config, ready for TS)
  ├─ ⚙️ nhb.scripts.config.mjs  # Config for nhb-scripts
  ├─ ⚙️ nodemon.json            # Nodemon config
  ├─ ⚙️ package.json            # Auto-generated `package.json`
