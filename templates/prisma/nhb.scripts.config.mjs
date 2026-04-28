@@ -1,6 +1,6 @@
 // @ts-check
 
-import { defineScriptConfig, runExeca } from 'nhb-scripts';
+import { defineScriptConfig, parsePackageJson, runExeca } from 'nhb-scripts';
 import { expressPrismaPostgresTemplate } from './scripts/moduleTemplate.mjs';
 import { updatePrismaSchema } from './scripts/updateSchema.mjs';
 import { updateCollection, updateRoutes } from './scripts/updateTemplate.mjs';
@@ -14,7 +14,7 @@ export default defineScriptConfig({
 	lint: { folders: ['src'], patterns: ['**/*.ts'] },
 	fix: { folders: ['src'], patterns: ['**/*.ts'] },
 	commit: {
-		runFormatter: true,
+		runFormatter: !!parsePackageJson()?.devDependencies?.prettier,
 		emojiBeforePrefix: true,
 		wrapPrefixWith: '`',
 	},

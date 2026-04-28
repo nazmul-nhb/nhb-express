@@ -2,11 +2,14 @@
 
 // @ts-check
 
-/** @import { PackageJson } from 'type-fest'; */
+/**
+ * @import { PackageJson } from 'type-fest';
+ * @import { $Record } from 'nhb-toolbox/object/types';
+ */
 
 import { confirm, intro, isCancel, note, outro, select, spinner, text } from '@clack/prompts';
 import { execa } from 'execa';
-import { capitalizeString } from 'nhb-toolbox';
+import { capitalizeString, deleteFields } from 'nhb-toolbox';
 import { Stylog } from 'nhb-toolbox/stylog';
 import fs from 'node:fs';
 import { rm as rmAsync } from 'node:fs/promises';
@@ -42,9 +45,104 @@ const deps = {
 	drizzle: ['drizzle-orm', 'drizzle-zod', 'postgres'],
 };
 
+// ----------------------
+// ! Entry
+// ----------------------
+intro(cyan.bold.toANSI('🚀 Create Express + TypeScript App with "nhb-express"'));
+
+const projectName = normalizeResult(
+	await text({
+		message: yellow.bold.toANSI('📂 Project Name:'),
+		placeholder: 'e.g. my-server',
+		validate: (v) => (v?.trim() ? undefined : 'Project name is required!'),
+	})
+);
+
+const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
+	normalizeResult(
+		await select({
+			message: yellow.bold.toANSI('📁 Select Database + ODM/ORM:'),
+			options: [
+				{ value: 'mongoose', label: 'MongoDB + Mongoose (v8.20.1)', hint: 'default' },
+				{
+					value: 'drizzle',
+					label: 'PostgreSQL + Drizzle',
+					hint: 'Driver: postgres-js',
+				},
+				{
+					value: 'prisma',
+					label: 'PostgreSQL + Prisma',
+					hint: 'Driver: "pg" with "@prisma/adapter-pg" & "prisma-client"',
+				},
+			],
+			initialValue: 'mongoose',
+		})
+	)
+);
+
+const fmtLint = /** @type {'biome' | 'prettier-eslint'} */ (
+	normalizeResult(
+		await select({
+			message: yellow.bold.toANSI('🎨 Select Formatter & Linter:'),
+			options: [
+				{
+					value: 'biome',
+					label: 'Biome',
+					hint: 'Format & Lint with Biome',
+				},
+				{
+					value: 'prettier-eslint',
+					label: 'Prettier + ESLint',
+					hint: 'Formatter: Prettier, Linter: ESLint',
+				},
+			],
+			initialValue: 'biome',
+		})
+	)
+);
+
+const pkgManager = normalizeResult(
+	await select({
+		message: yellow.bold.toANSI('📦 Choose a Package Manager:'),
+		options: [
+			{ value: 'pnpm', label: 'pnpm' },
+			{ value: 'npm', label: 'npm' },
+			{ value: 'yarn', label: 'yarn' },
+		],
+		initialValue: 'pnpm',
+	})
+);
+
+const fmtLintScripts = {
+	biome: {
+		lint: 'biome lint --diagnostic-level=error',
+		fix: 'biome check --write --diagnostic-level=error',
+		format: 'biome format --write --diagnostic-level=error',
+	},
+	'prettier-eslint': {
+		lint: 'nhb-lint',
+		fix: 'nhb-fix',
+		format: 'nhb-format',
+	},
+};
+
+const fmtLintDeps = {
+	biome: ['@biomejs/biome'],
+	'prettier-eslint': [
+		'@eslint/js',
+		'@typescript-eslint/eslint-plugin',
+		'@typescript-eslint/parser',
+		'eslint',
+		'eslint-config-prettier',
+		'eslint-plugin-prettier',
+		'globals',
+		'prettier',
+		'typescript-eslint',
+	],
+};
+
 const devDeps = {
 	common: [
-		'@eslint/js',
 		'@types/bcrypt',
 		'@types/cookie-parser',
 		'@types/cors',
@@ -55,36 +153,28 @@ const devDeps = {
 		'@types/node',
 		'@types/nodemailer',
 		'@types/serve-favicon',
-		'@typescript-eslint/eslint-plugin',
-		'@typescript-eslint/parser',
-		'eslint',
-		'eslint-config-prettier',
-		'eslint-plugin-prettier',
-		'globals',
 		'nhb-scripts',
 		'nodemon',
-		'prettier',
 		'ts-node',
 		'tsc-alias',
 		'tsconfig-paths',
 		'typescript',
-		'typescript-eslint',
 		'vercel',
+		...fmtLintDeps[fmtLint],
 	],
 	mongoose: [],
 	prisma: ['prisma', 'tsx'],
 	drizzle: ['drizzle-kit', 'tsx'],
 };
 
+/** @type { $Record<'common' | 'mongoose' | 'drizzle' | 'prisma', { [command: string]: string }> } */
 const scripts = {
 	common: {
 		dev: 'nodemon',
 		start: 'node dist/server.js',
 		deploy: 'nhb-build && vercel --prod',
 		build: 'nhb-build',
-		format: 'nhb-format',
-		lint: 'nhb-lint',
-		fix: 'nhb-fix',
+		...fmtLintScripts[fmtLint],
 		commit: 'nhb-commit',
 		count: 'nhb-count',
 		delete: 'nhb-delete',
@@ -117,53 +207,6 @@ const scripts = {
 	},
 };
 
-// ----------------------
-// ! Entry
-// ----------------------
-intro(cyan.bold.toANSI('🚀 Create Express + TypeScript App with "nhb-express"'));
-
-const projectName = normalizeResult(
-	await text({
-		message: yellow.bold.toANSI('📂 Project Name:'),
-		placeholder: 'e.g. my-server',
-		validate: (v) => (v.trim() ? undefined : 'Project name is required!'),
-	})
-);
-
-const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
-	normalizeResult(
-		await select({
-			message: yellow.bold.toANSI('📁 Select Database + ODM/ORM:'),
-			options: [
-				{ value: 'mongoose', label: 'MongoDB + Mongoose (v8.20.1)', hint: 'default' },
-				{
-					value: 'drizzle',
-					label: 'PostgreSQL + Drizzle',
-					hint: 'Driver: postgres-js',
-				},
-				{
-					value: 'prisma',
-					label: 'PostgreSQL + Prisma',
-					hint: 'Driver: "pg" with "@prisma/adapter-pg" & "prisma-client"',
-				},
-			],
-			initialValue: 'mongoose',
-		})
-	)
-);
-
-const pkgManager = normalizeResult(
-	await select({
-		message: yellow.bold.toANSI('📦 Choose a Package Manager:'),
-		options: [
-			{ value: 'pnpm', label: 'pnpm' },
-			{ value: 'npm', label: 'npm' },
-			{ value: 'yarn', label: 'yarn' },
-		],
-		initialValue: 'pnpm',
-	})
-);
-
 const targetDir = path.resolve(process.cwd(), projectName);
 
 /**
@@ -194,12 +237,19 @@ if (fs.existsSync(targetDir)) {
 
 fs.mkdirSync(targetDir);
 
+// ! Copy db/orm specific template files
 const templateDir = path.resolve(__dirname, '../templates', dbChoice);
 
 copyDir(templateDir, targetDir);
 
+// ! Rename env and gitignore files to dotfiles
 renameDotFile('env');
 renameDotFile('gitignore');
+
+// ! Copy formatter and linter config files
+const fmtLintDir = path.resolve(__dirname, '../templates', fmtLint);
+
+copyDir(fmtLintDir, targetDir);
 
 /** @type {PackageJson} */
 const pkgJson = {
@@ -229,6 +279,39 @@ await installDeps(
 	[...deps.common, ...deps[dbChoice]],
 	[...devDeps.common, ...devDeps[dbChoice]]
 );
+
+async function updateBiomeConfig() {
+	return new Promise((resolve) => {
+		if (fmtLint === 'biome') {
+			const biomeConfigPath = path.join(targetDir, 'biome.json');
+
+			/** @type string | undefined */
+			const biomeVersion = JSON.parse(
+				fs.readFileSync(path.join(targetDir, 'package.json'), 'utf-8')
+			)?.devDependencies?.['@biomejs/biome'];
+
+			if (fs.existsSync(biomeConfigPath) && biomeVersion) {
+				/** @type Record<string, any> */
+				const biomeConfig = JSON.parse(fs.readFileSync(biomeConfigPath, 'utf-8'));
+
+				const $version = biomeVersion.match(/\d+\.\d+\.\d+(?:[-+][\w.-]+)?/)?.[0] ?? '';
+
+				const $schema = `https://biomejs.dev/schemas/${$version}/schema.json`;
+
+				const newConfig = deleteFields(biomeConfig, ['$schema']);
+
+				fs.writeFileSync(
+					biomeConfigPath,
+					JSON.stringify({ $schema, ...newConfig }, null, 2)
+				);
+			}
+		}
+
+		return resolve(true);
+	});
+}
+
+await updateBiomeConfig();
 
 // await runMigration(dbChoice);
 

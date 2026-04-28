@@ -1,8 +1,8 @@
 // @ts-check
 
-import { defineScriptConfig } from 'nhb-scripts';
-import { updateCollection, updateRoutes } from './scripts/updateTemplate.mjs';
+import { defineScriptConfig, parsePackageJson } from 'nhb-scripts';
 import { expressMongooseZodTemplate } from './scripts/moduleTemplate.mjs';
+import { updateCollection, updateRoutes } from './scripts/updateTemplate.mjs';
 
 export default defineScriptConfig({
 	format: {
@@ -13,7 +13,8 @@ export default defineScriptConfig({
 	lint: { folders: ['src'], patterns: ['**/*.ts'] },
 	fix: { folders: ['src'], patterns: ['**/*.ts'] },
 	commit: {
-		runFormatter: true,
+		runFormatter: !!parsePackageJson()?.devDependencies?.prettier,
+		emojiBeforePrefix: true,
 		wrapPrefixWith: '`',
 	},
 	build: {

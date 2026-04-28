@@ -1,6 +1,6 @@
 // @ts-check
 
-import { defineScriptConfig, generateModule, runExeca } from 'nhb-scripts';
+import { defineScriptConfig, generateModule, parsePackageJson, runExeca } from 'nhb-scripts';
 import { createDrizzlePostgresSchema } from './scripts/createSchema.mjs';
 import { expressDrizzlePostgresTemplate } from './scripts/moduleTemplate.mjs';
 import { updateDrizzleInstance } from './scripts/updateDrizzle.mjs';
@@ -15,7 +15,7 @@ export default defineScriptConfig({
 	lint: { folders: ['src'], patterns: ['**/*.ts'] },
 	fix: { folders: ['src'], patterns: ['**/*.ts'] },
 	commit: {
-		runFormatter: true,
+		runFormatter: !!parsePackageJson()?.devDependencies?.prettier,
 		emojiBeforePrefix: true,
 		wrapPrefixWith: '`',
 	},
