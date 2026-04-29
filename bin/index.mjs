@@ -2,11 +2,6 @@
 
 // @ts-check
 
-/**
- * @import { PackageJson } from 'type-fest';
- * @import { $Record } from 'nhb-toolbox/object/types';
- */
-
 import { confirm, intro, isCancel, note, outro, select, spinner, text } from '@clack/prompts';
 import { execa } from 'execa';
 import { capitalizeString, deleteFields, isValidArray } from 'nhb-toolbox';
@@ -16,6 +11,13 @@ import { rm as rmAsync } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+/**
+ * @import { PackageJson } from 'type-fest';
+ * @import { $Record } from 'nhb-toolbox/object/types';
+ *
+ * @typedef {'mongoose' | 'prisma' | 'drizzle'} DBChoice
+ */
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const yellow = Stylog.ansi16('yellow');
@@ -24,6 +26,7 @@ const gray = Stylog.ansi16('blackBright');
 const green = Stylog.ansi16('green');
 const red = Stylog.ansi16('red');
 const blue = Stylog.ansi16('blue');
+const white = Stylog.ansi16('white');
 
 const deps = {
 	common: [
@@ -58,7 +61,7 @@ const projectName = normalizeResult(
 	})
 );
 
-const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
+const dbChoice = /** @type { DBChoice } */ (
 	normalizeResult(
 		await select({
 			message: yellow.bold.toANSI('📁 Select Database + ODM/ORM:'),
@@ -167,7 +170,7 @@ const devDeps = {
 	drizzle: ['drizzle-kit', 'tsx'],
 };
 
-/** @type { $Record<'common' | 'mongoose' | 'drizzle' | 'prisma', { [command: string]: string }> } */
+/** @type { $Record<'common' | DBChoice, { [command: string]: string }> } */
 const scripts = {
 	common: {
 		dev: 'nodemon',
@@ -272,7 +275,24 @@ const pkgJson = {
 
 saveJsonFile(path.join(targetDir, 'package.json'), pkgJson);
 
-mimicClack(blue.toANSI('🔄️ Installing dependencies...'));
+const displayProgress = await confirm({
+	message: yellow.bold.toANSI(`⏳ Display installation progress with details?`),
+	active: 'Display output of installation commands in the terminal',
+	inactive: 'Show only high-level progress without command outputs',
+	initialValue: false,
+	withGuide: true,
+	vertical: true,
+});
+
+if (isCancel(displayProgress)) {
+	showCancelMessage();
+}
+
+const spin = spinner();
+
+(displayProgress ? mimicClack : spin.start)(
+	white.toANSI('⏳ Installing dependencies... This might take a few moments!')
+);
 
 await installDeps(
 	pkgManager,
@@ -285,7 +305,7 @@ updateConfigs();
 
 // await runMigration(dbChoice);
 
-mimicClack(green.toANSI('✅ Dependencies installed!'), false);
+(displayProgress ? mimicClack : spin.stop)(green.toANSI('✅ Dependencies installed!'));
 
 const nextSteps = [
 	`cd ${projectName}`,
@@ -356,8 +376,10 @@ function copyDir(src, dest) {
  * @param {string[]} devDeps
  */
 async function installDeps(manager, cwd, deps, devDeps) {
+	const stdType = displayProgress ? 'inherit' : 'pipe';
+
 	/** @type {import('execa').Options} */
-	const options = { cwd, stdout: 'inherit', stderr: 'inherit', stdin: 'inherit' };
+	const options = { cwd, stdout: stdType, stderr: stdType, stdin: stdType };
 
 	if (manager === 'pnpm') {
 		await execa('pnpm', ['add', ...deps], options);
@@ -454,7 +476,7 @@ function updateConfigs() {
 
 // /**
 //  * * Run migration and generate for `prisma` and `drizzle`.
-//  * @param {'mongoose' | 'prisma' | 'drizzle'} orm
+//  * @param { DBChoice } orm
 //  */
 // async function runMigration(orm) {
 // 	/** @type {import('execa').Options} */
