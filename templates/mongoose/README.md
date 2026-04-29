@@ -86,14 +86,15 @@ pnpm dev     # or npm run dev / yarn dev
 - `pnpm/npm/yarn run start` – Run the built server
 - `pnpm/npm/yarn run deploy` – Build the project and deploy to Vercel (`nhb-build && vercel --prod`)
 - `pnpm/npm/yarn run build` – Build the project for production (`nhb-build`)
-- `pnpm/npm/yarn run format` – Format the codebase (`nhb-format`)
-- `pnpm/npm/yarn run lint` – Lint the code (`nhb-lint`)
-- `pnpm/npm/yarn run fix` – Auto‑fix lint issues (`nhb-fix`)
+- `pnpm/npm/yarn run format` – Format the codebase
+- `pnpm/npm/yarn run lint` – Lint the code
+- `pnpm/npm/yarn run fix` – Auto‑fix lint issues
 - `pnpm/npm/yarn run commit` – Guided commit workflow (`nhb-commit`)
 - `pnpm/npm/yarn run count` – Count exports (`nhb-count`)
 - `pnpm/npm/yarn run module` – Scaffold new modules (`nhb-module`)
 - `pnpm/npm/yarn run delete` – Delete any file/folder from the CLI (`nhb-delete`)
 - `pnpm/npm/yarn run secret` – Generate secrets for jwt (using crypto module)
+- `pnpm/npm/yarn run typecheck` → runs TypeScript type checking
 
 ---
 

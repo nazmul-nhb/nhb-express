@@ -1,5 +1,6 @@
+import { Model, type Query, type QueryFilter } from 'mongoose';
+import { normalizeNumber } from 'nhb-toolbox';
 import type { ExcludeField, NumericKeys, SearchField } from '@/types';
-import { type FilterQuery, Model, type Query } from 'mongoose';
 
 /**
  * @class QueryBuilder
@@ -33,7 +34,7 @@ export class QueryBuilder<T> {
 					(field) =>
 						({
 							[field]: { $regex: keyword, $options: 'i' },
-						}) as FilterQuery<T>
+						}) as QueryFilter<T>
 				),
 			});
 		}
@@ -65,7 +66,7 @@ export class QueryBuilder<T> {
 		excludeFields.forEach((field) => delete queryObj[field]);
 
 		if (Object.keys(queryObj).length > 0) {
-			this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>);
+			this.modelQuery = this.modelQuery.find(queryObj as QueryFilter<T>);
 		}
 
 		return this;
@@ -93,20 +94,26 @@ export class QueryBuilder<T> {
 	 * @param field The numeric field to filter by range (e.g., "price").
 	 * @returns The current instance of QueryBuilder.
 	 */
-	getRange(field: NumericKeys<T>) {
-		const min = this?.query?.min ? Number(this?.query?.min) : undefined;
-		const max = this?.query?.max ? Number(this?.query?.max) : undefined;
-
-		if (Number.isNaN(min) || Number.isNaN(max)) {
-			throw new Error(
-				`Invalid range values for field '${String(field)}', must be numeric.`
-			);
-		}
+	getRange(field: NumericKeys<T> & keyof QueryFilter<T>) {
+		const min = normalizeNumber(this?.query?.min);
+		const max = normalizeNumber(this?.query?.max);
 
 		if (min != null || max != null) {
-			const rangeFilter: FilterQuery<T> = {};
-			if (min != null) rangeFilter[field] = { ...rangeFilter[field], $gte: min };
-			if (max != null) rangeFilter[field] = { ...rangeFilter[field], $lte: max };
+			const rangeFilter: QueryFilter<T> = {};
+
+			if (min != null) {
+				rangeFilter[field] = {
+					...rangeFilter[field],
+					$gte: min,
+				};
+			}
+
+			if (max != null) {
+				rangeFilter[field] = {
+					...rangeFilter[field],
+					$lte: max,
+				};
+			}
 
 			this.modelQuery = this.modelQuery.find(rangeFilter);
 		}
@@ -126,7 +133,7 @@ export class QueryBuilder<T> {
 		if (value) {
 			this.modelQuery = this.modelQuery.find({
 				[field]: value,
-			} as FilterQuery<T>);
+			} as QueryFilter<T>);
 		}
 
 		return this;

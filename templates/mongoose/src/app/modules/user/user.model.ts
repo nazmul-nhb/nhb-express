@@ -55,7 +55,7 @@ const userSchema = new Schema<IUserDoc>(
 );
 
 // * Hash password and create username before saving the user in DB.
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function () {
 	const base = this.first_name?.toLowerCase()?.replace(/\s+/g, '_');
 	let userName = base;
 	let suffix = 0;
@@ -67,8 +67,6 @@ userSchema.pre('save', async function (next) {
 
 	this.user_name = userName;
 	this.password = await hashPassword(this.password);
-
-	next();
 });
 
 /** Static method to check if user exists */

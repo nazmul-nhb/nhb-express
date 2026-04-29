@@ -96,14 +96,15 @@ pnpm dev     # or npm run dev / yarn dev
 - `pnpm/npm/yarn run reset` - Run `prisma migrate reset` to reset migration
 - `pnpm/npm/yarn run studio` - Run `prisma studio` to view/edit data in the browser
 - `pnpm/npm/yarn run gen` - Run `prisma generate` to generate Prisma Client
-- `pnpm/npm/yarn run format` – Format the codebase (`nhb-format`)
-- `pnpm/npm/yarn run lint` – Lint the code (`nhb-lint`)
-- `pnpm/npm/yarn run fix` – Auto‑fix lint issues (`nhb-fix`)
+- `pnpm/npm/yarn run format` – Format the codebase
+- `pnpm/npm/yarn run lint` – Lint the code
+- `pnpm/npm/yarn run fix` – Auto‑fix lint issues
 - `pnpm/npm/yarn run commit` – Guided commit workflow (`nhb-commit`)
 - `pnpm/npm/yarn run count` – Count exports (`nhb-count`)
 - `pnpm/npm/yarn run module` - Scaffold new module (service, controller, routes, schema etc.) from template using `nhb-module`
 - `pnpm/npm/yarn run delete` – Delete any file/folder from the CLI (`nhb-delete`)
 - `pnpm/npm/yarn run secret` – Generate secrets for jwt (using crypto module)
+- `pnpm/npm/yarn run typecheck` → runs TypeScript type checking
 
 ---
 

@@ -273,8 +273,9 @@ This project comes integrated with **[nhb-scripts](https://www.npmjs.com/package
 - `npm/pnpm/yarn run build` → builds your project
 - `npm/pnpm/yarn run commit` → guided commit with semantic messages
 - `npm/pnpm/yarn run module` → scaffolds new modules
-- `npm/pnpm/yarn run fix` → auto‑fix lint issues
-- `npm/pnpm/yarn run format` → formats with Prettier
+- `npm/pnpm/yarn run fix` → auto‑fix lint issues with ESLint or Biome
+- `npm/pnpm/yarn run format` → formats with Prettier or Biome
+- `npm/pnpm/yarn run typecheck` → runs TypeScript type checking
 - and _more…_ configurable via `nhb.scripts.config.mjs`
 
 You can explore and extend `nhb-scripts` in your project as needed.

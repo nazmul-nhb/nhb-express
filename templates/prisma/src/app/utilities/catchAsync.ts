@@ -1,8 +1,9 @@
-import type { RequestHandler, Request, Response, NextFunction } from 'express';
+import type { NextFunction, Request, RequestHandler, Response } from 'express';
+
+type Params = Record<string, string>;
 
 /**
- * @function
- * A higher-order function that wraps an asynchronous Express request handler
+ * @function `catchAsync` A higher-order function that wraps an asynchronous Express request handler
  * to catch any errors and pass them to the global error handler middleware.
  * @param asyncFn - The asynchronous request handler function to be wrapped.
  * @returns A new request handler function that catches errors from the original handler.
@@ -14,8 +15,8 @@ import type { RequestHandler, Request, Response, NextFunction } from 'express';
  *   res.json(data);
  * }));
  */
-const catchAsync = (asyncFn: RequestHandler) => {
-	return async (req: Request, res: Response, next: NextFunction) => {
+const catchAsync = (asyncFn: RequestHandler<Params>) => {
+	return async (req: Request<Params>, res: Response, next: NextFunction) => {
 		try {
 			await asyncFn(req, res, next);
 		} catch (error) {

@@ -40,7 +40,7 @@ const deps = {
 		'serve-favicon',
 		'zod',
 	],
-	mongoose: ['mongoose@8.20.1'],
+	mongoose: ['mongoose'],
 	prisma: ['@prisma/adapter-pg', '@prisma/client', '@prisma/client-runtime-utils', 'pg'],
 	drizzle: ['drizzle-orm', 'drizzle-zod', 'postgres'],
 };
@@ -63,7 +63,7 @@ const dbChoice = /** @type {'mongoose' | 'prisma' | 'drizzle'} */ (
 		await select({
 			message: yellow.bold.toANSI('📁 Select Database + ODM/ORM:'),
 			options: [
-				{ value: 'mongoose', label: 'MongoDB + Mongoose (v8.20.1)', hint: 'default' },
+				{ value: 'mongoose', label: 'MongoDB + Mongoose', hint: 'default' },
 				{
 					value: 'drizzle',
 					label: 'PostgreSQL + Drizzle',
@@ -179,6 +179,7 @@ const scripts = {
 		count: 'nhb-count',
 		delete: 'nhb-delete',
 		secret: 'node scripts/generateSecret.mjs',
+		typecheck: 'tsc --noEmit',
 	},
 	mongoose: {
 		module: 'nhb-module -t express-mongoose-zod -d src/app/modules',
