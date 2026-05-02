@@ -70,15 +70,6 @@ class UserServices {
 	}
 
 	/**
-	 * * Get the current logged-in user's info from DB.
-	 * @param email User email
-	 * @returns The user details without the password field.
-	 */
-	async getCurrentUserFromDB(email: TEmail | undefined) {
-		return await findUserByEmail(email);
-	}
-
-	/**
 	 * * Retrieve a user from DB.
 	 * @param id ID of user in integer form.
 	 * @returns The matched user against the provided id.

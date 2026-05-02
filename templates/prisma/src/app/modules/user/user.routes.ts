@@ -1,4 +1,4 @@
-import { USER_ROLES } from '@/constants';
+import { ADMIN_ROLES, USER_ROLES } from '@/constants';
 import authorizeUser from '@/middlewares/authorizeUser';
 import validateRequest from '@/middlewares/validateRequest';
 import { userControllers } from '@/modules/user/user.controllers';
@@ -7,22 +7,17 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.get(
-	'/',
-	// authorizeUser(...ADMIN_ROLES),
-	userControllers.getAllUsers
-);
+router.get('/', userControllers.getAllUsers);
 
 router.get('/:id', userControllers.getUserById);
 
-router.delete('/:id', userControllers.deleteUserById);
+router.delete('/:id', authorizeUser(...ADMIN_ROLES), userControllers.deleteUserById);
 
 router.patch(
 	'/:id',
+	authorizeUser(...USER_ROLES),
 	validateRequest(userValidations.updateSchema),
 	userControllers.updateUserById
 );
-
-router.get('/profile', authorizeUser(...USER_ROLES), userControllers.getCurrentUser);
 
 export const userRoutes = router;

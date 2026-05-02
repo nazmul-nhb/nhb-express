@@ -75,7 +75,7 @@ class AuthServices {
 
 	/**
 	 * * Get the current logged-in user's info from DB.
-	 * @param email User details from decoded JWT token.
+	 * @param client User details from decoded JWT token.
 	 * @returns The user details without the password field.
 	 */
 	async getCurrentUserFromDB(client: DecodedUser | undefined) {

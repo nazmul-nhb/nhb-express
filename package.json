@@ -1,6 +1,6 @@
 {
   "name": "nhb-express",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "Minimal Express + TypeScript scaffolder with modular structure and flexible stack choices.",
   "main": "bin/index.mjs",
   "type": "module",

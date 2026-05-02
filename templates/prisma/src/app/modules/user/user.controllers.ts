@@ -9,13 +9,6 @@ class UserControllers {
 		sendResponse(res, 'User', 'GET', users);
 	});
 
-	/** * Get current logged in user. */
-	getCurrentUser = catchAsync(async (req, res) => {
-		const user = await userServices.getCurrentUserFromDB(req?.user?.email);
-
-		sendResponse(res, 'User', 'GET', user, 'Successfully retrieved user profile!');
-	});
-
 	/** * Get a user by user id. */
 	getUserById = catchAsync(async (req, res) => {
 		const user = await userServices.getUserByIdFromDB(Number(req.params.id));
