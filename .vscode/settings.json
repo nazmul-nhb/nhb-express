@@ -20,8 +20,8 @@
 		"source.addMissingImports.ts": "explicit",
 		"source.removeUnusedImports": "explicit",
 		"source.fixAll.ts": "explicit",
-		"source.sortImports": "explicit",
-		"source.organizeImports": "explicit"
+		"source.sortImports": "never",
+		"source.organizeImports": "never"
 	},
 	// ! File Nesting
 	"explorer.fileNesting.enabled": true,

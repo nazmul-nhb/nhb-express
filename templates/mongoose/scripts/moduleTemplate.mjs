@@ -2,7 +2,7 @@
 
 import { capitalizeString, pluralizer } from 'nhb-toolbox';
 
-/** @type {import('nhb-scripts').expressMongooseZodTemplate} */
+/** @type {typeof import('nhb-scripts').expressMongooseZodTemplate} */
 export function expressMongooseZodTemplate(moduleName, useAlias = false) {
 	const capModule = capitalizeString(moduleName);
 	const pluralModule = pluralizer.toPlural(moduleName);

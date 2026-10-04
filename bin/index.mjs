@@ -2,14 +2,14 @@
 
 // @ts-check
 
-import { confirm, intro, isCancel, note, outro, select, spinner, text } from '@clack/prompts';
-import { execa } from 'execa';
-import { capitalizeString, deleteFields, isValidArray } from 'nhb-toolbox';
-import { Stylog } from 'nhb-toolbox/stylog';
 import fs from 'node:fs';
 import { rm as rmAsync } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { confirm, intro, isCancel, note, outro, select, spinner, text } from '@clack/prompts';
+import { execa } from 'execa';
+import { capitalizeString, isValidArray } from 'nhb-toolbox';
+import { Stylog } from 'nhb-toolbox/stylog';
 
 /**
  * @import { PackageJson } from 'type-fest';
@@ -301,7 +301,7 @@ await installDeps(
 	[...devDeps.common, ...devDeps[dbChoice]]
 );
 
-updateConfigs();
+await updateConfigs();
 
 // await runMigration(dbChoice);
 
@@ -435,7 +435,7 @@ function saveJsonFile(filePath, data) {
 	fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 }
 
-function updateConfigs() {
+async function updateConfigs() {
 	const extJsonPath = path.join(targetDir, '.vscode', 'extensions.json');
 
 	if (dbChoice === 'prisma' && fs.existsSync(extJsonPath)) {
@@ -461,15 +461,18 @@ function updateConfigs() {
 		const biomeVersion = insDeps?.devDependencies?.['@biomejs/biome'];
 
 		if (fs.existsSync(biomeConfigPath) && biomeVersion) {
-			const biomeConfig = parseJsonFile(biomeConfigPath);
+			// const biomeConfig = parseJsonFile(biomeConfigPath);
 
-			const $version = biomeVersion.match(/\d+\.\d+\.\d+(?:[-+][\w.-]+)?/)?.[0] ?? '';
+			// const $version =
+			// 	biomeVersion.match(/\d+\.\d+\.\d+(?:[-+][\w.-]+)?/)?.[0] ?? "";
 
-			const $schema = `https://biomejs.dev/schemas/${$version}/schema.json`;
+			// const $schema = `https://biomejs.dev/schemas/${$version}/schema.json`;
 
-			const newConfig = deleteFields(biomeConfig, ['$schema']);
+			// const newConfig = deleteFields(biomeConfig, ["$schema"]);
 
-			saveJsonFile(biomeConfigPath, { $schema, ...newConfig });
+			// saveJsonFile(biomeConfigPath, { $schema, ...newConfig });
+
+			await execa(pkgManager, ['run', 'biome', 'migrate', '--write']);
 		}
 	}
 }

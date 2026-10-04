@@ -57,7 +57,7 @@ import sendResponse from '${baseAlias}/utilities/sendResponse';
 class ${capModule}Controllers {
     /** * Create ${moduleName}. */
     create${capModule} = catchAsync(async (req, res) => {
-        const ${moduleName} = await ${moduleName}Services.create${capModule}InDB(req.query);
+        const ${moduleName} = await ${moduleName}Services.create${capModule}InDB(req.body);
 
         sendResponse(res, '${capModule}', 'POST', ${moduleName});
     });
