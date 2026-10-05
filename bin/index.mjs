@@ -10,6 +10,7 @@ import { confirm, intro, isCancel, note, outro, select, spinner, text } from '@c
 import { execa } from 'execa';
 import { capitalizeString, isValidArray } from 'nhb-toolbox';
 import { Stylog } from 'nhb-toolbox/stylog';
+import { version } from '../package.json';
 
 /**
  * @import { PackageJson } from 'type-fest';
@@ -51,7 +52,7 @@ const deps = {
 // ----------------------
 // ! Entry
 // ----------------------
-intro(cyan.bold.toANSI('🚀 Create Express + TypeScript App with "nhb-express"'));
+intro(cyan.bold.toANSI(`🚀 Create Express + TypeScript App with "nhb-express" (${version})`));
 
 const projectName = normalizeResult(
 	await text({
