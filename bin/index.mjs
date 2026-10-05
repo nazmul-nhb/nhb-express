@@ -382,14 +382,14 @@ async function installDeps(manager, cwd, deps, devDeps) {
 	const options = { cwd, stdout: stdType, stderr: stdType, stdin: stdType };
 
 	if (manager === 'pnpm') {
-		await execa('pnpm', ['add', ...deps], options);
 		await execa('pnpm', ['add', '-D', ...devDeps], options);
+		await execa('pnpm', ['add', ...deps], options);
 	} else if (manager === 'npm') {
-		await execa('npm', ['install', '--progress', ...deps], options);
 		await execa('npm', ['install', '--progress', '-D', ...devDeps], options);
+		await execa('npm', ['install', '--progress', ...deps], options);
 	} else if (manager === 'yarn') {
-		await execa('yarn', ['add', ...deps], options);
 		await execa('yarn', ['add', '--dev', ...devDeps], options);
+		await execa('yarn', ['add', ...deps], options);
 	}
 }
 
