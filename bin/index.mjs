@@ -299,7 +299,7 @@ const spin = spinner();
 if (pkgManager === 'pnpm') {
 	fs.writeFileSync(
 		path.join(targetDir, 'pnpm-workspace.yaml'),
-		`allowBuilds:\n  bcrypt: true\n`
+		`allowBuilds:\n  bcrypt: true\n   \n'@prisma/engines': true\n  bcrypt: true\n  esbuild: true\n  prisma: true\n`
 	);
 }
 
