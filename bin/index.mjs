@@ -15,6 +15,7 @@ import { version } from '../package.json';
 /**
  * @import { PackageJson } from 'type-fest';
  * @import { $Record } from 'nhb-toolbox/object/types';
+ * @import { LooseLiteral } from 'nhb-toolbox/utils/types';
  *
  * @typedef {'mongoose' | 'prisma' | 'drizzle'} DBChoice
  */
@@ -105,6 +106,7 @@ const fmtLint = /** @type {'biome' | 'prettier-eslint'} */ (
 	)
 );
 
+/** @type {LooseLiteral<'pnpm' | 'npm' | 'yarn'>} */
 const pkgManager = normalizeResult(
 	await select({
 		message: yellow.bold.toANSI('📦 Choose a Package Manager:'),
@@ -294,6 +296,13 @@ const spin = spinner();
 (displayProgress ? mimicClack : spin.start)(
 	white.toANSI('⏳ Installing dependencies... This might take a few moments!')
 );
+
+if (pkgManager === 'pnpm') {
+	fs.writeFileSync(
+		path.join(targetDir, 'pnpm-workspace.yaml'),
+		`allowBuilds:\n  bcrypt: true\n`
+	);
+}
 
 await installDeps(
 	pkgManager,

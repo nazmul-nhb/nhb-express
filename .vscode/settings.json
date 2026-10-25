@@ -1,4 +1,7 @@
 {
+	"biome.enabled": false,
+	"prettier.enable": true,
+	"eslint.enable": true,
 	"prettier.useTabs": true,
 	"prettier.tabWidth": 4,
 	"prettier.printWidth": 96,
