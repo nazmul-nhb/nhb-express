@@ -482,6 +482,7 @@ async function updateConfigs() {
 			// saveJsonFile(biomeConfigPath, { $schema, ...newConfig });
 
 			await execa(pkgManager === 'npm' ? 'npx' : pkgManager, [
+				pkgManager !== 'npm' ? '' : 'dlx',
 				'biome',
 				'migrate',
 				'--write',
