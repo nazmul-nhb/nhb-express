@@ -487,7 +487,7 @@ async function updateConfigs() {
 					['npx', ['biome', 'migrate', '--write']]
 				:	[pkgManager, ['dlx', 'biome', 'migrate']];
 
-			await execa(...params);
+			await execa(...params, { cwd: targetDir });
 		}
 	}
 }
