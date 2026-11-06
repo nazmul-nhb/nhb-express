@@ -269,7 +269,7 @@ const pkgJson = {
 	author: {
 		name: 'Nazmul Hassan',
 		email: 'nazmulnhb@gmail.com',
-		url: 'https://nazmul-nhb.dev',
+		url: 'https://nazmul-nhb.vercel.app',
 	},
 	license: 'ISC',
 	keywords: [projectName, 'server', 'express', 'typescript', dbChoice],
@@ -299,7 +299,7 @@ const spin = spinner();
 if (pkgManager === 'pnpm') {
 	fs.writeFileSync(
 		path.join(targetDir, 'pnpm-workspace.yaml'),
-		`allowBuilds:\n  bcrypt: true\n  esbuild: true\n  ${dbChoice === 'prisma' ? "prisma: true\n  '@prisma/engines': true\n" : ''}`
+		`strictDepBuilds: false\n\nallowBuilds:\n  bcrypt: true\n  esbuild: true\n  ${dbChoice === 'prisma' ? "prisma: true\n  '@prisma/engines': true\n" : ''}`
 	);
 }
 

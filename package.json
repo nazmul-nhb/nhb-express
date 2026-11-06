@@ -1,6 +1,6 @@
 {
   "name": "nhb-express",
-  "version": "2.13.0",
+  "version": "2.14.0",
   "description": "Minimal Express + TypeScript scaffolder with modular structure and flexible stack choices.",
   "main": "bin/index.mjs",
   "type": "module",
@@ -57,7 +57,7 @@
   "author": {
     "name": "Nazmul Hassan",
     "email": "nazmulnhb@gmail.com",
-    "url": "https://nazmul-nhb.dev"
+    "url": "https://nazmul-nhb.vercel.app"
   },
   "license": "MIT",
   "dependencies": {

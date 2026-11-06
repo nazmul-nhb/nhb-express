@@ -35,7 +35,7 @@ Quickly bootstrap a production‑ready **Express + TypeScript + Zod** server wit
 - ✅ **Zod** for schema validation
 - ✅ **Mongoose** for `MongoDB` integration
 - ✅ **Drizzle** or **Prisma** for `PostgreSQL` integration
-- ✅ **Stylog** from [`nhb-toolbox`](https://toolbox.nazmul-nhb.dev/docs/utilities/misc/stylog) for colorful logging
+- ✅ **Stylog** from [`nhb-toolbox`](https://nhb-toolbox.vercel.app/docs/utilities/misc/stylog) for colorful logging
 - ✅ **Biome** or **Prettier** + **ESLint** for code formatting and linting (your choice during setup)
 - ✅ **[nhb-scripts](https://www.npmjs.com/package/nhb-scripts)** for easy build, commit, module scaffolding, and more
 - ✅ **Scaffolding via CLI** – choose package manager, DB, ORM/ODM etc.
