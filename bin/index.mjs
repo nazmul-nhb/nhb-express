@@ -460,36 +460,6 @@ async function updateConfigs() {
 			});
 		}
 	}
-
-	if (fmtLint === 'biome') {
-		const biomeConfigPath = path.join(targetDir, 'biome.json');
-
-		/** @type PackageJson */
-		const insDeps = parseJsonFile(path.join(targetDir, 'package.json'));
-
-		const biomeVersion = insDeps?.devDependencies?.['@biomejs/biome'];
-
-		if (fs.existsSync(biomeConfigPath) && biomeVersion) {
-			// const biomeConfig = parseJsonFile(biomeConfigPath);
-
-			// const $version =
-			// 	biomeVersion.match(/\d+\.\d+\.\d+(?:[-+][\w.-]+)?/)?.[0] ?? "";
-
-			// const $schema = `https://biomejs.dev/schemas/${$version}/schema.json`;
-
-			// const newConfig = deleteFields(biomeConfig, ["$schema"]);
-
-			// saveJsonFile(biomeConfigPath, { $schema, ...newConfig });
-
-			/** @type {[string, string[]]} */
-			const params =
-				pkgManager === 'npm' ?
-					['npx', ['biome', 'migrate', '--write']]
-				:	[pkgManager, ['dlx', 'biome', 'migrate']];
-
-			await execa(...params, { cwd: targetDir });
-		}
-	}
 }
 
 // /**
@@ -513,5 +483,35 @@ async function updateConfigs() {
 // 			await execa('prisma', ['generate'], options);
 // 			await execa('prisma', ['migrate', 'dev', '--name', 'init'], options);
 // 			break;
+// 	}
+// }
+
+// if (fmtLint === 'biome') {
+// 	const biomeConfigPath = path.join(targetDir, 'biome.json');
+
+// 	/** @type PackageJson */
+// 	const insDeps = parseJsonFile(path.join(targetDir, 'package.json'));
+
+// 	const biomeVersion = insDeps?.devDependencies?.['@biomejs/biome'];
+
+// 	if (fs.existsSync(biomeConfigPath) && biomeVersion) {
+// 		// const biomeConfig = parseJsonFile(biomeConfigPath);
+
+// 		// const $version =
+// 		// 	biomeVersion.match(/\d+\.\d+\.\d+(?:[-+][\w.-]+)?/)?.[0] ?? "";
+
+// 		// const $schema = `https://biomejs.dev/schemas/${$version}/schema.json`;
+
+// 		// const newConfig = deleteFields(biomeConfig, ["$schema"]);
+
+// 		// saveJsonFile(biomeConfigPath, { $schema, ...newConfig });
+
+// 		/** @type {[string, string[]]} */
+// 		// const params =
+// 		// 	pkgManager === 'npm' ?
+// 		// 		['npx', ['biome', 'migrate', '--write']]
+// 		// 	:	[pkgManager, ['dlx', 'biome', 'migrate']];
+
+// 		// await execa(...params, { cwd: targetDir });
 // 	}
 // }
